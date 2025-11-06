@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ZanonService } from '../zanonService/zanon-service';
 import { Libro } from '../zanonModel/zanonInterface';
+import { MatDialog } from '@angular/material/dialog';
+import { DatosUnroutedComponent } from '../datosUnroutedComponent/datos-unrouted-component';
 
 @Component({
   selector: 'app-zanon',
@@ -12,6 +14,8 @@ import { Libro } from '../zanonModel/zanonInterface';
 export class ZanonComponent {
 
   libros: Libro[] = [];
+
+  oMatDialog = inject(MatDialog);
 
   constructor(private oZanonService: ZanonService) {
 
@@ -30,6 +34,13 @@ export class ZanonComponent {
 
   verInformacionLibro(libro: Libro) {
     console.log("Datos cargador de un libro: ", libro);
-    alert(`Título: ${libro.Title}\nAño de publicación: ${libro.Year}\nEditorial: ${libro.Publisher}\nISBN: ${libro.ISBN}\nCantidad de páginas: ${libro.Pages}`);
+
+    this.oMatDialog.open(DatosUnroutedComponent, {
+      height: '400px',
+      width: '600px',
+      data: {
+        oLibro: libro,
+      }
+    });
   }
 }

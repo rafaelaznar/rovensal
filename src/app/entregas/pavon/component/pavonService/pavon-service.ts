@@ -1,6 +1,37 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Boss } from '../pavonModel/bossInterface';
+import { Weapon } from '../pavonModel/weaponInterface';
+import { Character } from '../pavonModel/characterInterface';
+import { Domain } from '../pavonModel/domainInterface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PavonService {}
+export class PavonService {
+
+  constructor(private oHttpClient: HttpClient){
+
+  }
+
+  getAllBosses(): Observable<Boss[]>{
+    return this.oHttpClient.get<Boss[]>('https://genshin.jmp.blue/boss/weekly-boss/all');
+  }
+
+  getAllWeapons(): Observable<Weapon[]>{
+    return this.oHttpClient.get<Weapon[]>('https://genshin.jmp.blue/weapons/all');
+  }
+
+  getAllCharacters(): Observable<Character[]>{
+    return this.oHttpClient.get<Character[]>('https://genshin.jmp.blue/characters/all');
+  }
+
+  getAllElements(): Observable<Element[]>{
+    return this.oHttpClient.get<Element[]>('https://genshin.jmp.blue/elements/all');
+  }
+
+  getAllDomains(): Observable<Domain[]>{
+    return this.oHttpClient.get<Domain[]>('https://genshin.jmp.blue/domains/all');
+  }
+}

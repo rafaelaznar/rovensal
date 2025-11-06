@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './garciaComponent.css',
   standalone: true
 })
-export class GarciaComponent {}
+export class GarciaComponent {
+  startCombat() {
+    alert('Combate iniciado entre Tanjiro y un demonio!');
+  }
+}

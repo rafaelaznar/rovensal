@@ -150,23 +150,16 @@ export class ThroneService {
    * Normaliza los datos de personajes de la API
    */
   private normalizeCharacters(characters: any[]): Character[] {
-    console.log('Datos originales de la API:', characters.slice(0, 2)); // Ver los primeros 2 personajes
-    
-    return characters.map(char => {
-      const normalized = {
-        id: char.id || 0,
-        firstName: char.firstName || '',
-        lastName: char.lastName || '',
-        fullName: char.fullName || `${char.firstName} ${char.lastName}`.trim(),
-        title: char.title || '',
-        family: char.family || '',
-        image: char.image || '',
-        imageUrl: char.imageUrl || char.image || ''
-      };
-      
-      console.log('Personaje normalizado:', normalized);
-      return normalized;
-    });
+    return characters.map(char => ({
+      id: char.id || 0,
+      firstName: char.firstName || '',
+      lastName: char.lastName || '',
+      fullName: char.fullName || `${char.firstName} ${char.lastName}`.trim(),
+      title: char.title || '',
+      family: char.family || '',
+      image: char.image || '',
+      imageUrl: char.imageUrl || char.image || ''
+    }));
   }
   
   /**

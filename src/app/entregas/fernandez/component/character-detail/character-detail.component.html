@@ -17,48 +17,55 @@
     <!-- Contenido principal -->
     <div class="detail-content">
       
-      <!-- Imagen del personaje -->
-      <div class="character-image-section">
-        <div class="image-container">
-          
-          <!-- Placeholder mientras carga -->
-          @if (!imageLoaded() && !imageError()) {
-            <div class="image-placeholder">
-              <div class="loading-spinner"></div>
-              <span>Cargando imagen...</span>
-            </div>
-          }
-          
-          <!-- Imagen principal -->
-          <img 
-            [src]="getCharacterImage()"
-            [alt]="character()!.fullName"
-            (load)="onImageLoad()"
-            (error)="onImageError()"
-            class="character-image"
-            [class.loaded]="imageLoaded()"
-            [class.error]="imageError()">
-          
-          <!-- Overlay con ID del personaje -->
-          <div class="character-id-overlay">
-            <span>#{{ character()!.id }}</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Información del personaje -->
+      <!-- Información del personaje con imagen -->
       <div class="character-info-section">
         
-        <!-- Nombre principal -->
-        <div class="character-name-section">
-          <h3 class="character-name">{{ getFormattedName() }}</h3>
-          
-          @if (character()!.family) {
-            <p class="character-house">
-              <span class="house-icon">🏰</span>
-              Casa {{ character()!.family }}
-            </p>
-          }
+          <!-- Header con imagen y nombre -->
+        <div class="character-header">
+          <div class="character-image-container">
+            <div class="image-container">
+              
+              <!-- Placeholder mientras carga -->
+              @if (!imageLoaded() && !imageError()) {
+                <div class="image-placeholder">
+                  <div class="loading-spinner"></div>
+                  <span>Cargando...</span>
+                </div>
+              }
+              
+              <!-- Imagen principal -->
+              <img 
+                [src]="getCharacterImage()"
+                [alt]="character()!.fullName"
+                (load)="onImageLoad()"
+                (error)="onImageError()"
+                class="character-image"
+                [class.loaded]="imageLoaded()"
+                [class.error]="imageError()">
+              
+              <!-- Overlay con ID del personaje -->
+              <div class="character-id-overlay">
+                <span>#{{ character()!.id }}</span>
+              </div>
+            </div>
+          </div>          <!-- Información básica -->
+          <div class="character-basic-info">
+            <h3 class="character-name">{{ getFormattedName() }}</h3>
+            
+            @if (character()!.family) {
+              <p class="character-house">
+                <span class="house-icon">🏰</span>
+                Casa {{ character()!.family }}
+              </p>
+            }
+            
+            @if (character()!.title) {
+              <p class="character-title">
+                <span class="title-icon">👑</span>
+                {{ character()!.title }}
+              </p>
+            }
+          </div>
         </div>
         
         <!-- Información detallada -->

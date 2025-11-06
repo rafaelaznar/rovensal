@@ -33,7 +33,6 @@ export class CharactersPageComponent implements OnInit {
     
     // Subscripción al personaje seleccionado del servicio
     this.throneService.selectedCharacter$.subscribe(character => {
-      console.log('Personaje seleccionado recibido:', character);
       this.selectedCharacter.set(character);
       this.showDetailPanel.set(character !== null);
     });

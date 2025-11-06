@@ -104,7 +104,6 @@ export class CharacterDetailComponent {
    */
   getFormattedName(): string {
     const char = this.character();
-    console.log('getFormattedName - character:', char);
     if (!char) return '';
     
     let name = char.fullName || `${char.firstName} ${char.lastName}`.trim();

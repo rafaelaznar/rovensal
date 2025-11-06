@@ -1,2 +1,28 @@
 <h2>Entrega Contreras</h2>
 
+<button (click)="buscarCampeon()">Buscar Campeón</button>
+
+<p>Total de campeones cargados: {{ posts.length }}</p>
+
+@if (posts.length > 0) {
+  <div>
+    <h3>Primeros 3 campeones:</h3>
+    @for (champion of posts.slice(0, 3); track champion.id) {
+      <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+        <h4>{{ champion.name }} - {{ champion.title }}</h4>
+        <p><strong>ID:</strong> {{ champion.id }}</p>
+        <p><strong>Tipo de ataque:</strong> {{ champion.attackType }}</p>
+        <p><strong>Tipo adaptativo:</strong> {{ champion.adaptiveType }}</p>
+        <p><strong>Recurso:</strong> {{ champion.resource }}</p>
+        <p><strong>Posiciones:</strong> {{ champion.positions }}</p>
+        <p><strong>Roles:</strong> {{ champion.roles }}</p>
+        <p><strong>Facción:</strong> {{ champion.faction }}</p>
+        <p><strong>Vida:</strong> {{ champion.stats.hp }}</p>
+        <p><strong>Armadura:</strong> {{ champion.stats.armor }}</p>
+        <p><strong>Daño de ataque:</strong> {{ champion.stats.attackdamage }}</p>
+        <p><strong>Velocidad:</strong> {{ champion.stats.movespeed }}</p>
+        <p><strong>Lore:</strong> {{ champion.lore.substring(0, 100) }}...</p>
+      </div>
+    }
+  </div>
+}

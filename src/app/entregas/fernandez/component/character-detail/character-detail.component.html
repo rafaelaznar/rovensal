@@ -1,0 +1,139 @@
+<!-- Componente de detalle de personaje -->
+<div class="character-detail-container">
+  
+  @if (character()) {
+    <!-- Header con botón de cerrar -->
+    <div class="detail-header">
+      <h2 class="detail-title">Detalles del Personaje</h2>
+      <button 
+        class="close-btn"
+        (click)="onClose()"
+        title="Cerrar detalles"
+        aria-label="Cerrar detalles del personaje">
+        ✕
+      </button>
+    </div>
+    
+    <!-- Contenido principal -->
+    <div class="detail-content">
+      
+      <!-- Imagen del personaje -->
+      <div class="character-image-section">
+        <div class="image-container">
+          
+          <!-- Placeholder mientras carga -->
+          @if (!imageLoaded() && !imageError()) {
+            <div class="image-placeholder">
+              <div class="loading-spinner"></div>
+              <span>Cargando imagen...</span>
+            </div>
+          }
+          
+          <!-- Imagen principal -->
+          <img 
+            [src]="getCharacterImage()"
+            [alt]="character()!.fullName"
+            (load)="onImageLoad()"
+            (error)="onImageError()"
+            class="character-image"
+            [class.loaded]="imageLoaded()"
+            [class.error]="imageError()">
+          
+          <!-- Overlay con ID del personaje -->
+          <div class="character-id-overlay">
+            <span>#{{ character()!.id }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Información del personaje -->
+      <div class="character-info-section">
+        
+        <!-- Nombre principal -->
+        <div class="character-name-section">
+          <h3 class="character-name">{{ getFormattedName() }}</h3>
+          
+          @if (character()!.family) {
+            <p class="character-house">
+              <span class="house-icon">🏰</span>
+              Casa {{ character()!.family }}
+            </p>
+          }
+        </div>
+        
+        <!-- Información detallada -->
+        <div class="character-details">
+          <h4 class="details-title">Información</h4>
+          
+          <div class="details-grid">
+            @for (info of getCharacterInfo(); track info.label) {
+              <div class="detail-item">
+                <span class="detail-label">{{ info.label }}:</span>
+                <span class="detail-value">{{ info.value }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        
+        <!-- Acciones -->
+        @if (showActions()) {
+          <div class="character-actions">
+            <h4 class="actions-title">Acciones</h4>
+            
+            <div class="actions-grid">
+              <button 
+                class="action-btn favorite-btn"
+                (click)="onToggleFavorite()"
+                title="Agregar/quitar de favoritos">
+                <span class="action-icon">⭐</span>
+                <span class="action-label">Favorito</span>
+              </button>
+              
+              <button 
+                class="action-btn edit-btn"
+                (click)="onRequestEdit()"
+                title="Editar personaje">
+                <span class="action-icon">✏️</span>
+                <span class="action-label">Editar</span>
+              </button>
+              
+              <button 
+                class="action-btn share-btn"
+                (click)="onRequestShare()"
+                title="Compartir personaje">
+                <span class="action-icon">📤</span>
+                <span class="action-label">Compartir</span>
+              </button>
+            </div>
+          </div>
+        }
+        
+        <!-- Información adicional -->
+        <div class="additional-info">
+          <h4 class="additional-title">Sobre este personaje</h4>
+          <p class="additional-text">
+            {{ character()!.fullName }} 
+            @if (character()!.family) {
+              es miembro de la Casa {{ character()!.family }}
+            }
+            @if (character()!.title) {
+              y ostenta el título de {{ character()!.title }}
+            }.
+            @if (!character()!.family && !character()!.title) {
+              es un personaje importante en el mundo de Juego de Tronos
+            }.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+  } @else {
+    <!-- Estado sin personaje seleccionado -->
+    <div class="no-character-state">
+      <div class="no-character-icon">👤</div>
+      <h3>No hay personaje seleccionado</h3>
+      <p>Selecciona un personaje de la lista para ver sus detalles.</p>
+    </div>
+  }
+  
+</div>

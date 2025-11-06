@@ -1,2 +1,115 @@
-<h2>Entrega Fernandez</h2>
+<!-- Componente principal de Game of Thrones App -->
+<div class="got-app">
+  
+  <!-- Header con título dinámico -->
+  <header class="app-header">
+    <div class="container">
+      <h1 class="app-title">{{ appTitle() }}</h1>
+      
+      <!-- Indicador de carga -->
+      @if (isLoading()) {
+        <div class="loading-indicator">
+          <span class="spinner"></span>
+          <span>Cargando...</span>
+        </div>
+      }
+      
+      <!-- Información del personaje seleccionado -->
+      @if (hasSelectedCharacter()) {
+        <div class="selected-character-info">
+          <span>Personaje actual: {{ selectedCharacter()?.fullName }}</span>
+          <button 
+            class="clear-btn" 
+            (click)="clearSelection()"
+            title="Limpiar selección">
+            ✕
+          </button>
+        </div>
+      }
+    </div>
+  </header>
+  
+  <!-- Navegación principal -->
+  <nav class="main-navigation">
+    <div class="container">
+      <ul class="nav-list">
+        @for (item of navigationItems; track item.path) {
+          <li class="nav-item">
+            <a 
+              [routerLink]="item.path" 
+              routerLinkActive="active"
+              class="nav-link">
+              <span class="nav-icon">{{ getIcon(item.icon) }}</span>
+              <span class="nav-label">{{ item.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Manejo de errores -->
+  @if (errorMessage()) {
+    <div class="error-banner">
+      <div class="container">
+        <div class="error-content">
+          <span class="error-icon">⚠️</span>
+          <span class="error-text">{{ errorMessage() }}</span>
+          <button 
+            class="error-close" 
+            (click)="clearError()"
+            title="Cerrar error">
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+  
+  <!-- Contenido principal - aquí se renderizan las rutas hijas -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Vista por defecto cuando no hay rutas específicas -->
+      @if (!hasSelectedCharacter()) {
+        <div class="welcome-section">
+          <h2>Bienvenido a Game of Thrones App</h2>
+          <p>Explora el mundo de Westeros y sus personajes</p>
+          
+          <div class="quick-actions">
+            <a routerLink="/fernandez/characters" class="action-card">
+              <div class="action-icon">👥</div>
+              <h3>Ver Personajes</h3>
+              <p>Explora todos los personajes de la serie</p>
+            </a>
+            
+            <a routerLink="/fernandez/search" class="action-card">
+              <div class="action-icon">🔍</div>
+              <h3>Buscar</h3>
+              <p>Encuentra personajes específicos</p>
+            </a>
+            
+            <a routerLink="/fernandez/favorites" class="action-card">
+              <div class="action-icon">⭐</div>
+              <h3>Favoritos</h3>
+              <p>Tus personajes preferidos</p>
+            </a>
+          </div>
+        </div>
+      }
+      
+      <!-- Router outlet para rutas hijas -->
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container">
+      <p>&copy; 2024 Game of Thrones App - Proyecto Angular</p>
+      <p>Datos obtenidos de <a href="https://thronesapi.com" target="_blank">ThronesAPI</a></p>
+    </div>
+  </footer>
+  
+</div>
 

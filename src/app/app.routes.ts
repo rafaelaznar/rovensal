@@ -7,6 +7,9 @@ import { CalinescuComponent } from './entregas/calinescu/component/calinescuComp
 import { CastanyeraComponent } from './entregas/castanyera/component/castanyeraComponent/castanyeraComponent';
 import { ContrerasComponent } from './entregas/contreras/component/contrerasComponent/contrerasComponent';
 import { FernandezComponent } from './entregas/fernandez/component/fernandezComponent/fernandezComponent';
+import { CharactersPageComponent } from './entregas/fernandez/component/characters-page/characters-page.component';
+import { SearchPageComponent } from './entregas/fernandez/component/search-page/search-page.component';
+import { FavoritesPageComponent } from './entregas/fernandez/component/favorites-page/favorites-page.component';
 import { GarciaComponent } from './entregas/garcia/component/garciaComponent/garciaComponent';
 import { PallasComponent } from './entregas/pallas/component/pallasComponent/pallasComponent';
 import { PalomaresComponent } from './entregas/palomares/component/palomaresComponent/palomaresComponent';
@@ -28,7 +31,15 @@ export const routes: Routes = [
     { path: 'calinescu', component: CalinescuComponent },
     { path: 'castanyera', component: CastanyeraComponent },
     { path: 'contreras', component: ContrerasComponent },
-    { path: 'fernandez', component: FernandezComponent },
+    { path: 'fernandez', component: FernandezComponent,
+        children: [
+            { path: 'characters', component: CharactersPageComponent },
+            { path: 'characters/:id', component: CharactersPageComponent },
+            { path: 'search', component: SearchPageComponent },
+            { path: 'favorites', component: FavoritesPageComponent },
+            { path: '', redirectTo: 'characters', pathMatch: 'full' }
+        ]
+    },
     { path: 'garcia', component: GarciaComponent },
     { path: 'pallas', component: PallasComponent },
     { path: 'palomares', component: PalomaresComponent },

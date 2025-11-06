@@ -9,7 +9,17 @@
 
 <body>
     <h3>Bienvenido al combate de Demon Slayer</h3>
+
+    <!--Elegir personaje-->
+
+    <h4>Elige tu personaje</h4>
+    <button (click)="selectMan()">Hombre</button> <button (click)="selectWoman()">Mujer</button>
+
+    <!--Iniciar combate-->
     <button (click)="startCombat()">Iniciar Combate</button>
+
+    <img *ngIf="chooseCharacter" alt="Character Image" width="200">
+
 </body>
 
 </html>

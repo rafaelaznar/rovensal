@@ -1,4 +1,7 @@
 /* Styles for GarciaComponent */
 body{
+    background-image: url(../../imagenes/fondo.png);
     text-align: center;
+    flex: auto;
+    
 }

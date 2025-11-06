@@ -1,8 +1,7 @@
 export interface Character {
   id: number;
   name: string;
-  age: number;
-  gender: string;
+  race: string;
   img: string;
 }
 

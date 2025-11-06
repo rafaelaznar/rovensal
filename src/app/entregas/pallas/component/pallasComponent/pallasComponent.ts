@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './pallasComponent.css',
   standalone: true
 })
-export class PallasComponent {}
+export class PallasComponent {
+
+
+
+  
+}

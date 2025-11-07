@@ -3,10 +3,11 @@ import { ProductCardUnroutedComponent } from '../product-card-unrouted/product-c
 import { Product } from '../../model/product.model';
 import { ProductService } from '../../service/product.service';
 import { FormsModule } from '@angular/forms';
+import { NavbarUnroutedComponent } from '../navbar-unrouted/navbar-unrouted';
 
 @Component({
   selector: 'app-reyna',
-  imports: [ProductCardUnroutedComponent, FormsModule],
+  imports: [ProductCardUnroutedComponent, FormsModule, NavbarUnroutedComponent],
   templateUrl: './reynaComponent.html',
   styleUrl: './reynaComponent.css',
   standalone: true,

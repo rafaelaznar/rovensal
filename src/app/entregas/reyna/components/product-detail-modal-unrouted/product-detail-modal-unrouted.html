@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+  <img [src]="data.image" alt="{{ data.title }}" class="img-fluid mb-3" />
+  <p><strong>Categoría:</strong> {{ data.category }}</p>
+  <p><strong>Precio:</strong> {{ data.price | currency:'EUR' }}</p>
+  <p><strong>Descripción:</strong> {{ data.description }}</p>
+  <p><strong>Rating:</strong> ★ {{ data.rating.rate }} ({{ data.rating.count }} votos)</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>

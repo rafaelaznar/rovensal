@@ -82,39 +82,6 @@
           </div>
         </div>
         
-        <!-- Acciones -->
-        @if (showActions()) {
-          <div class="character-actions">
-            <h4 class="actions-title">Acciones</h4>
-            
-            <div class="actions-grid">
-              <button 
-                class="action-btn favorite-btn"
-                (click)="onToggleFavorite()"
-                title="Agregar/quitar de favoritos">
-                <span class="action-icon">⭐</span>
-                <span class="action-label">Favorito</span>
-              </button>
-              
-              <button 
-                class="action-btn edit-btn"
-                (click)="onRequestEdit()"
-                title="Editar personaje">
-                <span class="action-icon">✏️</span>
-                <span class="action-label">Editar</span>
-              </button>
-              
-              <button 
-                class="action-btn share-btn"
-                (click)="onRequestShare()"
-                title="Compartir personaje">
-                <span class="action-icon">📤</span>
-                <span class="action-label">Compartir</span>
-              </button>
-            </div>
-          </div>
-        }
-        
         <!-- Información adicional -->
         <div class="additional-info">
           <h4 class="additional-title">Sobre este personaje</h4>

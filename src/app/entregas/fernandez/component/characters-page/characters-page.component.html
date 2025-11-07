@@ -46,10 +46,6 @@
       <div class="detail-section">
         <app-character-detail
           [character]="selectedCharacter()"
-          [showActions]="true"
-          (favoriteToggled)="onFavoriteToggled($event)"
-          (editRequested)="onEditRequested($event)"
-          (shareRequested)="onShareRequested($event)"
           (closeRequested)="onDetailCloseRequested()">
         </app-character-detail>
       </div>

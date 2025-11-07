@@ -17,47 +17,13 @@ export class CharacterDetailComponent {
   
   // Input del personaje seleccionado
   character = input<Character | null>(null);
-  showActions = input<boolean>(true);
   
   // Outputs para comunicación con el padre
-  favoriteToggled = output<Character>();
-  editRequested = output<Character>();
-  shareRequested = output<Character>();
   closeRequested = output<void>();
   
   // Estado interno
   imageLoaded = signal<boolean>(false);
   imageError = signal<boolean>(false);
-  
-  /**
-   * Maneja el toggle de favorito
-   */
-  onToggleFavorite(): void {
-    const char = this.character();
-    if (char) {
-      this.favoriteToggled.emit(char);
-    }
-  }
-  
-  /**
-   * Solicita edición del personaje
-   */
-  onRequestEdit(): void {
-    const char = this.character();
-    if (char) {
-      this.editRequested.emit(char);
-    }
-  }
-  
-  /**
-   * Solicita compartir personaje
-   */
-  onRequestShare(): void {
-    const char = this.character();
-    if (char) {
-      this.shareRequested.emit(char);
-    }
-  }
   
   /**
    * Cierra el detalle

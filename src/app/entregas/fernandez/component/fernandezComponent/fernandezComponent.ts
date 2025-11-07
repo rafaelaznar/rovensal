@@ -1,6 +1,7 @@
 import { Component, inject, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
 import { ThroneService } from '../../service';
 import { Character } from '../../model';
 
@@ -19,11 +20,13 @@ export class FernandezComponent {
   
   // Inyección de dependencias usando inject()
   private throneService = inject(ThroneService);
+  private router = inject(Router);
   
   // Signals para estado reactivo
   selectedCharacter = signal<Character | null>(null);
   isLoading = signal<boolean>(false);
   errorMessage = signal<string | null>(null);
+  currentRoute = signal<string>('');
   
   // Computed para estado derivado
   hasSelectedCharacter = computed(() => this.selectedCharacter() !== null);
@@ -33,12 +36,67 @@ export class FernandezComponent {
       : 'Game of Thrones App'
   );
   
-  // Propiedades para el template
-  navigationItems = [
-    { path: '/fernandez/characters', label: 'Personajes', icon: 'people' },
-    { path: '/fernandez/search', label: 'Búsqueda', icon: 'search' },
-    { path: '/fernandez/favorites', label: 'Favoritos', icon: 'favorite' }
-  ];
+  // Computed para mostrar solo el botón opuesto a la página actual
+  visibleNavigationItems = computed(() => {
+    const current = this.currentRoute();
+    
+    if (current.includes('/characters')) {
+      // Si estamos en personajes, mostrar solo búsqueda
+      return [{ path: '/fernandez/search', label: 'Búsqueda', icon: 'search' }];
+    } else if (current.includes('/search')) {
+      // Si estamos en búsqueda, mostrar solo personajes
+      return [{ path: '/fernandez/characters', label: 'Personajes', icon: 'people' }];
+    } else {
+      // En la página de inicio, mostrar ambos
+      return [
+        { path: '/fernandez/characters', label: 'Personajes', icon: 'people' },
+        { path: '/fernandez/search', label: 'Búsqueda', icon: 'search' }
+      ];
+    }
+  });
+
+  // Computed para las tarjetas de acción visibles en la página de inicio
+  visibleActionCards = computed(() => {
+    const current = this.currentRoute();
+    
+    if (current.includes('/characters')) {
+      // Si estamos en personajes, mostrar solo la tarjeta de búsqueda
+      return [
+        { 
+          path: '/fernandez/search', 
+          icon: '🔍', 
+          title: 'Buscar', 
+          description: 'Encuentra personajes específicos' 
+        }
+      ];
+    } else if (current.includes('/search')) {
+      // Si estamos en búsqueda, mostrar solo la tarjeta de personajes
+      return [
+        { 
+          path: '/fernandez/characters', 
+          icon: '👥', 
+          title: 'Ver Personajes', 
+          description: 'Explora todos los personajes de la serie' 
+        }
+      ];
+    } else {
+      // En la página de inicio, mostrar ambas tarjetas
+      return [
+        { 
+          path: '/fernandez/characters', 
+          icon: '👥', 
+          title: 'Ver Personajes', 
+          description: 'Explora todos los personajes de la serie' 
+        },
+        { 
+          path: '/fernandez/search', 
+          icon: '🔍', 
+          title: 'Buscar', 
+          description: 'Encuentra personajes específicos' 
+        }
+      ];
+    }
+  });
   
   constructor() {
     this.initializeSubscriptions();
@@ -63,6 +121,16 @@ export class FernandezComponent {
     this.throneService.error$.subscribe(error => {
       this.errorMessage.set(error);
     });
+
+    // Subscripción a cambios de ruta para mostrar navegación condicional
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentRoute.set(event.url);
+      });
+
+    // Establecer ruta inicial
+    this.currentRoute.set(this.router.url);
   }
   
   /**

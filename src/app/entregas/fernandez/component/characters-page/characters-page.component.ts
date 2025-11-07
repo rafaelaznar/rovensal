@@ -85,39 +85,6 @@ export class CharactersPageComponent implements OnInit {
   }
   
   /**
-   * Maneja el toggle de favorito desde el detalle
-   */
-  onFavoriteToggled(character: Character): void {
-    // Aquí iría la lógica para manejar favoritos
-    console.log('Toggle favorito para:', character.fullName);
-  }
-  
-  /**
-   * Maneja la solicitud de edición
-   */
-  onEditRequested(character: Character): void {
-    this.router.navigate(['/fernandez/characters', character.id, 'edit']);
-  }
-  
-  /**
-   * Maneja la solicitud de compartir
-   */
-  onShareRequested(character: Character): void {
-    // Implementar compartir (Web Share API o copiar al portapapeles)
-    if (navigator.share) {
-      navigator.share({
-        title: `Personaje: ${character.fullName}`,
-        text: `Mira este personaje de Game of Thrones: ${character.fullName}`,
-        url: window.location.href
-      });
-    } else {
-      // Fallback: copiar al portapapeles
-      navigator.clipboard.writeText(window.location.href);
-      console.log('URL copiada al portapapeles');
-    }
-  }
-  
-  /**
    * Cierra el panel de detalles
    */
   onDetailCloseRequested(): void {

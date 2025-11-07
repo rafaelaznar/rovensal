@@ -33,7 +33,7 @@
   <nav class="main-navigation">
     <div class="container">
       <ul class="nav-list">
-        @for (item of navigationItems; track item.path) {
+        @for (item of visibleNavigationItems(); track item.path) {
           <li class="nav-item">
             <a 
               [routerLink]="item.path" 
@@ -77,23 +77,13 @@
           <p>Explora el mundo de Westeros y sus personajes</p>
           
           <div class="quick-actions">
-            <a routerLink="/fernandez/characters" class="action-card">
-              <div class="action-icon">👥</div>
-              <h3>Ver Personajes</h3>
-              <p>Explora todos los personajes de la serie</p>
-            </a>
-            
-            <a routerLink="/fernandez/search" class="action-card">
-              <div class="action-icon">🔍</div>
-              <h3>Buscar</h3>
-              <p>Encuentra personajes específicos</p>
-            </a>
-            
-            <a routerLink="/fernandez/favorites" class="action-card">
-              <div class="action-icon">⭐</div>
-              <h3>Favoritos</h3>
-              <p>Tus personajes preferidos</p>
-            </a>
+            @for (card of visibleActionCards(); track card.path) {
+              <a [routerLink]="card.path" class="action-card">
+                <div class="action-icon">{{ card.icon }}</div>
+                <h3>{{ card.title }}</h3>
+                <p>{{ card.description }}</p>
+              </a>
+            }
           </div>
         </div>
       }

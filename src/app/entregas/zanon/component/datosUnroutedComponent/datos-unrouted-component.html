@@ -1,17 +1,22 @@
-<div class="dialog-container">
+<mat-dialog-content>
     <h2>INFORMACIÓN DEL LIBRO</h2>
 
-    <mat-dialog-content>
-        <div>
-            <div>
-                <p><strong>Año de publicación: </strong>{{ oLibro.Year }}</p>
-                <p><strong>Editorial: </strong>{{ oLibro.Publisher }}</p>
-                <p><strong>ISBN: </strong>{{ oLibro.ISBN }}</p>
-                <p><strong>Cantidad de páginas: </strong>{{ oLibro.Pages }}</p>
-            </div>
-        </div>
+    <div class="detalles">
+        <h3>Año de publicación:</h3>
+        <p>{{ oLibro.Year }}</p>
 
-        <!-- ¿DESCRIPCIÓN? -->
-        
-    </mat-dialog-content>
-</div>
+        <h3>Editorial:</h3>
+        <p>{{ oLibro.Publisher }}</p>
+
+        <h3>ISBN:</h3>
+        <p>{{ oLibro.ISBN }}</p>
+
+        <h3>Cantidad de páginas:</h3>
+        <p>{{ oLibro.Pages }}</p>
+    </div>
+    
+    <div class="descripcion">
+        <h3>Descripción:</h3>
+        <p>{{ oLibro.description || 'Descripción no disponible' }}</p>
+    </div>
+</mat-dialog-content>

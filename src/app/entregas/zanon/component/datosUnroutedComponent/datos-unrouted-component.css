@@ -1,3 +1,33 @@
-.dialog-container {
-  padding: 1rem;
+mat-dialog-content {
+  background-color: lightyellow;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  overflow-y: auto;
+  gap: 10px;
+}
+
+h2 {
+  text-align: center;
+  color: darkblue;
+}
+
+h3 {
+  font-size: medium;
+  color: darkcyan;
+  margin: 10px;
+}
+
+p {
+  font-size: medium;
+  color: black;
+  margin: 10px;
+}
+
+.descripcion {
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 10px;
 }

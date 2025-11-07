@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogContent, MatDialogActions } from '@angular/ma
 
 @Component({
   selector: 'app-datos-unrouted-component',
-  imports: [MatDialogContent, MatDialogActions],
+  imports: [MatDialogContent],
   templateUrl: './datos-unrouted-component.html',
   styleUrl: './datos-unrouted-component.css',
   standalone: true,

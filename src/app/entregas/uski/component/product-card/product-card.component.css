@@ -1,7 +1,7 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  border-radius: 18px;
+  border-radius: 10px;
   overflow: hidden;
   background: #fff;
   border: 1px solid rgba(148, 163, 184, 0.18);

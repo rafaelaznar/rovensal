@@ -18,6 +18,11 @@ import { SilvestreComponent } from './entregas/silvestre/component/silvestreComp
 import { SoaresComponent } from './entregas/soares/component/soaresComponent/soaresComponent';
 import { UskiComponent } from './entregas/uski/component/uskiComponent/uskiComponent';
 import { ZanonComponent } from './entregas/zanon/component/zanonComponent/zanonComponent';
+import { BossesComponent } from './entregas/pavon/component/bosses/bosses';
+import { CharactersComponent } from './entregas/pavon/component/characters/characters';
+import { DomainsComponent } from './entregas/pavon/component/domains/domains';
+import { ElementsComponent } from './entregas/pavon/component/elements/elements';
+import { WeaponsComponent } from './entregas/pavon/component/weapons/weapon';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -40,4 +45,9 @@ export const routes: Routes = [
     { path: 'soares', component: SoaresComponent },
     { path: 'uski', component: UskiComponent },
     { path: 'zanon', component: ZanonComponent },
+    { path: 'pavonBosses', component: BossesComponent },
+    { path: 'pavonCharacters', component: CharactersComponent },
+    { path: 'pavonDomains', component: DomainsComponent },
+    { path: 'pavonElements', component: ElementsComponent },
+    { path: 'pavonWeapons', component: WeaponsComponent },
 ];

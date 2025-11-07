@@ -1,5 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Champion } from '../ContrerasModel/contrerasInterface';
 import { JsonplaceholderServiceContreras } from '../ContrerasService/contrerasjsonPlacesholder';
@@ -9,14 +8,12 @@ import { JsonplaceholderServiceContreras } from '../ContrerasService/contrerasjs
   imports: [CommonModule],
   templateUrl: './contrerasComponent.html',
   styleUrl: './contrerasComponent.css',
-  standalone: true
 })
 export class ContrerasComponent implements OnInit {
 
   posts: Champion[] = [];
-  
-  private http = inject(HttpClient);
-  private oJsonplaceholderService = new JsonplaceholderServiceContreras(this.http);
+
+  constructor(private oJsonplaceholderService: JsonplaceholderServiceContreras) { }
 
   ngOnInit() {
     this.getPosts();
@@ -25,7 +22,7 @@ export class ContrerasComponent implements OnInit {
   getPosts() {
     this.oJsonplaceholderService.getAllPosts().subscribe((data) => {
       console.log(data);
-      this.posts = Object.values(data.data);
+      this.posts = Object.values(data.data || data);
     });
   }
 

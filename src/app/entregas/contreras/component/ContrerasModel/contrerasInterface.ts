@@ -1,4 +1,3 @@
-// Interfaz básica para un campeón de League of Legends
 export interface Champion {
   id: string;
   name: string;
@@ -19,7 +18,6 @@ export interface Champion {
   faction: string;
 }
 
-// Interfaz para la respuesta de la API
 export interface ChampionsResponse {
   data: { [key: string]: Champion };
 }

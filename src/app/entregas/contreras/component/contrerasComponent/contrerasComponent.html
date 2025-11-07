@@ -1,6 +1,6 @@
 <h2>Entrega Contreras</h2>
 
-<button (click)="buscarCampeon()">Buscar Campeón</button>
+<button (click)="buscarCampeon()">Buscar Campeon</button>
 
 <p>Total de campeones cargados: {{ posts.length }}</p>
 
@@ -17,11 +17,18 @@
         <p><strong>Posiciones:</strong> {{ champion.positions }}</p>
         <p><strong>Roles:</strong> {{ champion.roles }}</p>
         <p><strong>Facción:</strong> {{ champion.faction }}</p>
+        <p><strong>Stats completos:</strong> {{ champion.stats | json }}</p>
         <p><strong>Vida:</strong> {{ champion.stats.hp }}</p>
         <p><strong>Armadura:</strong> {{ champion.stats.armor }}</p>
         <p><strong>Daño de ataque:</strong> {{ champion.stats.attackdamage }}</p>
         <p><strong>Velocidad:</strong> {{ champion.stats.movespeed }}</p>
-        <p><strong>Lore:</strong> {{ champion.lore.substring(0, 100) }}...</p>
+        <p><strong>Lore: </strong> 
+          <span #loreText>{{ champion.lore.substring(0, 150) }}...</span>
+          <button #btnmas (click)="loreText.textContent = champion.lore; btnmas.style.display = 'none'" 
+                  style="margin-left: 10px; color: #007acc; background: none; border: none; cursor: pointer; text-decoration: underline;">
+            Ver más
+          </button>
+        </p>
       </div>
     }
   </div>

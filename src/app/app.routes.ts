@@ -23,6 +23,7 @@ import { CharactersComponent } from './entregas/pavon/component/characters/chara
 import { DomainsComponent } from './entregas/pavon/component/domains/domains';
 import { ElementsComponent } from './entregas/pavon/component/elements/elements';
 import { WeaponsComponent } from './entregas/pavon/component/weapons/weapon';
+import { PavonHomeComponent } from './entregas/pavon/component/home/home';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -50,4 +51,5 @@ export const routes: Routes = [
     { path: 'pavonDomains', component: DomainsComponent },
     { path: 'pavonElements', component: ElementsComponent },
     { path: 'pavonWeapons', component: WeaponsComponent },
+    { path: 'pavonHome', component: PavonHomeComponent },
 ];

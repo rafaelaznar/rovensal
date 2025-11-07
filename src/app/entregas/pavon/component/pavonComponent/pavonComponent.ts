@@ -4,10 +4,12 @@ import { Character } from '../../model/pavonModel/characterInterface';
 import { Boss } from '../../model/pavonModel/bossInterface';
 import { Weapon } from '../../model/pavonModel/weaponInterface';
 import { Domain } from '../../model/pavonModel/domainInterface';
+import { Menu } from "../menu/menu";
+import { RouterModule, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-pavon',
-  imports: [],
+  imports: [Menu, RouterOutlet, RouterModule],
   templateUrl: './pavonComponent.html',
   styleUrl: './pavonComponent.css',
   standalone: true,

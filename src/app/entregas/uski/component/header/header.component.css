@@ -24,6 +24,7 @@
   font-size: 16px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  border-bottom: 2px solid transparent;
 }
 
 .nav a:visited {
@@ -31,7 +32,7 @@
 }
 
 .nav a:hover {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 
 .nav-left {

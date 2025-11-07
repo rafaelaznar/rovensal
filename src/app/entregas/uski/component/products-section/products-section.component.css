@@ -68,3 +68,21 @@ h2 {
   gap: 32px;
   justify-items: center;
 }
+
+button {
+  flex: 1 1 auto;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+  background: linear-gradient(135deg, #363636, #020202);
+  color: #fff;
+  max-width: 60px;
+  text-align: center;
+}
+
+button:hover {
+  box-shadow: 0 16px 32px rgba(106, 105, 128, 0.322);
+}

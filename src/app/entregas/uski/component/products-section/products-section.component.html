@@ -7,17 +7,18 @@
       <path d="m21 21-6.5-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </svg>
     <input
+      #searchInput
       type="text"
       class="search-input"
       placeholder="Search products..."
       [(ngModel)]="searchQuery"
-      (input)="onSearchChange()"
     />
   </div>
 
   <div class="category-buttons">
+    <button class="category-btn" type="button">All</button>
     @for (category of categories; track category.id) {
-    <app-category-btn [category]="category"></app-category-btn>
+    <app-category-btn class="category-btn" [category]="category"></app-category-btn>
     }
   </div>
 

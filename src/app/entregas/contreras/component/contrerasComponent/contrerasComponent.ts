@@ -10,48 +10,32 @@ import { JsonplaceholderServiceContreras } from '../ContrerasService/contrerasjs
   styleUrl: './contrerasComponent.css',
 })
 export class ContrerasComponent implements OnInit {
-
+  
   posts: Champion[] = [];
   campeonMostrado: Champion | null = null;
-  mostrarBuscador = false;
+  mostrarBuscador = false; 
 
   constructor(private oJsonplaceholderService: JsonplaceholderServiceContreras) { }
 
   ngOnInit() {
-    this.getPosts();
-  }
-
-  getPosts() {
     this.oJsonplaceholderService.getAllPosts().subscribe((data) => {
       this.posts = Object.values(data.data || data);
     });
   }
 
-  campeonAleatorio(): void {
-    if (this.posts.length === 0) {
-      this.getPosts();
-      return;
+  campeonAleatorio() {
+    if (this.posts.length > 0) {
+      this.campeonMostrado = this.posts[Math.floor(Math.random() * this.posts.length)];
     }
-    
-    const randomChampion = this.posts[Math.floor(Math.random() * this.posts.length)];
-    this.campeonMostrado = randomChampion;
   }
 
-  buscarCampeonEspecifico(nombre: string): void {
-    if (!nombre.trim()) {
-      alert('Por favor, ingresa un nombre de campeón');
-      return;
-    }
-
-    const campeonEncontrado = this.posts.find(champion => 
-      champion.name.toLowerCase().includes(nombre.toLowerCase())
-    );
-
-    if (campeonEncontrado) {
-      this.campeonMostrado = campeonEncontrado;
+  buscarCampeon(nombre: string) {
+    const campeon = this.posts.find(c => c.name.toLowerCase().includes(nombre.toLowerCase()));
+    if (campeon) {
+      this.campeonMostrado = campeon;
       this.mostrarBuscador = false;
     } else {
-      alert(`No se encontró ningún campeón con el nombre "${nombre}"`);
+      alert(`No encontrado: ${nombre}`);
     }
   }
 }

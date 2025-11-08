@@ -1,2 +1,25 @@
-/* Styles for ContrerasComponent */
 h2 { color: #2a6f97; }
+
+.campeon-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+}
+
+.campeon-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.campeon-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+}
+
+.campeon-info h3 { margin: 0; }
+.campeon-info p { margin: 5px 0; color: #666; font-style: italic; }

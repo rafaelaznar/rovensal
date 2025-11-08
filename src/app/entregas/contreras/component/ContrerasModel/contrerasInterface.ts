@@ -10,7 +10,7 @@ export interface Champion {
     health?: { flat?: number };
     armor?: { flat?: number };
     attackDamage?: { flat?: number };
-    moveSpeed?: { flat?: number };
+    movespeed?: { flat?: number };
   };
   positions: string[];
   roles: string[];

@@ -1,35 +1,52 @@
 <h2>Entrega Contreras</h2>
 
-<button (click)="buscarCampeon()">Buscar Campeon</button>
+<button (click)="campeonAleatorio()">Campeón Aleatorio</button>
+
+<div style="margin: 20px 0;">
+  <button (click)="mostrarBuscador = !mostrarBuscador">Buscar Campeón Específico</button>
+  
+  @if (mostrarBuscador) {
+    <div style="margin-top: 10px;">
+      <input 
+        type="text" 
+        placeholder="Ej: Ahri" 
+        #inputBuscador
+        style="padding: 5px; margin-right: 10px;">
+      <button (click)="buscarCampeonEspecifico(inputBuscador.value)">Buscar</button>
+    </div>
+  }
+</div>
 
 <p>Total de campeones cargados: {{ posts.length }}</p>
 
-@if (posts.length > 0) {
-  <div>
-    <h3>Primeros 3 campeones:</h3>
-    @for (champion of posts.slice(0, 3); track champion.id) {
-      <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-        <h4>{{ champion.name }} - {{ champion.title }}</h4>
-        <p><strong>ID:</strong> {{ champion.id }}</p>
-        <p><strong>Tipo de ataque:</strong> {{ champion.attackType }}</p>
-        <p><strong>Tipo adaptativo:</strong> {{ champion.adaptiveType }}</p>
-        <p><strong>Recurso:</strong> {{ champion.resource }}</p>
-        <p><strong>Posiciones:</strong> {{ champion.positions }}</p>
-        <p><strong>Roles:</strong> {{ champion.roles }}</p>
-        <p><strong>Facción:</strong> {{ champion.faction }}</p>
-        <p><strong>Stats completos:</strong> {{ champion.stats | json }}</p>
-        <p><strong>Vida:</strong> {{ champion.stats?.health?.flat || 'No disponible' }}</p>
-        <p><strong>Armadura:</strong> {{ champion.stats?.armor?.flat || 'No disponible' }}</p>
-        <p><strong>Daño de ataque:</strong> {{ champion.stats?.attackDamage?.flat || 'No disponible' }}</p>
-        <p><strong>Velocidad:</strong> {{ champion.stats?.moveSpeed?.flat || 'No disponible' }}</p>
-        <p><strong>Lore: </strong> 
-          <span #loreText>{{ champion.lore.substring(0, 150) }}...</span>
-          <button #btnmas (click)="loreText.textContent = champion.lore; btnmas.style.display = 'none'" 
-                  style="margin-left: 10px; color: #007acc; background: none; border: none; cursor: pointer; text-decoration: underline;">
-            Ver más
-          </button>
-        </p>
+@if (campeonMostrado) {
+  <div style="border: 1px solid #ccc; padding: 20px; margin: 20px 0; background-color: #f9f9f9;">
+    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+      <img [src]="campeonMostrado.icon" 
+           [alt]="campeonMostrado.name" 
+           style="width: 64px; height: 64px; border-radius: 8px; border: 2px solid #ddd;">
+      <div>
+        <h3 style="margin: 0;">{{ campeonMostrado.name }}</h3>
+        <p style="margin: 5px 0; color: #666; font-style: italic;">{{ campeonMostrado.title }}</p>
       </div>
-    }
+    </div>
+    <p><strong>ID:</strong> {{ campeonMostrado.id }}</p>
+    <p><strong>Tipo de ataque:</strong> {{ campeonMostrado.attackType }}</p>
+    <p><strong>Tipo adaptativo:</strong> {{ campeonMostrado.adaptiveType }}</p>
+    <p><strong>Recurso:</strong> {{ campeonMostrado.resource }}</p>
+    <p><strong>Posiciones:</strong> {{ campeonMostrado.positions }}</p>
+    <p><strong>Roles:</strong> {{ campeonMostrado.roles }}</p>
+    <p><strong>Facción:</strong> {{ campeonMostrado.faction }}</p>
+    <p><strong>Vida:</strong> {{ campeonMostrado.stats?.health?.flat || 'No disponible' }}</p>
+    <p><strong>Armadura:</strong> {{ campeonMostrado.stats?.armor?.flat || 'No disponible' }}</p>
+    <p><strong>Daño de ataque:</strong> {{ campeonMostrado.stats?.attackDamage?.flat || 'No disponible' }}</p>
+    <p><strong>Velocidad:</strong> {{ campeonMostrado.stats?.moveSpeed?.flat || 'No disponible' }}</p>
+    <p><strong>Lore: </strong> 
+      <span #loreText>{{ campeonMostrado.lore.substring(0, 150) }}...</span>
+      <button #btnmas (click)="loreText.textContent = campeonMostrado.lore; btnmas.style.display = 'none'" 
+              style="margin-left: 10px; color: #007acc; background: none; border: none; cursor: pointer; text-decoration: underline;">
+        Ver más
+      </button>
+    </p>
   </div>
 }

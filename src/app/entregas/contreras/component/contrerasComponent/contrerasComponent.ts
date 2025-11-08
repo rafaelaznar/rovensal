@@ -12,6 +12,8 @@ import { JsonplaceholderServiceContreras } from '../ContrerasService/contrerasjs
 export class ContrerasComponent implements OnInit {
 
   posts: Champion[] = [];
+  campeonMostrado: Champion | null = null;
+  mostrarBuscador = false;
 
   constructor(private oJsonplaceholderService: JsonplaceholderServiceContreras) { }
 
@@ -21,26 +23,35 @@ export class ContrerasComponent implements OnInit {
 
   getPosts() {
     this.oJsonplaceholderService.getAllPosts().subscribe((data) => {
-      console.log('Datos completos:', data);
       this.posts = Object.values(data.data || data);
-      console.log('Total campeones:', this.posts.length);
-      console.log('Primeros 3 campeones:', this.posts.slice(0, 3));
-      // Verificar stats del primer campeón
-      if (this.posts.length > 0) {
-        console.log('Stats del primer campeón:', this.posts[0].stats);
-      }
     });
   }
 
-  // Método para el botón (mantener compatibilidad con el HTML actual)
-  buscarCampeon(): void {
+  campeonAleatorio(): void {
     if (this.posts.length === 0) {
-      console.log('Cargando campeones...');
       this.getPosts();
+      return;
+    }
+    
+    const randomChampion = this.posts[Math.floor(Math.random() * this.posts.length)];
+    this.campeonMostrado = randomChampion;
+  }
+
+  buscarCampeonEspecifico(nombre: string): void {
+    if (!nombre.trim()) {
+      alert('Por favor, ingresa un nombre de campeón');
+      return;
+    }
+
+    const campeonEncontrado = this.posts.find(champion => 
+      champion.name.toLowerCase().includes(nombre.toLowerCase())
+    );
+
+    if (campeonEncontrado) {
+      this.campeonMostrado = campeonEncontrado;
+      this.mostrarBuscador = false;
     } else {
-      const randomChampion = this.posts[Math.floor(Math.random() * this.posts.length)];
-      console.log('Campeón seleccionado:', randomChampion.name);
-      alert(`¡Campeón encontrado: ${randomChampion.name}!`);
+      alert(`No se encontró ningún campeón con el nombre "${nombre}"`);
     }
   }
 }

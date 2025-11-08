@@ -21,6 +21,7 @@ import { ZanonComponent } from './entregas/zanon/component/zanonComponent/zanonC
 /** Mis componentes */
 import { ProductListRoutedComponent } from './entregas/reyna/components/product-list-routed/product-list-routed';
 import { ProductDetailRoutedComponent } from './entregas/reyna/components/product-detail-routed/product-detail-routed';
+import { CategoryListRouted } from './entregas/reyna/components/category-list-routed/category-list-routed';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -41,7 +42,7 @@ export const routes: Routes = [
     { path: 'reyna', component: ReynaComponent },
     { path: 'reyna/list', component: ProductListRoutedComponent }, 
     { path: 'reyna/detail', component: ProductDetailRoutedComponent },
-
+    { path: 'reyna/categories', component: CategoryListRouted },
 
     { path: 'salinas', component: SalinasComponent },
     { path: 'sempertegui', component: SemperteguiComponent },

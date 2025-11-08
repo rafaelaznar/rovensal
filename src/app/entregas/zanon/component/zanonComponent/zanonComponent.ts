@@ -4,8 +4,6 @@ import { ZanonService } from '../zanonService/zanon-service';
 import { Libro } from '../zanonModel/zanonInterface';
 import { MatDialog } from '@angular/material/dialog';
 import { DatosUnroutedComponent } from '../datosUnroutedComponent/datos-unrouted-component';
-import { OpenLibraryService } from '../zanonService/open-library-service';
-import { catchError, forkJoin, map, of, switchMap } from 'rxjs';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
@@ -13,7 +11,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
   imports: [CommonModule, MatPaginatorModule],
   templateUrl: './zanonComponent.html',
   styleUrl: './zanonComponent.css',
-  standalone: true
 })
 export class ZanonComponent {
 
@@ -29,7 +26,7 @@ export class ZanonComponent {
 
   oMatDialog = inject(MatDialog);
 
-  constructor(private oZanonService: ZanonService, private oOpenLibraryService: OpenLibraryService) {
+  constructor(private oZanonService: ZanonService) {
 
   }
 
@@ -38,36 +35,13 @@ export class ZanonComponent {
   }
 
   getLibro() {
-    this.oZanonService.getAll().pipe (
-      switchMap((libros: Libro[]) => {
-        const peticiones = libros.map(libro =>
-
-          // "(libro.ISBN || '').replace(/[^0-9X]/gi, '')" normaliza el ISBN del libro.
-          // Entonces, llama al servicio OpenLibraryService y devuelve un "Observable" que luego será procesado en el "pipe()"
-          this.oOpenLibraryService.obtenerInfoLibro((libro.ISBN || '').replace(/[^0-9X]/gi, '')).pipe (
-            map(info => ({
-              ...libro, // Conserva los datos del libro original
-              coverUrl: info.coverUrl, // Añade la portada
-              description: info.description // Añade la descripción
-            })),
-
-            // "catchError()" garantiza que cada llamada individual a OpenLibraryService nunca lanze un error fatal.
-            // En su lugar, devuelve un valor por defecto
-            catchError(() => of({
-              ...libro, // Conserva también aquí los datos del libro original
-              coverUrl: 'zanon/placeholder-cover.png',
-              description: 'Descripción no disponible'
-            }))
-          )
-        );
-
-        // "forkJoin()" combina todos los observables y emite un único array con todos los resultados
-        return forkJoin(peticiones);
-      })
-    ).subscribe({
+    this.oZanonService.getAll().subscribe({
       next: (librosCargados: Libro[]) => {
         console.log("¡Libros cargados con éxito! ", librosCargados);
+
+        // Se guardan todos los libros
         this.libros = librosCargados;
+
         this.length = librosCargados.length;
         this.actualizarPagina();
       },

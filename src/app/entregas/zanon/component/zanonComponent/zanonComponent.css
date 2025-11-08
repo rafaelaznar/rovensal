@@ -6,6 +6,10 @@ h2 { color: #2a6f97; }
     height: 500px;
 }
 
+input {
+    width: 50%;
+}
+
 button {
     background-color: blue;
     color: white;

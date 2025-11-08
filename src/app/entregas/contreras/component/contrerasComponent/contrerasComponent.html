@@ -18,10 +18,10 @@
         <p><strong>Roles:</strong> {{ champion.roles }}</p>
         <p><strong>Facción:</strong> {{ champion.faction }}</p>
         <p><strong>Stats completos:</strong> {{ champion.stats | json }}</p>
-        <p><strong>Vida:</strong> {{ champion.stats.hp }}</p>
-        <p><strong>Armadura:</strong> {{ champion.stats.armor }}</p>
-        <p><strong>Daño de ataque:</strong> {{ champion.stats.attackdamage }}</p>
-        <p><strong>Velocidad:</strong> {{ champion.stats.movespeed }}</p>
+        <p><strong>Vida:</strong> {{ champion.stats?.health?.flat || 'No disponible' }}</p>
+        <p><strong>Armadura:</strong> {{ champion.stats?.armor?.flat || 'No disponible' }}</p>
+        <p><strong>Daño de ataque:</strong> {{ champion.stats?.attackDamage?.flat || 'No disponible' }}</p>
+        <p><strong>Velocidad:</strong> {{ champion.stats?.moveSpeed?.flat || 'No disponible' }}</p>
         <p><strong>Lore: </strong> 
           <span #loreText>{{ champion.lore.substring(0, 150) }}...</span>
           <button #btnmas (click)="loreText.textContent = champion.lore; btnmas.style.display = 'none'" 

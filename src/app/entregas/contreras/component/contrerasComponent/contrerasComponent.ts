@@ -21,8 +21,14 @@ export class ContrerasComponent implements OnInit {
 
   getPosts() {
     this.oJsonplaceholderService.getAllPosts().subscribe((data) => {
-      console.log(data);
+      console.log('Datos completos:', data);
       this.posts = Object.values(data.data || data);
+      console.log('Total campeones:', this.posts.length);
+      console.log('Primeros 3 campeones:', this.posts.slice(0, 3));
+      // Verificar stats del primer campeón
+      if (this.posts.length > 0) {
+        console.log('Stats del primer campeón:', this.posts[0].stats);
+      }
     });
   }
 

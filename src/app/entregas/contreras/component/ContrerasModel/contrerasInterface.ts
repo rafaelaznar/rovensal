@@ -1,16 +1,16 @@
 export interface Champion {
-  id: string;
+  id: number;
   name: string;
   title: string;
   icon: string;
   resource: string;
   attackType: string;
   adaptiveType: string;
-  stats: {
-    hp: number;
-    armor: number;
-    attackdamage: number;
-    movespeed: number;
+  stats?: {
+    health?: { flat?: number };
+    armor?: { flat?: number };
+    attackDamage?: { flat?: number };
+    moveSpeed?: { flat?: number };
   };
   positions: string[];
   roles: string[];

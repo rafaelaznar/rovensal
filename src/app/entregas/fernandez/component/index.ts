@@ -1,4 +1,3 @@
-// Exportaciones de todos los componentes de fernandez
 export * from './fernandezComponent/fernandezComponent';
 export * from './character-list/character-list.component';
 export * from './character-detail/character-detail.component';

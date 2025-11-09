@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ThroneService, FavoriteService } from '../../service';
 import { Character } from '../../model';
 
-// Componente reutilizable para mostrar listas de personajes
-// Lo usan varias páginas (characters, search, favorites)
 @Component({
   selector: 'app-character-list',
   imports: [CommonModule],
@@ -14,18 +12,15 @@ import { Character } from '../../model';
 })
 export class CharacterListComponent {
   
-  // Datos que recibe del componente padre
   characters = input<Character[]>([]);
   loading = input<boolean>(false);
   title = input<string>('Personajes');
-  showFamilyFilter = input<boolean>(true);  // si mostrar el filtro por casa
+  showFamilyFilter = input<boolean>(true);
   
-  // Eventos que emite al componente padre
   characterSelected = output<Character>();
   familyFilterChanged = output<string>();
   
-  // Estado interno
-  selectedFamily = signal<string>('');  // casa seleccionada para filtrar
+  selectedFamily = signal<string>('');
   
   private throneService = inject(ThroneService);
   private favoriteService = inject(FavoriteService);

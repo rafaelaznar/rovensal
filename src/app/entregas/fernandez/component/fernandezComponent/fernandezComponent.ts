@@ -6,8 +6,6 @@ import { ThroneService } from '../../service';
 import { Character } from '../../model';
 import { ThemeSelectorComponent } from '../theme-selector/theme-selector.component';
 
-// Componente principal de la aplicación Game of Thrones
-// Maneja la navegación y el estado general
 @Component({
   selector: 'app-fernandez',
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, ThemeSelectorComponent],
@@ -20,13 +18,11 @@ export class FernandezComponent {
   private throneService = inject(ThroneService);
   private router = inject(Router);
   
-  // Signals para el estado del componente
   selectedCharacter = signal<Character | null>(null);
   isLoading = signal<boolean>(false);
   errorMessage = signal<string | null>(null);
   currentRoute = signal<string>('');
   
-  // Computed values que se actualizan automáticamente
   hasSelectedCharacter = computed(() => this.selectedCharacter() !== null);
   appTitle = computed(() => 
     this.selectedCharacter() 
@@ -34,7 +30,7 @@ export class FernandezComponent {
       : 'Game of Thrones App'
   );
   
-  visibleNavigationItems = computed(() => {
+  navItems = computed(() => {
     const current = this.currentRoute();
     
     if (current.includes('/characters')) {
@@ -61,7 +57,7 @@ export class FernandezComponent {
     }
   });
 
-  visibleActionCards = computed(() => {
+  actionCards = computed(() => {
     const current = this.currentRoute();
     
     if (current.includes('/characters')) {

@@ -3,36 +3,29 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { BehaviorSubject, Observable, catchError, map, retry, shareReplay, throwError } from 'rxjs';
 import { Character, CharacterFilter, House, AppEvent, EventType } from '../model';
 
-// Servicio principal para manejar todo lo de Game of Thrones
-// Conecta con la API de thronesapi.com y maneja el estado
 @Injectable({
   providedIn: 'root'
 })
 export class ThroneService {
   private readonly http = inject(HttpClient);
   
-  // URL base y configuración
   private readonly API_BASE_URL = 'https://thronesapi.com/api/v2';
-  private readonly MAX_RETRIES = 3;  // reintentos si falla la API
+  private readonly MAX_RETRIES = 3;
   
-  // Subjects para manejar el estado de la app
   private selectedCharacterSubject = new BehaviorSubject<Character | null>(null);
   private loadingSubject = new BehaviorSubject<boolean>(false);
   private errorSubject = new BehaviorSubject<string | null>(null);
   private eventsSubject = new BehaviorSubject<AppEvent[]>([]);
   
-  // Observables que pueden usar otros componentes
   public selectedCharacter$ = this.selectedCharacterSubject.asObservable();
   public loading$ = this.loadingSubject.asObservable();
   public error$ = this.errorSubject.asObservable(); 
   public events$ = this.eventsSubject.asObservable();
   
-  // Cache para no llamar a la API cada vez
   private charactersCache$ = this.getAllCharacters().pipe(
     shareReplay(1)
   );
   
-  // Obtiene todos los personajes de la API
   getAllCharacters(): Observable<Character[]> {
     this.setLoading(true);
     
@@ -49,7 +42,6 @@ export class ThroneService {
     );
   }
   
-  // Busca un personaje por su ID
   getCharacterById(id: number): Observable<Character | undefined> {
     return this.charactersCache$.pipe(
       map(characters => characters.find(char => char.id === id)),
@@ -63,7 +55,6 @@ export class ThroneService {
     );
   }
   
-  // Filtros de búsqueda - busca local para que vaya más rápido
   searchCharacters(filter: CharacterFilter): Observable<Character[]> {
     return this.charactersCache$.pipe(
       map(characters => this.filterCharacters(characters, filter)),
@@ -74,12 +65,10 @@ export class ThroneService {
     );
   }
   
-  // Obtiene personajes de una familia específica
   getCharactersByFamily(family: string): Observable<Character[]> {
     return this.searchCharacters({ family });
   }
   
-  // Obtiene todas las familias únicas normalizadas y ordenadas
   getAllFamilies(): Observable<string[]> {
     return this.charactersCache$.pipe(
       map(characters => {
@@ -87,12 +76,10 @@ export class ThroneService {
           .map(char => char.family)
           .filter(f => f && f.trim() !== '')
           .map(f => f.trim())
-          .filter(f => this.isValidFamily(f)); // Filtrar familias válidas
+          .filter(f => this.isValidFamily(f));
         
-        // Eliminar duplicados
         const uniqueFamilies = [...new Set(families)];
         
-        // Separar y ordenar por categorías
         const houses: string[] = [];
         const organizations: string[] = [];
         const individuals: string[] = [];
@@ -107,22 +94,19 @@ export class ThroneService {
           }
         });
         
-        // Ordenar cada categoría alfabéticamente
         houses.sort();
         organizations.sort();
         individuals.sort();
         
-        // Combinar: primero casas, luego organizaciones, luego individuos
         return [...houses, ...organizations, ...individuals];
       })
     );
   }
 
-  // Determina si una familia es válida y no debe ser filtrada
   private isValidFamily(family: string): boolean {
     const invalidFamilies = [
       'unknown',
-      'unkown', // Error tipográfico común
+      'unkown',
       'null',
       'undefined',
       'none',
@@ -135,12 +119,10 @@ export class ThroneService {
     return !invalidFamilies.includes(family.toLowerCase().trim());
   }
   
-  // Métodos para gestión de estado
   setSelectedCharacter(character: Character | null): void {
     this.selectedCharacterSubject.next(character);
   }
   
-  // Obtiene el personaje seleccionado actualmente
   getSelectedCharacter(): Character | null {
     return this.selectedCharacterSubject.value;
   }
@@ -160,7 +142,6 @@ export class ThroneService {
     this.setError(null);
   }
   
-  // Añade un evento al historial
   private addEvent(type: EventType, payload: any): void {
     const currentEvents = this.eventsSubject.value;
     const newEvent: AppEvent = {

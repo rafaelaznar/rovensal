@@ -93,7 +93,6 @@ export class ThemeService {
   private applyThemeVariables(theme: 'light' | 'dark'): void {
     const root = document.documentElement;
     
-
     const lightColors = {
       '--fernandez-bg-primary': '#ffffff',
       '--fernandez-bg-secondary': '#f8f9fa',
@@ -141,7 +140,6 @@ export class ThemeService {
       const stored = localStorage.getItem(this.STORAGE_KEY) as Theme;
       return this.themes.includes(stored) ? stored : 'auto';
     } catch (error) {
-
       return 'auto';
     }
   }
@@ -150,7 +148,7 @@ export class ThemeService {
     try {
       localStorage.setItem(this.STORAGE_KEY, theme);
     } catch (error) {
-
+      // ignore
     }
   }
   
@@ -165,7 +163,7 @@ export class ThemeService {
   
   private getThemeIcon(theme: Theme): string {
     if (theme === 'light') return '☀️';
-    if (theme === 'dark') return '�';
+    if (theme === 'dark') return '🌙';
     return '🌓';
   }
 }

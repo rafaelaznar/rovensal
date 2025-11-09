@@ -4,16 +4,6 @@
     <h3 class="form-title">
       {{ isEditing() ? 'Editar Personaje' : 'Nuevo Personaje' }}
     </h3>
-    
-    <div class="form-progress">
-      <div class="progress-bar">
-        <div 
-          class="progress-fill" 
-          [style.width.%]="getFormCompleteness()">
-        </div>
-      </div>
-      <span class="progress-text">{{ getFormCompleteness() }}% completado</span>
-    </div>
   </div>
   
   <form [formGroup]="characterForm" (ngSubmit)="onSubmit()" class="character-form">
@@ -161,19 +151,6 @@
           {{ isEditing() ? 'Actualizar' : 'Crear' }}
         }
       </button>
-    </div>
-    
-    <!-- Estado del formulario (para debug) -->
-    <div class="form-debug">
-      <details>
-        <summary>Debug del formulario</summary>
-        <div class="debug-info">
-          <p><strong>Válido:</strong> {{ characterForm.valid ? 'Sí' : 'No' }}</p>
-          <p><strong>Tocado:</strong> {{ characterForm.touched ? 'Sí' : 'No' }}</p>
-          <p><strong>Estado:</strong> {{ characterForm.status }}</p>
-          <p><strong>Completitud:</strong> {{ getFormCompleteness() }}%</p>
-        </div>
-      </details>
     </div>
     
   </form>

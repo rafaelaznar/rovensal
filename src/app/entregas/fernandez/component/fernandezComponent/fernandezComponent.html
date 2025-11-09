@@ -39,7 +39,7 @@
   <nav class="main-navigation">
     <div class="container">
       <ul class="nav-list">
-        @for (item of visibleNavigationItems(); track item.path) {
+        @for (item of navItems(); track item.path) {
           <li class="nav-item">
             <a 
               [routerLink]="item.path" 
@@ -83,7 +83,7 @@
           <p>Explora el mundo de Westeros y sus personajes</p>
           
           <div class="quick-actions">
-            @for (card of visibleActionCards(); track card.path) {
+            @for (card of actionCards(); track card.path) {
               <a [routerLink]="card.path" class="action-card">
                 <div class="action-icon">{{ card.icon }}</div>
                 <h3>{{ card.title }}</h3>

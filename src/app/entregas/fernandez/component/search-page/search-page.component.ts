@@ -5,8 +5,6 @@ import { ThroneService } from '../../service';
 import { Character, CharacterFilter } from '../../model';
 import { CharacterListComponent } from '../character-list/character-list.component';
 
-// Página de búsqueda avanzada con formulario
-// Permite filtrar por nombre, casa, título, etc.
 @Component({
   selector: 'app-search-page',
   imports: [CommonModule, FormsModule, ReactiveFormsModule, CharacterListComponent],
@@ -19,15 +17,13 @@ export class SearchPageComponent {
   private throneService = inject(ThroneService);
   private fb = inject(FormBuilder);
   
-  // Estado de la búsqueda
   searchResults = signal<Character[]>([]);
   loading = signal<boolean>(false);
-  hasSearched = signal<boolean>(false);  // para mostrar el mensaje "no hay resultados"
+  hasSearched = signal<boolean>(false);
   
-  // Formulario con validaciones básicas
   searchForm: FormGroup = this.fb.group({
-    name: ['', [Validators.minLength(2)]], // mínimo 2 caracteres
-    family: [''],                         // opcional
+    name: ['', [Validators.minLength(2)]],
+    family: [''],
     title: ['']
   });
   
@@ -57,7 +53,6 @@ export class SearchPageComponent {
     this.hasSearched.set(false);
   }
   
-  // Maneja la selección de personaje
   onCharacterSelected(character: Character): void {
     this.throneService.setSelectedCharacter(character);
   }

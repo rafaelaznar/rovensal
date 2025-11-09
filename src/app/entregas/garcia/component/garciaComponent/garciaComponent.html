@@ -177,27 +177,10 @@
 
     <!-- BOTONES DE ACCIÓN -->
     @if (esTurnoJugador) {
-    <div class="botones-accion">
-        <h3>¡Tu turno!</h3>
-        <div class="botones-combate">
-            <button (click)="atacar()" class="boton-grande boton-atacar">
-                ATACAR
-            </button>
-
-            <button (click)="curar()" class="boton-grande boton-curar"
-                [disabled]="pocionesDisponibles <= 0 || !esTurnoJugador || combateTerminado">
-                CURAR
-            </button>
-
-            <button (click)="defender()" class="boton-grande boton-defender">
-                DEFENDER
-            </button>
-
-        </div>
-        <p class="texto-pociones">
-            🧪 {{ pocionesDisponibles }}
-        </p>
-    </div>
+    <app-botones-accion [titulo]="'¡Tu turno!'" [habilitado]="esTurnoJugador"
+        [pocionesDisponibles]="pocionesDisponibles" (atacar)="manejarAtacar()" (curar)="manejarCurar()"
+        (defender)="manejarDefender()">
+    </app-botones-accion>
     } @else {
     <div class="botones-accion">
         <h3>⏳ Turno del enemigo...</h3>

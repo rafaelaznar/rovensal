@@ -3,42 +3,36 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { BehaviorSubject, Observable, catchError, map, retry, shareReplay, throwError } from 'rxjs';
 import { Character, CharacterFilter, House, AppEvent, EventType } from '../model';
 
-/**
- * Servicio singleton para la gestión de datos de Game of Thrones
- * Implementa patrones de diseño: Singleton, Observer
- * Utiliza RxJS para comunicación asíncrona
- */
+// Servicio principal para manejar todo lo de Game of Thrones
+// Conecta con la API de thronesapi.com y maneja el estado
 @Injectable({
   providedIn: 'root'
 })
 export class ThroneService {
   private readonly http = inject(HttpClient);
   
-  // Configuración de la API
+  // URL base y configuración
   private readonly API_BASE_URL = 'https://thronesapi.com/api/v2';
-  private readonly MAX_RETRIES = 3;
+  private readonly MAX_RETRIES = 3;  // reintentos si falla la API
   
-  // Subjects para estado global (patrón Observer)
+  // Subjects para manejar el estado de la app
   private selectedCharacterSubject = new BehaviorSubject<Character | null>(null);
   private loadingSubject = new BehaviorSubject<boolean>(false);
   private errorSubject = new BehaviorSubject<string | null>(null);
   private eventsSubject = new BehaviorSubject<AppEvent[]>([]);
   
-  // Observables públicos
+  // Observables que pueden usar otros componentes
   public selectedCharacter$ = this.selectedCharacterSubject.asObservable();
   public loading$ = this.loadingSubject.asObservable();
-  public error$ = this.errorSubject.asObservable();
+  public error$ = this.errorSubject.asObservable(); 
   public events$ = this.eventsSubject.asObservable();
   
-  // Cache para optimizar rendimiento
+  // Cache para no llamar a la API cada vez
   private charactersCache$ = this.getAllCharacters().pipe(
     shareReplay(1)
   );
   
-  /**
-   * Obtiene todos los personajes de la API
-   * Implementa retry automático y manejo de errores
-   */
+  // Obtiene todos los personajes de la API
   getAllCharacters(): Observable<Character[]> {
     this.setLoading(true);
     
@@ -55,9 +49,7 @@ export class ThroneService {
     );
   }
   
-  /**
-   * Obtiene un personaje específico por ID
-   */
+  // Busca un personaje por su ID
   getCharacterById(id: number): Observable<Character | undefined> {
     return this.charactersCache$.pipe(
       map(characters => characters.find(char => char.id === id)),
@@ -71,10 +63,7 @@ export class ThroneService {
     );
   }
   
-  /**
-   * Busca personajes aplicando filtros
-   * Implementa búsqueda local para mejor rendimiento
-   */
+  // Filtros de búsqueda - busca local para que vaya más rápido
   searchCharacters(filter: CharacterFilter): Observable<Character[]> {
     return this.charactersCache$.pipe(
       map(characters => this.filterCharacters(characters, filter)),
@@ -85,16 +74,12 @@ export class ThroneService {
     );
   }
   
-  /**
-   * Obtiene personajes de una familia específica
-   */
+  // Obtiene personajes de una familia específica
   getCharactersByFamily(family: string): Observable<Character[]> {
     return this.searchCharacters({ family });
   }
   
-  /**
-   * Obtiene todas las familias únicas normalizadas y ordenadas
-   */
+  // Obtiene todas las familias únicas normalizadas y ordenadas
   getAllFamilies(): Observable<string[]> {
     return this.charactersCache$.pipe(
       map(characters => {
@@ -133,9 +118,7 @@ export class ThroneService {
     );
   }
 
-  /**
-   * Determina si una familia es válida y no debe ser filtrada
-   */
+  // Determina si una familia es válida y no debe ser filtrada
   private isValidFamily(family: string): boolean {
     const invalidFamilies = [
       'unknown',
@@ -152,16 +135,12 @@ export class ThroneService {
     return !invalidFamilies.includes(family.toLowerCase().trim());
   }
   
-  /**
-   * Métodos para gestión de estado
-   */
+  // Métodos para gestión de estado
   setSelectedCharacter(character: Character | null): void {
     this.selectedCharacterSubject.next(character);
   }
   
-  /**
-   * Obtiene el personaje seleccionado actualmente
-   */
+  // Obtiene el personaje seleccionado actualmente
   getSelectedCharacter(): Character | null {
     return this.selectedCharacterSubject.value;
   }
@@ -181,9 +160,7 @@ export class ThroneService {
     this.setError(null);
   }
   
-  /**
-   * Añade un evento al historial
-   */
+  // Añade un evento al historial
   private addEvent(type: EventType, payload: any): void {
     const currentEvents = this.eventsSubject.value;
     const newEvent: AppEvent = {
@@ -197,9 +174,7 @@ export class ThroneService {
     this.eventsSubject.next(updatedEvents);
   }
   
-  /**
-   * Normaliza los datos de personajes de la API y elimina duplicados
-   */
+  // Normaliza los datos de personajes de la API y elimina duplicados
   private normalizeCharacters(characters: any[]): Character[] {
     const normalized = characters.map(char => ({
       id: char.id || 0,
@@ -237,9 +212,7 @@ export class ThroneService {
     return uniqueCharacters;
   }
 
-  /**
-   * Normaliza nombres de familias para corregir errores tipográficos comunes
-   */
+  // Normaliza nombres de familias para corregir errores tipográficos comunes
   private normalizeFamilyName(family: string): string {
     if (!family) return '';
     
@@ -324,17 +297,17 @@ export class ThroneService {
     
     // Si no hay corrección específica, aplicar reglas generales
     if (cleanFamily.startsWith('house ')) {
-      // Ya tiene "House", solo capitalizar
+
       return family
         .split(' ')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
         .join(' ');
     } else if (this.isValidHouseName(cleanFamily)) {
-      // Es un apellido válido, agregar "House"
+
       const capitalizedName = family.charAt(0).toUpperCase() + family.slice(1).toLowerCase();
       return `House ${capitalizedName}`;
     } else {
-      // Nombre único o grupo, solo capitalizar
+
       return family
         .split(' ')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
@@ -342,9 +315,7 @@ export class ThroneService {
     }
   }
 
-  /**
-   * Determina si un nombre es un apellido válido para convertir en "House X"
-   */
+  // Determina si un nombre es un apellido válido para convertir en "House X"
   private isValidHouseName(name: string): boolean {
     const validHouseNames = [
       'stark', 'lannister', 'baratheon', 'targaryen', 'greyjoy', 'arryn',
@@ -355,10 +326,8 @@ export class ThroneService {
     return validHouseNames.includes(name.toLowerCase());
   }
 
-  /**
-   * Determina si un personaje debe reemplazar a otro duplicado
-   * Criterios: título más específico, ID menor, o imagen disponible
-   */
+  // Determina si un personaje debe reemplazar a otro duplicado
+  // Criterios: título más específico, ID menor, o imagen disponible
   private shouldReplaceCharacter(existing: Character, candidate: Character): boolean {
     // Si el candidato tiene título "King" y el existente "Lord of the Seven Kingdoms", mantener "King" (más específico)
     if (candidate.title.toLowerCase().includes('king') && existing.title.toLowerCase().includes('lord')) {
@@ -379,9 +348,7 @@ export class ThroneService {
     return candidate.id < existing.id;
   }
   
-  /**
-   * Aplica filtros a la lista de personajes
-   */
+  // Aplica filtros a la lista de personajes
   private filterCharacters(characters: Character[], filter: CharacterFilter): Character[] {
     return characters.filter(character => {
       const matchesName = !filter.name || 
@@ -399,9 +366,7 @@ export class ThroneService {
     });
   }
   
-  /**
-   * Maneja errores de HTTP de forma centralizada
-   */
+  // Maneja errores de HTTP de forma centralizada
   private handleError(error: HttpErrorResponse): Observable<never> {
     this.setLoading(false);
     

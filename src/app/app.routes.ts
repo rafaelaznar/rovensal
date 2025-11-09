@@ -35,6 +35,7 @@ export const routes: Routes = [
             { path: 'characters', component: CharactersPageComponent },
             { path: 'characters/:id', component: CharactersPageComponent },
             { path: 'search', component: SearchPageComponent },
+            { path: 'favorites', loadComponent: () => import('./entregas/fernandez/component/favorites-page/favorites-page.component').then(m => m.FavoritesPageComponent) },
             { path: '', redirectTo: 'characters', pathMatch: 'full' }
         ]
     },

@@ -1,11 +1,11 @@
-<!-- Componente de lista de personajes -->
+
 <div class="character-list-container">
   
-  <!-- Encabezado con título y filtro -->
+
   <div class="list-header">
     <h3 class="list-title">{{ title() }}</h3>
     
-    <!-- Filtro por familia -->
+
     @if (showFamilyFilter()) {
       <div class="family-filter">
         <label for="family-select">Filtrar por Casa:</label>
@@ -23,7 +23,7 @@
     }
   </div>
   
-  <!-- Indicador de carga -->
+
   @if (loading()) {
     <div class="loading-container">
       <div class="spinner-large"></div>
@@ -31,7 +31,7 @@
     </div>
   }
   
-  <!-- Lista de personajes -->
+
   @if (!loading() && getFilteredCharacters().length > 0) {
     <div class="characters-grid">
       @for (character of getFilteredCharacters(); track character.id) {
@@ -43,7 +43,7 @@
           tabindex="0"
           [attr.aria-label]="'Seleccionar ' + character.fullName">
           
-          <!-- Imagen del personaje -->
+ 
           <div class="character-image-container">
             <img 
               [src]="getCharacterImage(character)"
@@ -52,13 +52,22 @@
               class="character-image"
               loading="lazy">
             
-            <!-- Overlay con información adicional -->
+        
+            <button 
+              class="favorite-btn"
+              [class.is-favorite]="isFavorite(character.id)"
+              (click)="toggleFavorite(character, $event)"
+              [title]="isFavorite(character.id) ? 'Quitar de favoritos' : 'Añadir a favoritos'">
+              <span class="favorite-icon">{{isFavorite(character.id) ? '⭐' : '☆'}}</span>
+            </button>
+            
+           
             <div class="character-overlay">
               <span class="character-id">#{{ character.id }}</span>
             </div>
           </div>
           
-          <!-- Información del personaje -->
+       
           <div class="character-info">
             <h4 class="character-name">{{ character.fullName }}</h4>
             
@@ -74,7 +83,7 @@
             }
           </div>
           
-          <!-- Indicador de selección -->
+        
           <div class="selection-indicator">
             <span class="checkmark">✓</span>
           </div>
@@ -82,7 +91,7 @@
       }
     </div>
     
-    <!-- Información del conteo -->
+  
     <div class="character-count">
       <p>
         Mostrando {{ getFilteredCharacters().length }} 
@@ -94,7 +103,7 @@
     </div>
   }
   
-  <!-- Estado vacío -->
+ 
   @if (!loading() && characters().length === 0) {
     <div class="empty-state">
       <div class="empty-icon">👤</div>
@@ -103,7 +112,7 @@
     </div>
   }
   
-  <!-- No hay resultados de filtro -->
+
   @if (!loading() && characters().length > 0 && getFilteredCharacters().length === 0) {
     <div class="empty-state">
       <div class="empty-icon">🔍</div>

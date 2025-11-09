@@ -1,7 +1,7 @@
-<!-- Página de búsqueda -->
+
 <div class="search-page">
   
-  <!-- Header -->
+
   <div class="page-header">
     <h2 class="page-title">Buscar Personajes</h2>
     <p class="page-description">
@@ -9,11 +9,11 @@
     </p>
   </div>
   
-  <!-- Formulario de búsqueda -->
+
   <div class="search-form-container">
     <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
       
-      <!-- Campo de nombre -->
+      // Campo de nombre
       <div class="form-field">
         <label for="name">Nombre del personaje:</label>
         <input 
@@ -30,7 +30,7 @@
         }
       </div>
       
-      <!-- Campo de familia -->
+
       <div class="form-field">
         <label for="family">Casa/Familia:</label>
         <input 
@@ -41,7 +41,7 @@
           class="form-input">
       </div>
       
-      <!-- Campo de título -->
+
       <div class="form-field">
         <label for="title">Título:</label>
         <input 
@@ -52,7 +52,7 @@
           class="form-input">
       </div>
       
-      <!-- Botones -->
+
       <div class="form-actions">
         <button 
           type="submit" 
@@ -78,7 +78,7 @@
     </form>
   </div>
   
-  <!-- Resultados -->
+  // Resultados
   @if (hasSearched()) {
     <div class="results-section">
       @if (searchResults().length > 0) {

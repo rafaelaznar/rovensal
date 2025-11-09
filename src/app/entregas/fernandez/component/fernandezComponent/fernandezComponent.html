@@ -1,27 +1,33 @@
-<!-- Componente principal de Game of Thrones App -->
+
 <div class="got-app">
   
-  <!-- Header con título dinámico -->
+
   <header class="app-header">
     <div class="container">
-      <h1 class="app-title">{{ appTitle() }}</h1>
+      <div class="header-top">
+        <h1 class="app-title">{{ appTitle() }}</h1>
+        
+
+        <div class="theme-section">
+          <app-theme-selector></app-theme-selector>
+        </div>
+      </div>
       
-      <!-- Indicador de carga -->
       @if (isLoading()) {
         <div class="loading-indicator">
           <span class="spinner"></span>
-          <span>Cargando...</span>
+          <span>Loading...</span>
         </div>
       }
       
-      <!-- Información del personaje seleccionado -->
+
       @if (hasSelectedCharacter()) {
         <div class="selected-character-info">
-          <span>Personaje actual: {{ selectedCharacter()?.fullName }}</span>
+          <span>Current: {{ selectedCharacter()?.fullName }}</span>
           <button 
             class="clear-btn" 
             (click)="clearSelection()"
-            title="Limpiar selección">
+            title="Clear selection">
             ✕
           </button>
         </div>
@@ -29,7 +35,7 @@
     </div>
   </header>
   
-  <!-- Navegación principal -->
+
   <nav class="main-navigation">
     <div class="container">
       <ul class="nav-list">
@@ -48,7 +54,7 @@
     </div>
   </nav>
   
-  <!-- Manejo de errores -->
+
   @if (errorMessage()) {
     <div class="error-banner">
       <div class="container">
@@ -66,11 +72,11 @@
     </div>
   }
   
-  <!-- Contenido principal - aquí se renderizan las rutas hijas -->
+
   <main class="main-content">
     <div class="container">
       
-      <!-- Vista por defecto cuando no hay rutas específicas -->
+
       @if (!hasSelectedCharacter()) {
         <div class="welcome-section">
           <h2>Bienvenido a Game of Thrones App</h2>
@@ -88,12 +94,12 @@
         </div>
       }
       
-      <!-- Router outlet para rutas hijas -->
+
       <router-outlet></router-outlet>
     </div>
   </main>
   
-  <!-- Footer -->
+
   <footer class="app-footer">
     <div class="container">
       <p>&copy; 2024 Game of Thrones App - Proyecto Angular</p>

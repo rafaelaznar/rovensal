@@ -6,9 +6,8 @@ import { Character } from '../../model';
 import { CharacterListComponent } from '../character-list/character-list.component';
 import { CharacterDetailComponent } from '../character-detail/character-detail.component';
 
-/**
- * Página de personajes - demuestra componentes enrutados y comunicación
- */
+// Página principal donde se muestran todos los personajes
+// Usa componentes hijos para la lista y los detalles
 @Component({
   selector: 'app-characters-page',
   imports: [CommonModule, CharacterListComponent, CharacterDetailComponent],
@@ -21,14 +20,14 @@ export class CharactersPageComponent implements OnInit {
   private throneService = inject(ThroneService);
   private router = inject(Router);
   
-  // Signals para el estado de la página
+  // Estado de la página
   characters = signal<Character[]>([]);
   loading = signal<boolean>(false);
   selectedCharacter = signal<Character | null>(null);
-  showDetailPanel = signal<boolean>(false);
+  showDetailPanel = signal<boolean>(false);  // para mostrar/ocultar panel de detalles
   
   ngOnInit(): void {
-    // Cargar personajes al inicializar
+    // Cargar los personajes cuando se inicia el componente
     this.loadCharacters();
     
     // Subscripción al personaje seleccionado del servicio
@@ -43,9 +42,6 @@ export class CharactersPageComponent implements OnInit {
     });
   }
   
-  /**
-   * Carga todos los personajes desde la API
-   */
   private loadCharacters(): void {
     this.throneService.getAllCharacters().subscribe({
       next: (characters) => {
@@ -57,9 +53,6 @@ export class CharactersPageComponent implements OnInit {
     });
   }
   
-  /**
-   * Maneja la selección de un personaje desde la lista
-   */
   onCharacterSelected(character: Character): void {
     // El servicio ya se actualiza desde character-list
     // Solo mostramos el panel de detalles
@@ -69,9 +62,6 @@ export class CharactersPageComponent implements OnInit {
     this.router.navigate(['/fernandez/characters', character.id]);
   }
   
-  /**
-   * Maneja el cambio de filtro de familia
-   */
   onFamilyFilterChanged(family: string): void {
     if (family) {
       this.throneService.getCharactersByFamily(family).subscribe({
@@ -84,18 +74,12 @@ export class CharactersPageComponent implements OnInit {
     }
   }
   
-  /**
-   * Cierra el panel de detalles
-   */
   onDetailCloseRequested(): void {
     this.showDetailPanel.set(false);
     this.throneService.setSelectedCharacter(null);
     this.router.navigate(['/fernandez/characters']);
   }
   
-  /**
-   * Alterna la visibilidad del panel de detalles
-   */
   toggleDetailPanel(): void {
     this.showDetailPanel.update(show => !show);
   }

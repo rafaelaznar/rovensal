@@ -1,14 +1,14 @@
-<!-- Página de personajes -->
+
 <div class="characters-page">
   
-  <!-- Header de la página -->
+
   <div class="page-header">
     <h2 class="page-title">Personajes de Westeros</h2>
     <p class="page-description">
       Explora todos los personajes de Game of Thrones y descubre sus historias
     </p>
     
-    <!-- Controles de la página -->
+
     <div class="page-controls">
       @if (selectedCharacter()) {
         <button 
@@ -26,10 +26,10 @@
     </div>
   </div>
   
-  <!-- Contenido principal -->
+
   <div class="page-content" [class.with-detail]="showDetailPanel()">
     
-    <!-- Lista de personajes -->
+
     <div class="characters-section">
       <app-character-list
         [characters]="characters()"
@@ -41,7 +41,7 @@
       </app-character-list>
     </div>
     
-    <!-- Panel de detalles (condicional) -->
+
     @if (showDetailPanel() && selectedCharacter()) {
       <div class="detail-section">
         <app-character-detail
@@ -52,7 +52,7 @@
     }
   </div>
   
-  <!-- Estado de carga global -->
+
   @if (loading() && characters().length === 0) {
     <div class="global-loading">
       <div class="loading-content">
@@ -63,7 +63,7 @@
     </div>
   }
   
-  <!-- Información adicional -->
+
   <div class="page-footer">
     <div class="info-cards">
       <div class="info-card">

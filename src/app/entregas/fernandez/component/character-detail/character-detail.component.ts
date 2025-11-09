@@ -2,10 +2,8 @@ import { Component, input, output, signal, ChangeDetectionStrategy } from '@angu
 import { CommonModule } from '@angular/common';
 import { Character } from '../../model';
 
-/**
- * Componente no enrutado para mostrar detalles de un personaje
- * Demuestra: inputs/outputs, comunicación bidireccional, eventos
- */
+// Panel de detalles que se abre cuando seleccionas un personaje
+// Muestra la imagen, nombre completo, casa, título, etc.
 @Component({
   selector: 'app-character-detail',
   imports: [CommonModule],
@@ -15,42 +13,31 @@ import { Character } from '../../model';
 })
 export class CharacterDetailComponent {
   
-  // Input del personaje seleccionado
+  // El personaje a mostrar
   character = input<Character | null>(null);
   
-  // Outputs para comunicación con el padre
+  // Para que el padre sepa cuando cerrar
   closeRequested = output<void>();
   
-  // Estado interno
+  // Para manejar la carga de imágenes
   imageLoaded = signal<boolean>(false);
-  imageError = signal<boolean>(false);
+  imageError = signal<boolean>(false);  // si falla la imagen
   
-  /**
-   * Cierra el detalle
-   */
+  // Cierra el panel de detalles
   onClose(): void {
     this.closeRequested.emit();
   }
   
-  /**
-   * Maneja la carga exitosa de imagen
-   */
   onImageLoad(): void {
     this.imageLoaded.set(true);
     this.imageError.set(false);
   }
   
-  /**
-   * Maneja error de carga de imagen
-   */
   onImageError(): void {
     this.imageLoaded.set(false);
     this.imageError.set(true);
   }
   
-  /**
-   * Obtiene la imagen del personaje
-   */
   getCharacterImage(): string {
     const char = this.character();
     if (!char) return '';
@@ -58,16 +45,10 @@ export class CharacterDetailComponent {
     return char.imageUrl || char.image || this.getDefaultImage();
   }
   
-  /**
-   * Imagen por defecto en SVG
-   */
   private getDefaultImage(): string {
     return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzNiNGE2MCIvPjx0ZXh0IHg9IjE1MCIgeT0iMTYwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TaW4gSW1hZ2VuPC90ZXh0Pjwvc3ZnPg==';
   }
   
-  /**
-   * Formatea el nombre completo con título
-   */
   getFormattedName(): string {
     const char = this.character();
     if (!char) return '';
@@ -80,9 +61,6 @@ export class CharacterDetailComponent {
     return name;
   }
   
-  /**
-   * Obtiene información adicional del personaje
-   */
   getCharacterInfo(): Array<{label: string, value: string}> {
     const char = this.character();
     if (!char) return [];

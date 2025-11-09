@@ -1,12 +1,10 @@
 import { Component, inject, signal, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ThroneService } from '../../service';
+import { ThroneService, FavoriteService } from '../../service';
 import { Character } from '../../model';
 
-/**
- * Componente no enrutado para mostrar lista de personajes
- * Demuestra: comunicación padre-hijo, inputs/outputs, eventos
- */
+// Componente reutilizable para mostrar listas de personajes
+// Lo usan varias páginas (characters, search, favorites)
 @Component({
   selector: 'app-character-list',
   imports: [CommonModule],
@@ -16,48 +14,36 @@ import { Character } from '../../model';
 })
 export class CharacterListComponent {
   
-  // Inputs del componente padre
+  // Datos que recibe del componente padre
   characters = input<Character[]>([]);
   loading = input<boolean>(false);
   title = input<string>('Personajes');
-  showFamilyFilter = input<boolean>(true);
+  showFamilyFilter = input<boolean>(true);  // si mostrar el filtro por casa
   
-  // Outputs hacia el componente padre
+  // Eventos que emite al componente padre
   characterSelected = output<Character>();
   familyFilterChanged = output<string>();
   
-  // Estado interno del componente
-  selectedFamily = signal<string>('');
+  // Estado interno
+  selectedFamily = signal<string>('');  // casa seleccionada para filtrar
   
   private throneService = inject(ThroneService);
+  private favoriteService = inject(FavoriteService);
   
-  /**
-   * Obtiene el personaje seleccionado actualmente
-   */
   getSelectedCharacter(): Character | null {
     return this.throneService.getSelectedCharacter();
   }
   
-  /**
-   * Maneja la selección de un personaje
-   * Emite evento hacia el padre y actualiza servicio
-   */
   onCharacterSelect(character: Character): void {
     this.characterSelected.emit(character);
     this.throneService.setSelectedCharacter(character);
   }
   
-  /**
-   * Maneja el cambio de filtro de familia
-   */
   onFamilyFilterChange(family: string): void {
     this.selectedFamily.set(family);
     this.familyFilterChanged.emit(family);
   }
   
-  /**
-   * Maneja el evento de cambio en el select de familia
-   */
   onFamilySelectChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     if (target) {
@@ -65,9 +51,6 @@ export class CharacterListComponent {
     }
   }
   
-  /**
-   * Obtiene las familias únicas de los personajes actuales
-   */
   getUniqueFamilies(): string[] {
     const families = this.characters()
       .map(char => char.family)
@@ -78,9 +61,7 @@ export class CharacterListComponent {
     return families;
   }
   
-  /**
-   * Filtra personajes por familia seleccionada
-   */
+ 
   getFilteredCharacters(): Character[] {
     const selectedFamily = this.selectedFamily();
     if (!selectedFamily) {
@@ -92,16 +73,20 @@ export class CharacterListComponent {
     );
   }
   
-  /**
-   * Obtiene la imagen del personaje o una por defecto
-   */
   getCharacterImage(character: Character): string {
     return character.imageUrl || character.image || '/assets/default-character.jpg';
   }
   
-  /**
-   * Maneja errores de carga de imágenes
-   */
+
+  isFavorite(characterId: number): boolean {
+    return this.favoriteService.isFavorite(characterId);
+  }
+  
+  toggleFavorite(character: Character, event: Event): void {
+    event.stopPropagation(); // Evitar que se active la selección
+    this.favoriteService.toggleFavorite(character);
+  }
+  
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzNiNGE2MCIvPjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Tm8gSW1hZ2U8L3RleHQ+PC9zdmc+';

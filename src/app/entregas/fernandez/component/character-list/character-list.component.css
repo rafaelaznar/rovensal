@@ -125,6 +125,50 @@
   transform: scale(1.1);
 }
 
+/* Botón de favoritos */
+.favorite-btn {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-btn.is-favorite {
+  background: linear-gradient(135deg, #ffd700 0%, #f39c12 100%);
+  color: white;
+}
+
+.favorite-btn.is-favorite:hover {
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+}
+
+.favorite-icon {
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.favorite-btn:hover .favorite-icon {
+  transform: scale(1.1);
+}
+
 .character-overlay {
   position: absolute;
   top: 0.75rem;

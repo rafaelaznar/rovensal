@@ -10,10 +10,6 @@ import {
 } from '@angular/forms';
 import { Character } from '../../model';
 
-/**
- * Componente de formulario para editar/crear personajes
- * Demuestra: formularios reactivos, validación avanzada, expresiones regulares
- */
 @Component({
   selector: 'app-character-form',
   imports: [CommonModule, ReactiveFormsModule],

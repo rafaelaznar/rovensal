@@ -17,28 +17,38 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/reyna" routerLinkActive="active"
-            >Inicio</a
-          >
+          <a class="nav-link" routerLink="/reyna" routerLinkActive="active">Inicio</a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/reyna/list"
-            routerLinkActive="active"
-            >Productos</a
-          >
+          <a class="nav-link" routerLink="/reyna/list" routerLinkActive="active">Productos</a>
         </li>
-        <li class="nav-item">
+
+        <li class="nav-item dropdown">
           <a
-            class="nav-link"
-            routerLink="/reyna/categories"
-            routerLinkActive="active"
-            >Categorías</a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
+            Categorías
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @for (cat of categories; track cat) {
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="['/reyna/categories', cat]"
+                routerLinkActive="active"
+              >
+                {{ cat | titlecase }}
+              </a>
+            </li>
+            }
+          </ul>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-

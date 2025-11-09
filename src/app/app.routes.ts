@@ -42,7 +42,7 @@ export const routes: Routes = [
     { path: 'reyna', component: ReynaComponent },
     { path: 'reyna/list', component: ProductListRoutedComponent }, 
     { path: 'reyna/detail', component: ProductDetailRoutedComponent },
-    { path: 'reyna/categories', component: CategoryListRouted },
+    { path: 'reyna/categories/:category', component: CategoryListRouted },
 
     { path: 'salinas', component: SalinasComponent },
     { path: 'sempertegui', component: SemperteguiComponent },

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Menu } from "../menu/menu";
+import { Menu } from '../menu/menu';
 import { RouterModule } from '@angular/router';
 import { Domain } from '../../model/pavonModel/domainInterface';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,31 +13,33 @@ import { DatosDominio } from '../../data/dataDomain/data';
   styleUrl: './domains.css',
 })
 export class DomainsComponent {
+  // Estas variables se inicializan antes de comenzar con las funciones, y se les da un tipo
+  domains: Domain[] = [];
+  readonly oMatDialog = inject(MatDialog);
 
-  domains: Domain[] = []
-  readonly oMatDialog = inject(MatDialog)
+  // El constructor, está vacío, pero se inyecta PavónService
+  constructor(private oPavonService: PavonService) {}
 
-  constructor(private oPavonService: PavonService){ }
-
-  ngOnInit(){
+  // El ngOnInit, y el método que llama para obtener los datos necesarios
+  ngOnInit() {
     this.getDomains();
   }
 
-  getDomains(){
-    this.oPavonService.getAllDomains().subscribe((domains) =>{
-      console.log(domains)
+  getDomains() {
+    this.oPavonService.getAllDomains().subscribe((domains) => {
+      console.log(domains);
       this.domains = domains;
-    })
+    });
   }
 
-  verDetalles(dom: Domain){
-      this.oMatDialog.open(DatosDominio, {
-        height: '600px',
-        width: '800px',
-        data: {
-          domain: dom,
-        }
-      })
-    }
-
+  // Este método abre el MatDialog para mostrar los detalles
+  verDetalles(dom: Domain) {
+    this.oMatDialog.open(DatosDominio, {
+      height: '600px',
+      width: '800px',
+      data: {
+        domain: dom,
+      },
+    });
+  }
 }

@@ -13,39 +13,40 @@ import { DatosPersonaje } from '../../data/dataChar/data';
   styleUrl: './characters.css',
 })
 export class CharactersComponent {
-
+  // Estas variables se inicializan antes de comenzar con las funciones, y se les da un tipo
   chars: Character[] = [];
-  readonly oMatDialog = inject(MatDialog)
+  readonly oMatDialog = inject(MatDialog);
 
+  // Esta función genera la URL de la imagen deseada, es parte de la API, así que puede tardar en cargar
   imageUrlFor(character: Character) {
     const base = 'https://genshin.jmp.blue/characters';
-    const slug = (character.id).toLowerCase().replace(/\s+/g, '-');
+    const slug = character.id.toLowerCase().replace(/\s+/g, '-');
     return `${base}/${encodeURIComponent(slug)}/card`;
   }
 
-  constructor(private oPavonService: PavonService){ }
+  // El constructor, está vacío, pero se inyecta PavónService
+  constructor(private oPavonService: PavonService) {}
 
-  ngOnInit(){
+  // El ngOnInit, y el método que llama para obtener los datos necesarios
+  ngOnInit() {
     this.getChars();
   }
 
-  getChars(){
+  getChars() {
     this.oPavonService.getAllCharacters().subscribe((chars) => {
-      console.log(chars)
+      console.log(chars);
       this.chars = chars;
-    })
+    });
   }
 
-  verDetalles(char: Character){
+  // Este método abre el MatDialog para mostrar los detalles
+  verDetalles(char: Character) {
     this.oMatDialog.open(DatosPersonaje, {
       height: '600px',
       width: '800px',
       data: {
         character: char,
-      }
-    })
+      },
+    });
   }
-
-
-
 }

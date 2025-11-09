@@ -13,38 +13,40 @@ import { DatosJefe } from '../../data/dataBoss/data';
   styleUrl: './bosses.css',
 })
 export class BossesComponent {
-
+  // Estas variables se inicializan antes de comenzar con las funciones, y se les da un tipo
   bosses: Boss[] = [];
-  readonly oMatDialog = inject(MatDialog)
+  readonly oMatDialog = inject(MatDialog);
 
+  // Esta función genera la URL de la imagen deseada, es parte de la API, así que puede tardar en cargar
   imageUrlFor(boss: Boss) {
     const base = 'https://genshin.jmp.blue/boss/weekly-boss';
-    const slug = (boss.id).toLowerCase().replace(/\s+/g, '-');
+    const slug = boss.id.toLowerCase().replace(/\s+/g, '-');
     return `${base}/${encodeURIComponent(slug)}/portrait`;
   }
 
-  constructor(private oPavonService: PavonService){ }
+  // El constructor, está vacío, pero se inyecta PavónService
+  constructor(private oPavonService: PavonService) {}
 
-  ngOnInit(){
+  // El ngOnInit, y el método que llama para obtener los datos necesarios
+  ngOnInit() {
     this.getBosses();
   }
 
-  getBosses(){
+  getBosses() {
     this.oPavonService.getAllBosses().subscribe((bosses) => {
-      console.log(bosses)
+      console.log(bosses);
       this.bosses = bosses;
-    })
+    });
   }
 
-  verDetalles(boss: Boss){
+  // Este método abre el MatDialog para mostrar los detalles
+  verDetalles(boss: Boss) {
     this.oMatDialog.open(DatosJefe, {
       height: '600px',
       width: '800px',
       data: {
         boss: boss,
-      }
-    })
+      },
+    });
   }
-
-
 }

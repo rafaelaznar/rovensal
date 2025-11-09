@@ -18,8 +18,11 @@ import { SilvestreComponent } from './entregas/silvestre/component/silvestreComp
 import { SoaresComponent } from './entregas/soares/component/soaresComponent/soaresComponent';
 import { UskiComponent } from './entregas/uski/component/uskiComponent/uskiComponent';
 import { ZanonComponent } from './entregas/zanon/component/zanonComponent/zanonComponent';
-import { HomeComponent } from './entregas/sempertegui/component/homeComponent/homeComponent'
-import { CatalogComponent } from './entregas/sempertegui/component/catalogComponent/catalogComponent';
+import { HomePageComponent } from './entregas/sempertegui/component/homePageComponent/homePageComponent';
+import { CatalogPageComponent } from './entregas/sempertegui/component/catalogPageComponent/catalogPageComponent';
+import { ProductPageComponent } from './entregas/sempertegui/component/productPageComponent/productPageComponent';
+
+
 export const routes: Routes = [
     { path: '', component: Home },
     { path: 'home', component: Home },
@@ -38,10 +41,10 @@ export const routes: Routes = [
     { path: 'salinas', component: SalinasComponent },
     { path: 'sempertegui', component: SemperteguiComponent,
         children: [
-            { path: '', component: HomeComponent },
-            { path: 'home', component: HomeComponent },
-            { path: 'catalog', component: CatalogComponent }
-            
+            { path: '', component: HomePageComponent },
+            { path: 'home', component: HomePageComponent },
+            { path: 'catalog', component: CatalogPageComponent },
+            { path: 'catalog/:id', component: ProductPageComponent }
         ],
     },
     { path: 'silvestre', component: SilvestreComponent },

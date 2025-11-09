@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-home',
+  selector: 'app-home-page',
   imports: [FormsModule],
-  templateUrl: './homeComponent.html',
-  styleUrl: './homeComponent.css',
-  standalone: true
+  templateUrl: './homePageComponent.html',
+  styleUrl: './homePageComponent.css',
 })
-export class HomeComponent {
+export class HomePageComponent {
   
   terminoBusqueda: string = '';
 

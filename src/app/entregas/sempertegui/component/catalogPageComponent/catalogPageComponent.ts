@@ -8,18 +8,18 @@ import { ApiCallService } from '../../services/api-call-service';
 import { Products, Product } from '../../model/productsInterface';
 import { ProductListComponent } from '../productListComponent/productListComponent';
 import { ActivatedRoute } from '@angular/router'
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
-  selector: 'app-catolog',
+  selector: 'app-catolog-page',
   imports: [MatButtonModule, MatIconModule, ProductListComponent, FormsModule, MatSlideToggleModule, MatFormFieldModule, MatSelectModule, MatInputModule],
-  templateUrl: './catalogComponent.html',
-  styleUrl: './catalogComponent.css',
+  templateUrl: './catalogPageComponent.html',
+  styleUrl: './catalogPageComponent.css',
   standalone: true
 })
-export class CatalogComponent {
+export class CatalogPageComponent {
 
   terminoBusqueda: string | null = '';
   terminoBusquedaSubmit: string = '';

@@ -1,4 +1,7 @@
-/* Styles for SemperteguiComponent */
+h1{
+  color: var(--accent-color);
+}
+
 .content {
   padding: var(--content-padding);
 }

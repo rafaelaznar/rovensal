@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { BarraVidaComponent } from '../barra-vida/barra-vida';
 import { DialogoConfirmacionComponent } from '../dialogo-confirmacion/dialogo-confirmacion';
@@ -202,6 +202,23 @@ export class GarciaComponent implements OnInit {
     setTimeout(() => this.turnoDemonio(), 1500);
   }
 
+  pocionesDisponibles = 10;
+
+  curar(): void {
+  if (this.pocionesDisponibles <= 0) {
+    this.agregarLog('❌ No te quedan pociones.', 'sistema');
+    return;
+  }
+
+  const cantidadCura = 100;
+  const vidaAntes = this.vidaJugador;
+  this.vidaJugador = Math.min(this.vidaJugador + cantidadCura, this.vidaMaxJugador);
+  this.pocionesDisponibles--;
+
+  const vidaCurada = this.vidaJugador - vidaAntes;
+  this.agregarLog(`🧪 ${this.nombreJugador} usó una poción y recuperó ${vidaCurada} de vida. (${this.pocionesDisponibles} restantes)`, 'jugador');
+}
+
   turnoDemonio(): void {
     const random = Math.random();
     if (random < 0.7) {
@@ -311,6 +328,7 @@ export class GarciaComponent implements OnInit {
     this.historialEnemigos = [];
     this.logs = [];
     this.mensajeError = '';
+    this.pocionesDisponibles = 10;
   }
 
   numeroAleatorio(min: number, max: number): number {

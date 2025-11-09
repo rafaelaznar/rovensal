@@ -19,6 +19,12 @@
             </div>
         }
     </div>
+
+    @if (paginasPokemon.length === 0 && filtroNombre.trim() !== '') {
+        <div class="text-center mt-4">
+            <p>Lo siento, no se ha podido encontrar el Pokémon que busca</p>
+        </div>
+    }
 </div>
 
 <mat-paginator

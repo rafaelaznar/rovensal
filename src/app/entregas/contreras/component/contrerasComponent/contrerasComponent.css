@@ -1,3 +1,10 @@
+:host {
+  display: block;
+  background-color: #e3f2fd;
+  min-height: 100vh;
+  padding: 20px;
+}
+
 h2 { color: #2a6f97; }
 
 .campeon_container {

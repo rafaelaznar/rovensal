@@ -19,7 +19,7 @@ import { Champion } from '../ContrerasModel/contrerasInterface';
           <div (click)="seleccionar(c)" class="carta">
             <img [src]="c.icon" [alt]="c.name" class="icono">
             <div class="info">
-              <strong>{{ c.name }}</strong>
+              <strong>{{ c.name }}</strong> 
               <small>{{ c.title }}</small>
             </div>
           </div>
@@ -39,14 +39,17 @@ export class ListaCampeonesComponent {
   readonly dialogRef = inject(MatDialogRef<ListaCampeonesComponent>);
   readonly data = inject(MAT_DIALOG_DATA);
   
+  // Lista filtrada de campeones para mostrar
   lista = this.data.campeones;
   
+  // Funcion para filtrar campeones por nombre
   filtrar(texto: string) {
     this.lista = texto 
       ? this.data.campeones.filter((c: Champion) => c.name.toLowerCase().includes(texto.toLowerCase()))
       : this.data.campeones;
   }
   
-  seleccionar = (c: Champion) => this.dialogRef.close(c);
-  cerrar = () => this.dialogRef.close();
+  // Funciones para cerrar el dialogo
+  seleccionar = (c: Champion) => this.dialogRef.close(c); // Con campeon seleccionado
+  cerrar = () => this.dialogRef.close(); // Sin seleccionar
 }

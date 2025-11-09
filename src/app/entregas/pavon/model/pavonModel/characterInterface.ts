@@ -8,4 +8,5 @@ export interface Character{
     affiliation: string;
     description: string;
     release: string;
+    id: string;
 }

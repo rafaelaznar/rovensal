@@ -21,7 +21,6 @@ import { ZanonComponent } from './entregas/zanon/component/zanonComponent/zanonC
 import { BossesComponent } from './entregas/pavon/component/bosses/bosses';
 import { CharactersComponent } from './entregas/pavon/component/characters/characters';
 import { DomainsComponent } from './entregas/pavon/component/domains/domains';
-import { ElementsComponent } from './entregas/pavon/component/elements/elements';
 import { WeaponsComponent } from './entregas/pavon/component/weapons/weapon';
 import { PavonHomeComponent } from './entregas/pavon/component/home/home';
 
@@ -49,7 +48,6 @@ export const routes: Routes = [
     { path: 'pavonBosses', component: BossesComponent },
     { path: 'pavonCharacters', component: CharactersComponent },
     { path: 'pavonDomains', component: DomainsComponent },
-    { path: 'pavonElements', component: ElementsComponent },
     { path: 'pavonWeapons', component: WeaponsComponent },
     { path: 'pavonHome', component: PavonHomeComponent },
 ];

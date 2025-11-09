@@ -24,10 +24,6 @@ export class PavonService {
     return this.oHttpClient.get<Character[]>('https://genshin.jmp.blue/characters/all');
   }
 
-  getAllElements(): Observable<Element[]> {
-    return this.oHttpClient.get<Element[]>('https://genshin.jmp.blue/elements/all');
-  }
-
   getAllDomains(): Observable<Domain[]> {
     return this.oHttpClient.get<Domain[]>('https://genshin.jmp.blue/domains/all');
   }

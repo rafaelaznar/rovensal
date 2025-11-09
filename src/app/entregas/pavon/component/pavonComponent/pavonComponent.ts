@@ -18,7 +18,6 @@ export class PavonComponent {
   chacacters: Character[] = [];
   bosses: Boss[] = [];
   weapons: Weapon[] = [];
-  elements: Element[] = [];
   domains: Domain[] = [];
 
   constructor(private pavonService: PavonService) {}
@@ -27,7 +26,6 @@ export class PavonComponent {
     this.getChars();
     this.getWeapons();
     this.getBosses();
-    this.getElements();
     this.getDomains();
   }
 
@@ -47,12 +45,6 @@ export class PavonComponent {
     this.pavonService.getAllBosses().subscribe((bossesData) => {
       console.log(bossesData);
       this.bosses = bossesData;
-    });
-  }
-  getElements() {
-    this.pavonService.getAllElements().subscribe((elementsData) => {
-      console.log(elementsData);
-      this.elements = elementsData;
     });
   }
   getDomains() {

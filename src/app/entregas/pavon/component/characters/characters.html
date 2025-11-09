@@ -1,2 +1,8 @@
 <app-menu-pavon></app-menu-pavon>
-<p>characters works!</p>
+<link rel="stylesheet" href="characters.css">
+<h2>Lista de Personajes</h2>
+@for (item of chars; track $index) {
+    <div>
+        <button (click)="verDetalles(item)"><img [src]="imageUrlFor(item)" alt="{{item.name}}" height="800px" width="400px"></button>
+    </div>
+}

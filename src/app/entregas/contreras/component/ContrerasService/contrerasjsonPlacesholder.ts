@@ -12,7 +12,7 @@ export class JsonplaceholderServiceContreras {
   constructor(private oHttpClient: HttpClient) {
   }
 
-  getAllPosts(): Observable<ChampionsResponse> { // Por problemas de cors he utilizado un proxy
+  getAllPosts(): Observable<ChampionsResponse> { // Por problemas de cors he utilizado un proxy (mi api se murio 2 dias antes y he tenido que cambiarla :D)
     const url = 'https://corsproxy.io/?' + encodeURIComponent('https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json');
     return this.oHttpClient.get<ChampionsResponse>(url);
   }

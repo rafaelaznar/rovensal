@@ -1,7 +1,7 @@
 <h2>Entrega Contreras</h2>
 
 <!-- IR AL COMPARADOR -->
-<button (click)="irAComparador()">Comparador</button>
+<button (click)="ruta_Comparador()">Comparador</button>
 <br><br>
 
 <button (click)="campeon_Random()">Personaje aleatorio</button>
@@ -24,25 +24,26 @@
   <!-- Total personajes -->
 <p>Total de personajes cargados: {{ posts.length }}</p>
 
+  <!-- MOSTRAR CAMPEON -->
 @if (campeon) {
-  <div style="border: 1px solid #000000; padding: 20px; margin: 20px 0;">
-    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-      <img [src]="campeon.icon" 
+  <div class="campeon_container">
+    <div class="campeon_header"> <!-- div imagen -->
+      <img [src]="campeon.icon"  
            [alt]="campeon.name" 
-           style="width: 128px; height: 128px; border-radius: 8px; margin-right: 15px;">
-      <div>
-        <h3 style="margin: 0;">{{ campeon.name }}</h3>
-        <p style="margin: 5px 0; color: #000000; font-style: italic;">{{ campeon.title }}</p>
+           class="campeon_image"> 
+      <div class="campeon_info">
+        <h3>{{ campeon.name }}</h3> <!-- nombre -->
+        <p>{{ campeon.title }}</p> <!-- titulo personaje -->
       </div>
     </div>
-    <p><strong>ID:</strong> {{ campeon.id }}</p>
+    <p><strong>ID:</strong> {{ campeon.id }}</p> 
     <p><strong>Tipo de daño:</strong> {{ campeon.adaptiveType }}</p>
     <p><strong>Rango ataque:</strong> {{ campeon.attackType }}</p>
     <p><strong>Recurso:</strong> {{ campeon.resource }}</p>
     <p><strong>Lineas:</strong> {{ campeon.positions }}</p>
     <p><strong>Roles:</strong> {{ campeon.roles }}</p>
     <p><strong>Faccion:</strong> {{ campeon.faction }}</p>
-    <p><strong>Vida:</strong> {{ campeon.stats?.health?.flat }}</p>
+    <p><strong>Vida:</strong> {{ campeon.stats?.health?.flat }}</p> <!-- utilizo flat por el tipo de dato, sino me devolveria un object porque tiene varios valores -->
     <p><strong>Armadura:</strong> {{ campeon.stats?.armor?.flat }}</p>
     <p><strong>Daño:</strong> {{ campeon.stats?.attackDamage?.flat }}</p>
     <p><strong>Velocidad:</strong> {{ campeon.stats?.movespeed?.flat }}</p>

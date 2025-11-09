@@ -1,20 +1,21 @@
 <h2>Comparador de Campeones</h2>
 
-<button onclick="history.back()">Volver</button>
-<button (click)="limpiar()">Limpiar</button>
+<button onclick="history.back()" style="margin-right: 10px;">Volver</button>
+<button (click)="vaciar_Texto()">Limpiar</button>
 
-<div class="contenedor-comparacion">
-  <!-- Campeón 1 -->
-  <div class="campeon-panel">
-    <h3>Campeón 1</h3>
-    <input type="text" placeholder="Ej: Ahri" #input1>
-    <button (click)="buscar1(input1.value)">Buscar</button>
-    <button (click)="aleatorio1()">Aleatorio</button>
+<div class="main">
+  <!-- CAMPEON 1 -->
+  <div class="campeon">
+    <h3>Personaje 1</h3>
+    <input type="text" placeholder="Ej: Ahri" #input1 style="margin-right: 10px;">
+    <button (click)="buscar_c1(input1.value)" style="margin-right: 10px;">Buscar</button>
+    <button (click)="aleatorio_c1()">Aleatorio</button>
+    <br><br>
     
     @if (campeon1) {
       <div>
         <h4>{{ campeon1.name }}</h4>
-        <img [src]="campeon1.icon" class="icono-campeon">
+        <img [src]="campeon1.icon" class="icono_campeon">
         <br><br>
         <p>Vida: {{ campeon1.stats?.health?.flat || 0 }}</p>
         <p>Armadura: {{ campeon1.stats?.armor?.flat || 0 }}</p>
@@ -27,70 +28,71 @@
     }
   </div>
 
-  <!-- Comparación -->
+  <!-- COMPARACION STATS -->
   @if (campeon1 && campeon2) {
-    <div class="seccion-comparacion">
+    <div class="seccion_comparacion">
       <h3>VS</h3>
       
-      <div class="stat-comparacion">
-        <span [class]="getClaseComparacion(campeon1.stats?.health?.flat, campeon2.stats?.health?.flat)">
+      <div class="stat_comparacion">
+        <span [class]="comparacion_Stats(campeon1.stats?.health?.flat, campeon2.stats?.health?.flat)">
           {{ campeon1.stats?.health?.flat || 0 }}
         </span>
         <span>Vida</span>
-        <span [class]="getClaseComparacion(campeon2.stats?.health?.flat, campeon1.stats?.health?.flat)">
+        <span [class]="comparacion_Stats(campeon2.stats?.health?.flat, campeon1.stats?.health?.flat)">
           {{ campeon2.stats?.health?.flat || 0 }}
         </span>
       </div>
 
-      <div class="stat-comparacion">
-        <span [class]="getClaseComparacion(campeon1.stats?.armor?.flat, campeon2.stats?.armor?.flat)">
+      <div class="stat_comparacion">
+        <span [class]="comparacion_Stats(campeon1.stats?.armor?.flat, campeon2.stats?.armor?.flat)">
           {{ campeon1.stats?.armor?.flat || 0 }}
         </span>
         <span>Armadura</span>
-        <span [class]="getClaseComparacion(campeon2.stats?.armor?.flat, campeon1.stats?.armor?.flat)">
+        <span [class]="comparacion_Stats(campeon2.stats?.armor?.flat, campeon1.stats?.armor?.flat)">
           {{ campeon2.stats?.armor?.flat || 0 }}
         </span>
       </div>
 
-      <div class="stat-comparacion">
-        <span [class]="getClaseComparacion(campeon1.stats?.attackDamage?.flat, campeon2.stats?.attackDamage?.flat)">
+      <div class="stat_comparacion">
+        <span [class]="comparacion_Stats(campeon1.stats?.attackDamage?.flat, campeon2.stats?.attackDamage?.flat)">
           {{ campeon1.stats?.attackDamage?.flat || 0 }}
         </span>
         <span>Daño</span>
-        <span [class]="getClaseComparacion(campeon2.stats?.attackDamage?.flat, campeon1.stats?.attackDamage?.flat)">
+        <span [class]="comparacion_Stats(campeon2.stats?.attackDamage?.flat, campeon1.stats?.attackDamage?.flat)">
           {{ campeon2.stats?.attackDamage?.flat || 0 }}
         </span>
       </div>
 
-      <div class="stat-comparacion">
-        <span [class]="getClaseComparacion(campeon1.stats?.movespeed?.flat, campeon2.stats?.movespeed?.flat)">
+      <div class="stat_comparacion">
+        <span [class]="comparacion_Stats(campeon1.stats?.movespeed?.flat, campeon2.stats?.movespeed?.flat)">
           {{ campeon1.stats?.movespeed?.flat || 0 }}
         </span>
         <span>Velocidad</span>
-        <span [class]="getClaseComparacion(campeon2.stats?.movespeed?.flat, campeon1.stats?.movespeed?.flat)">
+        <span [class]="comparacion_Stats(campeon2.stats?.movespeed?.flat, campeon1.stats?.movespeed?.flat)">
           {{ campeon2.stats?.movespeed?.flat || 0 }}
         </span>
       </div>
 
       @if (rolesComunes().length > 0) {
-        <p class="roles-comunes">Roles comunes: {{ rolesComunes().join(', ') }}</p>
+        <p class="roles_comunes">Roles comunes: {{ rolesComunes().join(', ') }}</p>
       } @else {
-        <p class="sin-roles-comunes">Tienen Roles diferentes</p>
+        <p class="sin_roles_comunes">Tienen Roles diferentes</p>
       }
     </div>
   }
 
-  <!-- Campeón 2 -->
-  <div class="campeon-panel">
+  <!-- CAMPEON 2 -->
+  <div class="campeon">
     <h3>Campeón 2</h3>
-    <input type="text" placeholder="Ej: Gragas" #input2>
-    <button (click)="buscar2(input2.value)">Buscar</button>
-    <button (click)="aleatorio2()">Aleatorio</button>
+    <input type="text" placeholder="Ej: Gragas" #input2 style="margin-right: 10px;">
+    <button (click)="buscar_c2(input2.value)" style="margin-right: 10px;">Buscar</button>
+    <button (click)="aleatorio_c2()">Aleatorio</button>
+    <br><br>
     
     @if (campeon2) {
       <div>
         <h4>{{ campeon2.name }}</h4>
-        <img [src]="campeon2.icon" class="icono-campeon">
+        <img [src]="campeon2.icon" class="icono_campeon">
         <br><br>
         <p>Vida: {{ campeon2.stats?.health?.flat || 0 }}</p>
         <p>Armadura: {{ campeon2.stats?.armor?.flat || 0 }}</p>

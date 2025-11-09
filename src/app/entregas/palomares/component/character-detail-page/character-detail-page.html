@@ -1,0 +1,72 @@
+<div class="detail-page-container">
+  @if (loading()) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Cargando personaje...</p>
+    </div>
+  } @else if (error()) {
+    <div class="error-message">
+      <h2>Error</h2>
+      <p>{{ error() }}</p>
+      <button class="back-button" (click)="goBack()">Volver a la lista</button>
+    </div>
+  } @else if (character()) {
+    <div class="character-detail">
+      <button class="back-button" (click)="goBack()">← Volver</button>
+      
+      <div class="detail-header">
+        <img [src]="character()!.image" [alt]="character()!.name" class="character-image">
+        <div class="header-info">
+          <h1>{{ character()!.name }}</h1>
+          <div class="status-badge" [class]="character()!.status.toLowerCase()">
+            {{ character()!.status }}
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+        <div class="info-card">
+          <h3>Información básica</h3>
+          <div class="info-row">
+            <span class="label">Especie:</span>
+            <span>{{ character()!.species }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Género:</span>
+            <span>{{ character()!.gender }}</span>
+          </div>
+          @if (character()!.type) {
+            <div class="info-row">
+              <span class="label">Tipo:</span>
+              <span>{{ character()!.type }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="info-card">
+          <h3>Origen</h3>
+          <div class="info-row">
+            <span class="label">Lugar:</span>
+            <span>{{ character()!.origin.name }}</span>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>Ubicación actual</h3>
+          <div class="info-row">
+            <span class="label">Lugar:</span>
+            <span>{{ character()!.location.name }}</span>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>Apariciones</h3>
+          <div class="info-row">
+            <span class="label">Episodios:</span>
+            <span>{{ character()!.episode.length }} episodios</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

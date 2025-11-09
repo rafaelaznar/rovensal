@@ -19,6 +19,7 @@ import { SoaresComponent } from './entregas/soares/component/soaresComponent/soa
 import { UskiComponent } from './entregas/uski/component/uskiComponent/uskiComponent';
 import { ZanonComponent } from './entregas/zanon/component/zanonComponent/zanonComponent';
 import { UskiContactPage } from './entregas/uski/pages/contact/contact.page';
+import { UskiHomePage } from './entregas/uski/pages/home/home.page';
 
 // вернуть стандартный таб
 export const routes: Routes = [
@@ -40,7 +41,12 @@ export const routes: Routes = [
   { path: 'sempertegui', component: SemperteguiComponent },
   { path: 'silvestre', component: SilvestreComponent },
   { path: 'soares', component: SoaresComponent },
-  { path: 'uski', component: UskiComponent },
-  { path: 'uski/contact', component: UskiContactPage },
+  { path: 'uski',
+    component: UskiComponent,
+    children: [
+      { path: 'home', component: UskiHomePage },
+      { path: 'contact', component: UskiContactPage }
+    ]
+  },
   { path: 'zanon', component: ZanonComponent },
 ];

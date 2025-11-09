@@ -13,10 +13,10 @@ export class ZeldaPersonajesService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Carga todas las páginas conocidas de personajes (por defecto 10).
+   * Carga todas las páginas conocidas de personajes (pongo 30 porque sinceramente ni idea de cuantas tiene).
    * Si alguna página falla, se ignora para que no interrumpa el resto.
    */
-  getTodosPersonajes(totalPaginas: number = 10): Observable<ZeldaPersonaje[]> {
+  getTodosPersonajes(totalPaginas: number = 30): Observable<ZeldaPersonaje[]> {
     const peticiones: Observable<ZeldaPersonaje[]>[] = [];
 
     for (let i = 1; i <= totalPaginas; i++) {
@@ -24,14 +24,14 @@ export class ZeldaPersonajesService {
       peticiones.push(
         this.http.get<{ data: ZeldaPersonaje[] }>(url).pipe(
           map(resp => resp.data || []),
-          catchError(() => of([])) // 🔹 si falla una página, devuelve array vacío
+          catchError(() => of([])) // Si falla una página, devuelve array vacío
         )
       );
     }
 
-    // 🔹 forkJoin combina todos los resultados de las páginas
+    // forkJoin combina todos los resultados de las páginas
     return forkJoin(peticiones).pipe(
-      map(resultados => resultados.flat()) // 🔹 aplana los arrays en uno solo
+      map(resultados => resultados.flat()) // aplana los arrays en uno solo
     );
   }
 }

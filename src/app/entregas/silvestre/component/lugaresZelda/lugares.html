@@ -19,19 +19,19 @@
           <h3>{{ lugarSeleccionado.name }}</h3>
           <p class="descripcion"><strong>Descripción:</strong> {{ lugarSeleccionado.description }}</p>
 
-          @if (lugarSeleccionado.inhabitants?.length) {
+          @if (lugarSeleccionado.inhabitantsNames?.length) {
             <p><strong>Habitantes:</strong></p>
             <ul>
-              @for (hab of lugarSeleccionado.inhabitants; track $index) {
+              @for (hab of lugarSeleccionado.inhabitantsNames; track $index) {
                 <li>{{ hab }}</li>
               }
             </ul>
           }
 
-          @if (lugarSeleccionado.appearances?.length) {
+          @if (lugarSeleccionado.appearancesNames?.length) {
             <p><strong>Aparece en:</strong></p>
             <ul>
-              @for (app of lugarSeleccionado.appearances; track $index) {
+              @for (app of lugarSeleccionado.appearancesNames; track $index) {
                 <li>{{ app }}</li>
               }
             </ul>

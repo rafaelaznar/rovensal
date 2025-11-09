@@ -34,6 +34,13 @@ export class ZeldaPersonajesService {
       map(resultados => resultados.flat()) // aplana los arrays en uno solo
     );
   }
+
+  getPersonajePorId(id: string): Observable<string> {
+    return this.http.get<{ data: ZeldaPersonaje }>(`${this.baseUrl}/${id}`).pipe(
+      map(resp => resp.data.name || 'Personaje desconocido'),
+      catchError(() => of('Personaje desconocido'))
+    );
+  }
 }
 
 

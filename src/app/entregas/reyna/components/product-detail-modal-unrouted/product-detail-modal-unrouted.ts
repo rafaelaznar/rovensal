@@ -21,8 +21,15 @@ export class ProductDetailModalUnrouted {
   readonly data = inject<number>(MAT_DIALOG_DATA); // ahora uso solo el ID del producto y ya no el objeto completo
 
   private productService = inject(ProductService);
-  product!: Product;
-
+  product: Product = {
+    id: 0,
+    title: '',
+    price: 0,
+    description: '',
+    category: '',
+    image: '',
+    rating: { rate: 0, count: 0 },
+  };
   ngOnInit() {
     this.productService.getProductById(this.data).subscribe({
       next: (product) => {

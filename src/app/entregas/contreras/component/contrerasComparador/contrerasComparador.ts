@@ -73,7 +73,7 @@ export class ContrerasComparadorComponent implements OnInit {
   }
 
   // Funcion para comprar roles
-  rolesComunes(): string[] {
+  roles_Comunes(): string[] {
     if (!this.campeon1 || !this.campeon2) return [];
     return this.campeon1.roles.filter(role => this.campeon2!.roles.includes(role));
   }

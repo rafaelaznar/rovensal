@@ -5,6 +5,9 @@
 <br><br>
 
 <button (click)="campeon_Random()">Personaje aleatorio</button>
+<br><br>
+
+<button (click)="mostrar_Campeones()">Ver todos los campeones</button>
 
 <br><br>
 <div>
@@ -17,6 +20,16 @@
         #input_Usuario
         style="padding: 5px; margin-right: 10px;">
       <button (click)="buscar_Campeon(input_Usuario.value)">Buscar</button>
+      
+      <!-- Error no encontrado -->
+      @if (no_Encontrado) {
+        <div style="color: red; font-size: 12px; margin-top: 5px;">
+          {{ no_Encontrado }}
+        </div>
+      }
+      <div style="color: #666; font-size: 11px; margin-top: 3px;">
+        Solo letras y espacios (2-20 caracteres)
+      </div>
     </div>
   }
 </div>
@@ -52,7 +65,7 @@
       <span #loreText>{{ campeon.lore.substring(0, 150) }}...</span>
       <button #btnmas (click)="loreText.textContent = campeon.lore; btnmas.style.display = 'none'" 
               style="margin-left: 10px; color: #007acc; background: none; border: none; cursor: pointer; text-decoration: underline;">
-        Ver más
+        Ver mas
       </button>
     </p>
   </div>

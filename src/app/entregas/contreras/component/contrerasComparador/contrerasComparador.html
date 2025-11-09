@@ -25,13 +25,13 @@
         <p>Roles: {{ campeon1.roles.join(', ') }}</p>
       </div>
     } @else {
-      <p class="placeholder">Selecciona campeón</p>
+      <p class="placeholder">Selecciona campeon</p>
     }
   </div>
 
   <!-- CAMPEON 2 -->
   <div class="campeon">
-    <h3>Campeón 2</h3>
+    <h3>Campeon 2</h3>
     <input type="text" placeholder="Ej: Gragas" #input2 style="margin-right: 10px;">
     <button (click)="buscar_c2(input2.value)" style="margin-right: 10px;">Buscar</button>
     <button (click)="aleatorio_c2()">Aleatorio</button>
@@ -49,17 +49,17 @@
         <p>Roles: {{ campeon2.roles.join(', ') }}</p>
       </div>
     } @else {
-      <p class="placeholder">Selecciona campeón</p>
+      <p class="placeholder">Selecciona campeon</p>
     }
   </div>
 </div>
 <br>
-<!-- COMPARACION  -->
+
+<!-- COMPARACION DE STATS -->
 @if (campeon1 && campeon2) {
-  <div class="seccion_comparacion">
+  <div class="seccion_comparacion"> 
     <h3>VS</h3>
-    
-    <div class="stat_comparacion">
+    <div class="stat_comparacion">  <!-- VIDA -->
       <span [class]="comparacion_Stats(campeon1.stats?.health?.flat, campeon2.stats?.health?.flat)">
         {{ campeon1.stats?.health?.flat || 0 }}
       </span>
@@ -69,7 +69,7 @@
       </span>
     </div>
 
-    <div class="stat_comparacion">
+    <div class="stat_comparacion"> <!-- ARMADURA -->
       <span [class]="comparacion_Stats(campeon1.stats?.armor?.flat, campeon2.stats?.armor?.flat)">
         {{ campeon1.stats?.armor?.flat || 0 }}
       </span>
@@ -79,7 +79,7 @@
       </span>
     </div>
 
-    <div class="stat_comparacion">
+    <div class="stat_comparacion"> <!-- DAÑO -->
       <span [class]="comparacion_Stats(campeon1.stats?.attackDamage?.flat, campeon2.stats?.attackDamage?.flat)">
         {{ campeon1.stats?.attackDamage?.flat || 0 }}
       </span>
@@ -89,7 +89,7 @@
       </span>
     </div>
 
-    <div class="stat_comparacion">
+    <div class="stat_comparacion"> <!-- VELOCIDAD -->
       <span [class]="comparacion_Stats(campeon1.stats?.movespeed?.flat, campeon2.stats?.movespeed?.flat)">
         {{ campeon1.stats?.movespeed?.flat || 0 }}
       </span>
@@ -99,8 +99,8 @@
       </span>
     </div>
 
-    @if (rolesComunes().length > 0) {
-      <p class="roles_comunes">Roles comunes: {{ rolesComunes().join(', ') }}</p>
+    @if (roles_Comunes().length > 0) { <!-- ROLES -->
+      <p class="roles_comunes">Roles comunes: {{ roles_Comunes().join(', ') }}</p>
     } @else {
       <p class="sin_roles_comunes">Tienen Roles diferentes</p>
     }

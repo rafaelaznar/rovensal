@@ -331,62 +331,6 @@ body {
     font-weight: bold;
 }
 
-.botones-accion {
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: rgba(236, 240, 241, 0.5);
-    border-radius: 15px;
-}
-
-.botones-accion h3 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
-.botones-combate {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.boton-atacar {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.boton-atacar:hover {
-    background-color: #c0392b;
-}
-
-.boton-defender {
-    background-color: #2ecc71;
-    color: white;
-}
-
-.boton-defender:hover {
-    background-color: #27ae60;
-}
-
-.boton-curar {
-    background-color: #2980b9;
-    color: white;
-}
-
-.boton-curar:hover {
-    background-color: #2980b9;
-}
-
-.texto-pociones {
-  font-weight: bold;
-  margin-top: 8px;
-  color: #ffd700;
-  text-shadow: 0 0 3px #000;
-  text-align: center;
-}
-
 .mensaje-espera {
     color: #7f8c8d;
     font-size: 1.1rem;

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { BarraVidaComponent } from '../barra-vida/barra-vida';
 import { BotonesAccionComponent } from '../botones-accion/botones-accion';
@@ -16,7 +14,7 @@ import { GarciaService } from '../../service/garcia-service';
   templateUrl: './garciaComponent.html',
   styleUrls: ['./garciaComponent.css']
 })
-export class GarciaComponent implements OnInit {
+export class GarciaComponent{
   imagenHombre = '/garcia/imagenes/personajeMasc.png';
   imagenMujer = '/garcia/imagenes/personajeFem.png';
   generoElegido = '';
@@ -54,28 +52,10 @@ export class GarciaComponent implements OnInit {
   dificultad = 'normal';
 
   constructor(
-    private http: HttpClient,
     private dialog: MatDialog,
-    private route: ActivatedRoute,
     private garciaService: GarciaService
   ) {}
 
-  /**
-   * Inicializa el componente y lee parámetros de ruta
-   */
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.dificultad = params['dificultad'] || 'normal';
-      
-      if (this.dificultad === 'facil') {
-        this.totalRondas = 3;
-        this.pocionesDisponibles = 15;
-      } else if (this.dificultad === 'dificil') {
-        this.totalRondas = 7;
-        this.pocionesDisponibles = 5;
-      }
-    });
-  }
 
   /**
    * Selecciona el género masculino para el jugador

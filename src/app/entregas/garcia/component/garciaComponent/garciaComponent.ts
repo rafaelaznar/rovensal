@@ -6,11 +6,12 @@ import { BarraVidaComponent } from '../barra-vida/barra-vida';
 import { BotonesAccionComponent } from '../botones-accion/botones-accion';
 import { DialogoConfirmacionComponent } from '../dialogo-confirmacion/dialogo-confirmacion';
 import { GarciaService } from '../../service/garcia-service';
+import { Menu } from "../menu/menu";
 
 @Component({
   selector: 'app-garcia',
   standalone: true,
-  imports: [CommonModule, FormsModule, BarraVidaComponent, BotonesAccionComponent],
+  imports: [CommonModule, FormsModule, BarraVidaComponent, BotonesAccionComponent, Menu],
   templateUrl: './garciaComponent.html',
   styleUrls: ['./garciaComponent.css']
 })

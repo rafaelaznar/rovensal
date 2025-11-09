@@ -1,6 +1,8 @@
 <!-- PANTALLA PRINCIPAL DEL JUEGO -->
 <div class="contenedor-principal">
 
+    <app-menu-garcia (reiniciar)="reiniciarJuego()"></app-menu-garcia>
+
     <!-- ELEGIR GÉNERO -->
     @if (!generoElegido) {
     <div class="pantalla-paso">

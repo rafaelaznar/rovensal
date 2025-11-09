@@ -8,6 +8,13 @@ body {
     padding: 0;
 }
 
+app-menu-garcia {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
 .contenedor-principal {
     min-height: 100vh;
     display: flex;

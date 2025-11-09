@@ -1,8 +1,6 @@
-<!-- Componente de detalle de personaje -->
 <div class="character-detail-container">
   
   @if (character()) {
-    <!-- Header con botón de cerrar -->
     <div class="detail-header">
       <h2 class="detail-title">Detalles del Personaje</h2>
       <button 
@@ -14,18 +12,14 @@
       </button>
     </div>
     
-    <!-- Contenido principal -->
     <div class="detail-content">
       
-      <!-- Información del personaje con imagen -->
       <div class="character-info-section">
         
-          <!-- Header con imagen y nombre -->
         <div class="character-header">
           <div class="character-image-container">
             <div class="image-container">
               
-              <!-- Placeholder mientras carga -->
               @if (!imageLoaded() && !imageError()) {
                 <div class="image-placeholder">
                   <div class="loading-spinner"></div>
@@ -33,7 +27,6 @@
                 </div>
               }
               
-              <!-- Imagen principal -->
               <img 
                 [src]="getCharacterImage()"
                 [alt]="character()!.fullName"
@@ -43,12 +36,12 @@
                 [class.loaded]="imageLoaded()"
                 [class.error]="imageError()">
               
-              <!-- Overlay con ID del personaje -->
               <div class="character-id-overlay">
                 <span>#{{ character()!.id }}</span>
               </div>
             </div>
-          </div>          <!-- Información básica -->
+          </div>
+          
           <div class="character-basic-info">
             <h3 class="character-name">{{ getFormattedName() }}</h3>
             
@@ -68,7 +61,6 @@
           </div>
         </div>
         
-        <!-- Información detallada -->
         <div class="character-details">
           <h4 class="details-title">Información</h4>
           
@@ -82,7 +74,6 @@
           </div>
         </div>
         
-        <!-- Información adicional -->
         <div class="additional-info">
           <h4 class="additional-title">Sobre este personaje</h4>
           <p class="additional-text">
@@ -102,7 +93,6 @@
     </div>
     
   } @else {
-    <!-- Estado sin personaje seleccionado -->
     <div class="no-character-state">
       <div class="no-character-icon">👤</div>
       <h3>No hay personaje seleccionado</h3>

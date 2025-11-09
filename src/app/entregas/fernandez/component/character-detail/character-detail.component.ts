@@ -2,8 +2,6 @@ import { Component, input, output, signal, ChangeDetectionStrategy } from '@angu
 import { CommonModule } from '@angular/common';
 import { Character } from '../../model';
 
-// Panel de detalles que se abre cuando seleccionas un personaje
-// Muestra la imagen, nombre completo, casa, título, etc.
 @Component({
   selector: 'app-character-detail',
   imports: [CommonModule],
@@ -13,17 +11,12 @@ import { Character } from '../../model';
 })
 export class CharacterDetailComponent {
   
-  // El personaje a mostrar
   character = input<Character | null>(null);
-  
-  // Para que el padre sepa cuando cerrar
   closeRequested = output<void>();
   
-  // Para manejar la carga de imágenes
   imageLoaded = signal<boolean>(false);
-  imageError = signal<boolean>(false);  // si falla la imagen
+  imageError = signal<boolean>(false);
   
-  // Cierra el panel de detalles
   onClose(): void {
     this.closeRequested.emit();
   }

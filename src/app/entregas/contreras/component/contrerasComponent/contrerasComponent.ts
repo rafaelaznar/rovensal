@@ -1,5 +1,7 @@
+// Si estas leyendo esto los campeones son los personajes, lo he puesto asi porque luego me daba problemas con las variables
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Champion } from '../ContrerasModel/contrerasInterface';
 import { JsonplaceholderServiceContreras } from '../ContrerasService/contrerasjsonPlacesholder';
 
@@ -11,31 +13,39 @@ import { JsonplaceholderServiceContreras } from '../ContrerasService/contrerasjs
 })
 export class ContrerasComponent implements OnInit {
   
+  // VARIABLES PRINCIPALES
   posts: Champion[] = [];
-  campeonMostrado: Champion | null = null;
-  mostrarBuscador = false; 
+  campeon: Champion | null = null; // Default null
+  buscador = false; 
 
-  constructor(private oJsonplaceholderService: JsonplaceholderServiceContreras) { }
+  constructor(
+    private oJsonplaceholderService: JsonplaceholderServiceContreras,
+    private router: Router // Enviar comparador despues
+  ) { }
 
   ngOnInit() {
-    this.oJsonplaceholderService.getAllPosts().subscribe((data) => {
+    this.oJsonplaceholderService.getAllPosts().subscribe((data) => { // El get devuelve observable, so subscribe para tener los datos
       this.posts = Object.values(data.data || data);
     });
   }
 
-  campeonAleatorio() {
+  campeon_Random() {
     if (this.posts.length > 0) {
-      this.campeonMostrado = this.posts[Math.floor(Math.random() * this.posts.length)];
+      this.campeon = this.posts[Math.floor(Math.random() * this.posts.length)];
     }
   }
 
-  buscarCampeon(nombre: string) {
+  buscar_Campeon(nombre: string) {
     const campeon = this.posts.find(c => c.name.toLowerCase().includes(nombre.toLowerCase()));
     if (campeon) {
-      this.campeonMostrado = campeon;
-      this.mostrarBuscador = false;
+      this.campeon = campeon;
+      this.buscador = false;
     } else {
       alert(`No encontrado: ${nombre}`);
     }
+  }
+
+  irAComparador() {
+    this.router.navigate(['/contreras-comparador']);
   }
 }

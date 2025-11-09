@@ -1,0 +1,130 @@
+/* CSS súper simple */
+.contenedor-principal {
+  padding: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.boton-volver {
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.seccion-controles {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.boton-limpiar {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+}
+
+.boton-aleatorio {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+}
+
+.contenedor-comparacion {
+  display: flex;
+  gap: 20px;
+}
+
+.campeon-panel {
+  border: 1px solid black;
+  padding: 10px;
+  flex: 1;
+}
+
+.boton-buscar {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.buscador {
+  display: flex;
+  gap: 5px;
+}
+
+.input-buscar {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid gray;
+}
+
+.boton-buscar-accion {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 5px;
+}
+
+.cabecera-campeon {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.icono-campeon {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+}
+
+.seccion-comparacion {
+  background-color: lightgray;
+  padding: 10px;
+  flex: 1;
+  text-align: center;
+}
+
+.stat-comparacion {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-mayor {
+  background-color: lightgreen;
+  padding: 2px 5px;
+}
+
+.stat-menor {
+  background-color: lightcoral;
+  padding: 2px 5px;
+}
+
+.stat-igual {
+  background-color: lightblue;
+  padding: 2px 5px;
+}
+
+.roles-comunes {
+  color: green;
+  font-weight: bold;
+}
+
+.sin-roles-comunes {
+  color: red;
+}
+
+.placeholder {
+  text-align: center;
+  color: gray;
+  padding: 50px 0;
+}

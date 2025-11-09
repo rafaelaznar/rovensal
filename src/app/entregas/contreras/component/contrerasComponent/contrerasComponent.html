@@ -1,49 +1,55 @@
 <h2>Entrega Contreras</h2>
 
-<button (click)="campeonAleatorio()">Campeón Aleatorio</button>
+<!-- IR AL COMPARADOR -->
+<button (click)="irAComparador()">Comparador</button>
+<br><br>
 
-<div style="margin: 20px 0;">
-  <button (click)="mostrarBuscador = !mostrarBuscador">Buscar Campeón Específico</button>
+<button (click)="campeon_Random()">Personaje aleatorio</button>
+
+<br><br>
+<div>
+  <button (click)="buscador = !buscador">Buscar personaje:</button>
   
-  @if (mostrarBuscador) {
+  <!-- Coger texto escrito usuario -->
+  @if (buscador) {
     <div style="margin-top: 10px;">
-      <input 
-        type="text" 
-        placeholder="Ej: Ahri" 
-        #inputBuscador
+      <input type="text" placeholder="Ej: Ahri" 
+        #input_Usuario
         style="padding: 5px; margin-right: 10px;">
-      <button (click)="buscarCampeon(inputBuscador.value)">Buscar</button>
+      <button (click)="buscar_Campeon(input_Usuario.value)">Buscar</button>
     </div>
   }
 </div>
 
-<p>Total de campeones cargados: {{ posts.length }}</p>
+  <!-- Total personajes -->
+<p>Total de personajes cargados: {{ posts.length }}</p>
 
-@if (campeonMostrado) {
-  <div style="border: 1px solid #ccc; padding: 20px; margin: 20px 0; background-color: #f9f9f9;">
-    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-      <img [src]="campeonMostrado.icon" 
-           [alt]="campeonMostrado.name" 
-           style="width: 64px; height: 64px; border-radius: 8px; border: 2px solid #ddd;">
+@if (campeon) {
+  <div style="border: 1px solid #000000; padding: 20px; margin: 20px 0;">
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+      <img [src]="campeon.icon" 
+           [alt]="campeon.name" 
+           style="width: 128px; height: 128px; border-radius: 8px; margin-right: 15px;">
       <div>
-        <h3 style="margin: 0;">{{ campeonMostrado.name }}</h3>
-        <p style="margin: 5px 0; color: #666; font-style: italic;">{{ campeonMostrado.title }}</p>
+        <h3 style="margin: 0;">{{ campeon.name }}</h3>
+        <p style="margin: 5px 0; color: #000000; font-style: italic;">{{ campeon.title }}</p>
       </div>
     </div>
-    <p><strong>ID:</strong> {{ campeonMostrado.id }}</p>
-    <p><strong>Tipo de ataque:</strong> {{ campeonMostrado.attackType }}</p>
-    <p><strong>Tipo adaptativo:</strong> {{ campeonMostrado.adaptiveType }}</p>
-    <p><strong>Recurso:</strong> {{ campeonMostrado.resource }}</p>
-    <p><strong>Posiciones:</strong> {{ campeonMostrado.positions }}</p>
-    <p><strong>Roles:</strong> {{ campeonMostrado.roles }}</p>
-    <p><strong>Facción:</strong> {{ campeonMostrado.faction }}</p>
-    <p><strong>Vida:</strong> {{ campeonMostrado.stats?.health?.flat }}</p>
-    <p><strong>Armadura:</strong> {{ campeonMostrado.stats?.armor?.flat }}</p>
-    <p><strong>Daño de ataque:</strong> {{ campeonMostrado.stats?.attackDamage?.flat }}</p>
-    <p><strong>Velocidad:</strong> {{ campeonMostrado.stats?.movespeed?.flat }}</p>
-    <p><strong>Lore: </strong> 
-      <span #loreText>{{ campeonMostrado.lore.substring(0, 150) }}...</span>
-      <button #btnmas (click)="loreText.textContent = campeonMostrado.lore; btnmas.style.display = 'none'" 
+    <p><strong>ID:</strong> {{ campeon.id }}</p>
+    <p><strong>Tipo de daño:</strong> {{ campeon.adaptiveType }}</p>
+    <p><strong>Rango ataque:</strong> {{ campeon.attackType }}</p>
+    <p><strong>Recurso:</strong> {{ campeon.resource }}</p>
+    <p><strong>Lineas:</strong> {{ campeon.positions }}</p>
+    <p><strong>Roles:</strong> {{ campeon.roles }}</p>
+    <p><strong>Faccion:</strong> {{ campeon.faction }}</p>
+    <p><strong>Vida:</strong> {{ campeon.stats?.health?.flat }}</p>
+    <p><strong>Armadura:</strong> {{ campeon.stats?.armor?.flat }}</p>
+    <p><strong>Daño:</strong> {{ campeon.stats?.attackDamage?.flat }}</p>
+    <p><strong>Velocidad:</strong> {{ campeon.stats?.movespeed?.flat }}</p>
+    <p><strong>Lore:</strong> 
+      <br>
+      <span #loreText>{{ campeon.lore.substring(0, 150) }}...</span>
+      <button #btnmas (click)="loreText.textContent = campeon.lore; btnmas.style.display = 'none'" 
               style="margin-left: 10px; color: #007acc; background: none; border: none; cursor: pointer; text-decoration: underline;">
         Ver más
       </button>

@@ -1,14 +1,17 @@
-<div class="card p-5 bg-light mb-4">
-  <h1>DEAD BY DAYLIGHT</h1>
-  <h5 class="text-muted">Descubre información sobre personajes, habilidades y eventos del videojuego DBD.</h5>
+<div class="layout">
+  <header class="menu">
+    <h1>Bienvenido al MARAVILLOSO mundo de The Legend of Zelda - by Ana Silvestre</h1>
+    <nav>
+      <a routerLink="../" routerLinkActive="activo"> Home </a>
+      <a routerLink="../silvestre" routerLinkActive="activo">Inicio</a>
+      <a routerLink="juegos" routerLinkActive="activo">Juegos</a>
+      <a routerLink="personajes" routerLinkActive="activo">Personajes</a>
+      <a routerLink="lugares" routerLinkActive="activo">Lugares</a>
+    </nav>
+  </header>
+
+  <main class="contenido">
+    <router-outlet></router-outlet>
+  </main>
 </div>
-
-<nav>  
-  <ul>
-    <li><a routerLink="/personajes">Personajes</a></li>
-    <li><a routerLink="/habilidades">Habilidades</a></li>
-    <li><a routerLink="/eventos">Eventos</a></li>
-  </ul>
-</nav>
-
 

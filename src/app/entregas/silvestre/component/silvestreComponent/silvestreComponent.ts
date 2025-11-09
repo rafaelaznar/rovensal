@@ -1,23 +1,14 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-silvestre',
-  imports: [],
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './silvestreComponent.html',
-  styleUrl: './silvestreComponent.css',
-  standalone: true
+  styleUrls: ['./silvestreComponent.css'],
 })
-export class SilvestreComponent {
+export class SilvestreComponent {}
 
- activeRoute: string = '';
 
- constructor(private router: Router) {
-   this.router.events.subscribe(event => {
-     if (event instanceof NavigationEnd) {
-       this.activeRoute = event.url;
-     }
-   });
- }
 
-}

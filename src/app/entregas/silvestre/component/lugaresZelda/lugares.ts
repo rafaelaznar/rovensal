@@ -34,7 +34,19 @@ export class LugaresComponent implements OnInit {
   }
 
   verDetalles(lugar: ZeldaLugar) {
-    this.lugarSeleccionado = lugar;
+    // Si el lugar no tiene los nombres resueltos, resolverlos ahora
+    if (!lugar.appearancesNames && !lugar.inhabitantsNames) {
+      this.lugaresService.resolverDatosLugar(lugar).subscribe({
+        next: (lugarResuelto) => {
+          this.lugarSeleccionado = lugarResuelto;
+        },
+        error: () => {
+          this.lugarSeleccionado = lugar; // Mostrar sin resolver si hay error
+        }
+      });
+    } else {
+      this.lugarSeleccionado = lugar;
+    }
   }
 
   cerrarDetalles() {

@@ -13,7 +13,8 @@ export class ZeldaJuegosService {
   constructor(private oHttpClient: HttpClient) {}
 
   getJuegos(): Observable<{ data: ZeldaJuego[] }> {
-    return this.oHttpClient.get<{ data: ZeldaJuego[] }>(this.apiUrl);
+    // La API de juegos tiene todos los juegos en una sola llamada con limit
+    return this.oHttpClient.get<{ data: ZeldaJuego[] }>(`${this.apiUrl}?limit=100`);
   }
 
   getJuegoPorId(id: string): Observable<string> {

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { ZeldaLugar } from '../model/zeldaLugarInterface';
 import { ZeldaJuegosService } from './zeldaJuego-service';
 import { ZeldaPersonajesService } from './zeldaPersonaje-service';
@@ -16,22 +16,33 @@ export class ZeldaLugaresService {
   private personajesService = inject(ZeldaPersonajesService);
 
   getLugares(): Observable<{ success: boolean; count: number; data: ZeldaLugar[] }> {
-    return this.http.get<{ success: boolean; count: number; data: ZeldaLugar[] }>(this.apiUrl).pipe(
-      switchMap(response => {
-        // Para cada lugar, resolver las URLs de appearances e inhabitants
-        const lugaresConDatos = response.data.map(lugar => this.resolverDatosLugar(lugar));
-        
-        return forkJoin(lugaresConDatos).pipe(
-          map(lugaresResueltos => ({
-            ...response,
-            data: lugaresResueltos
-          }))
-        );
+    // Cargar 100 páginas de lugares
+    const peticiones: Observable<ZeldaLugar[]>[] = [];
+
+    for (let i = 1; i <= 100; i++) { // 100 páginas porque no tengo ni idea de cuantas hay 
+      const url = `${this.apiUrl}?page=${i}`;
+      peticiones.push(
+        this.http.get<{ data: ZeldaLugar[] }>(url).pipe(
+          map(resp => resp.data || []),
+          catchError(() => of([]))
+        )
+      );
+    }
+
+    return forkJoin(peticiones).pipe(
+      map(respuestas => {
+        const todosLugares = respuestas.flat();
+        return {
+          success: true,
+          count: todosLugares.length,
+          data: todosLugares
+        };
       })
     );
   }
 
-  private resolverDatosLugar(lugar: ZeldaLugar): Observable<ZeldaLugar> {
+  // Datos de lugar específico cuando se necesite
+  resolverDatosLugar(lugar: ZeldaLugar): Observable<ZeldaLugar> {
     const appearances$ = lugar.appearances?.length 
       ? forkJoin(
           lugar.appearances.map(url => {

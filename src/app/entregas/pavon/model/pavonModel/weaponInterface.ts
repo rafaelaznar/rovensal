@@ -6,4 +6,5 @@ export interface Weapon{
     rarity: number;
     passiveName: string;
     passiveDesc: string;
+    id: string;
 }

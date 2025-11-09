@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Character } from '../../model/pavonModel/characterInterface';
+import { Weapon } from '../../model/pavonModel/weaponInterface';
 
 @Component({
   selector: 'app-data',
@@ -8,16 +8,16 @@ import { Character } from '../../model/pavonModel/characterInterface';
   templateUrl: './data.html',
   styleUrl: './data.css',
 })
-export class DatosPersonaje {
+export class DatosArma {
   data = inject(MAT_DIALOG_DATA)
-  oPersonaje: Character = {} as Character;
+  oArma: Weapon = {} as Weapon;
 
  ngOnInit(){
   console.log(this.data);
-  if (this.data?.character) {
-      this.oPersonaje = this.data.character;
+  if (this.data?.weapon) {
+      this.oArma = this.data.weapon;
     } else {
-      console.warn('No se recibió character en MAT_DIALOG_DATA', this.data);
+      console.warn('No se recibió weapon en MAT_DIALOG_DATA', this.data);
     }
  }
 

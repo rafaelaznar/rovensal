@@ -1,22 +1,35 @@
 <mat-dialog-content>
-    <h2>INFORMACIÓN DEL LIBRO</h2>
+    <h2>INFORMACIÓN DEL POKÉMON</h2>
 
     <div class="detalles">
-        <h3>Fecha de publicación:</h3>
-        <p>{{ oLibro.publishedDate }}</p>
+        <h3>Altura:</h3>
+        <p>{{ oPokemon.height }}</p>
 
-        <h3>Editorial:</h3>
-        <p>{{ oLibro.publisher }}</p>
+        <h3>Peso:</h3>
+        <p>{{ oPokemon.weight }}</p>
 
-        <h3>Categoría:</h3>
-        <p>{{ oLibro.categories }}</p>
+        <h3>Tipos:</h3>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Tipo</th>
+            </tr>
+            @for (tipo of oPokemon.types; track $index) {
+                <td>{{ $index + 1 }}</td>
+                <td>{{ tipo }}</td>
+            }
+        </table>
 
-        <h3>Cantidad de páginas:</h3>
-        <p>{{ oLibro.pageCount }}</p>
-    </div>
-    
-    <div class="descripcion">
-        <h3>Descripción:</h3>
-        <p>{{ oLibro.description || 'Descripción no disponible' }}</p>
+        <h3>Habilidades:</h3>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Habilidad</th>
+            </tr>
+            @for (habilidad of oPokemon.abilities; track $index) {
+                <td>{{ $index + 1 }}</td>
+                <td>{{ habilidad }}</td>
+            }
+        </table>
     </div>
 </mat-dialog-content>

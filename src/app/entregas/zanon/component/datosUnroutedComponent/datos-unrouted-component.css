@@ -1,5 +1,5 @@
 mat-dialog-content {
-  background-color: lightyellow;
+  background-color: yellow;
   padding: 10px;
 
   display: flex;
@@ -11,23 +11,28 @@ mat-dialog-content {
 
 h2 {
   text-align: center;
-  color: darkblue;
+  color: blue;
 }
 
 h3 {
+  color: darkblue;
   font-size: medium;
-  color: darkcyan;
+  font-weight: bold;
   margin: 10px;
 }
 
 p {
+  color: black;
   font-size: medium;
+  margin: 10px;
+}
+
+table {
   color: black;
   margin: 10px;
 }
 
-.descripcion {
+th, td {
   border: 1px solid black;
-  border-radius: 12px;
   padding: 10px;
 }

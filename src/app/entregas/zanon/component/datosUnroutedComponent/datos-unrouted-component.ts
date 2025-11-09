@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Libro } from '../zanonModel/zanonInterface';
+import { Pokemon } from '../zanonModel/zanonInterface';
 import { MAT_DIALOG_DATA, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
 
 @Component({
@@ -13,10 +13,10 @@ export class DatosUnroutedComponent {
 
   data = inject(MAT_DIALOG_DATA);
 
-  oLibro: Libro = {} as Libro;
+  oPokemon: Pokemon = {} as Pokemon;
 
   ngOnInit() {
     console.log("Datos recibidos en el diálogo: ", this.data);
-    this.oLibro = this.data.oLibro;
+    this.oPokemon = this.data.oPokemon;
   }
 }

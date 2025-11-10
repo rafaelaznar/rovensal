@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { NgOptimizedImage } from '@angular/common';
-import { ExtinctAnimal } from '../../models/animal.interface';
+import { AnimalExtinto } from '../../models/animal.interfaz';
 
 /**
  * Componente no enrutado que muestra una tarjeta con información básica de un animal extinto
@@ -11,47 +11,47 @@ import { ExtinctAnimal } from '../../models/animal.interface';
  * Utiliza OnPush para optimizar el rendimiento
  */
 @Component({
-  selector: 'app-animal-card',
+  selector: 'app-tarjeta-animal',
   imports: [
     MatCardModule,
     MatButtonModule,
     MatChipsModule,
     NgOptimizedImage
   ],
-  templateUrl: './animal-card.html',
-  styleUrl: './animal-card.css',
+  templateUrl: './tarjeta-animal.html',
+  styleUrl: './tarjeta-animal.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AnimalCardComponent {
+export class TarjetaAnimal {
   /** Input signal que recibe el animal desde el componente padre */
-  animal = input.required<ExtinctAnimal>();
+  animal = input.required<AnimalExtinto>();
   
   /** Output signal que emite cuando se hace clic en "Ver más" */
-  viewDetails = output<ExtinctAnimal>();
+  verDetalles = output<AnimalExtinto>();
 
   /**
    * Método que se ejecuta cuando el usuario hace clic en el botón "Ver más"
    * Emite el evento con el animal seleccionado
    */
-  onViewDetails(): void {
-    this.viewDetails.emit(this.animal());
+  alVerDetalles(): void {
+    this.verDetalles.emit(this.animal());
   }
 
   /**
    * Obtiene el nombre a mostrar (común o binomial)
    * @returns El nombre común si existe, sino el binomial
    */
-  getDisplayName(): string {
-    const animalData = this.animal();
-    return animalData.commonName || animalData.binomialName;
+  obtenerNombreParaMostrar(): string {
+    const datosAnimal = this.animal();
+    return datosAnimal.commonName || datosAnimal.binomialName;
   }
 
   /**
    * Verifica si la imagen está disponible
    * @returns true si hay una URL de imagen válida
    */
-  hasImage(): boolean {
-    const animalData = this.animal();
-    return !!animalData.imageSrc && animalData.imageSrc.trim() !== '';
+  tieneImagen(): boolean {
+    const datosAnimal = this.animal();
+    return !!datosAnimal.imageSrc && datosAnimal.imageSrc.trim() !== '';
   }
 }

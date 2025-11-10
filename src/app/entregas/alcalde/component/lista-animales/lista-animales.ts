@@ -6,10 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
-import { ExtinctAnimalsService } from '../../services/extinct-animals.service';
-import { ExtinctAnimal } from '../../models/animal.interface';
-import { AnimalCardComponent } from '../animal-card/animal-card';
-import { AnimalDetailDialogComponent } from '../animal-detail-dialog/animal-detail-dialog';
+import { ServicioAnimalesExtintos } from '../../services/animales-extintos.servicio';
+import { AnimalExtinto } from '../../models/animal.interfaz';
+import { TarjetaAnimal } from '../tarjeta-animal/tarjeta-animal';
+import { DialogoDetalleAnimal } from '../dialogo-detalle-animal/dialogo-detalle-animal';
 
 /**
  * Componente enrutado que muestra una lista de animales extintos
@@ -17,7 +17,7 @@ import { AnimalDetailDialogComponent } from '../animal-detail-dialog/animal-deta
  * y OnPush para optimizar el rendimiento
  */
 @Component({
-  selector: 'app-animal-list',
+  selector: 'app-lista-animales',
   imports: [
     MatButtonModule,
     MatInputModule,
@@ -25,53 +25,53 @@ import { AnimalDetailDialogComponent } from '../animal-detail-dialog/animal-deta
     MatProgressSpinnerModule,
     MatSelectModule,
     FormsModule,
-    AnimalCardComponent
+    TarjetaAnimal
   ],
-  templateUrl: './animal-list.html',
-  styleUrl: './animal-list.css',
+  templateUrl: './lista-animales.html',
+  styleUrl: './lista-animales.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AnimalListComponent implements OnInit {
+export class ListaAnimales implements OnInit {
   /** Servicio inyectado para obtener datos de animales */
-  private readonly animalsService = inject(ExtinctAnimalsService);
+  private readonly servicioAnimales = inject(ServicioAnimalesExtintos);
   
   /** Servicio de diálogos de Angular Material */
-  private readonly dialog = inject(MatDialog);
+  private readonly dialogo = inject(MatDialog);
 
   /** Signal que almacena todos los animales cargados */
-  private allAnimals = signal<ExtinctAnimal[]>([]);
+  private todosLosAnimales = signal<AnimalExtinto[]>([]);
   
   /** Signal que almacena el término de búsqueda */
-  searchTerm = signal<string>('');
+  terminoBusqueda = signal<string>('');
   
   /** Signal que almacena el filtro de ubicación */
-  locationFilter = signal<string>('');
+  filtroUbicacion = signal<string>('');
   
   /** Signal que indica si se están cargando datos */
-  loading = signal<boolean>(false);
+  cargando = signal<boolean>(false);
   
   /** Signal que almacena el número de animales a cargar */
-  animalCount = signal<number>(20);
+  cantidadAnimales = signal<number>(20);
 
   /** Computed signal que filtra los animales según los criterios de búsqueda */
-  filteredAnimals = computed(() => {
-    let animals = this.allAnimals();
+  animalesFiltrados = computed(() => {
+    let animales = this.todosLosAnimales();
     
     // Filtrar por nombre si hay término de búsqueda
-    if (this.searchTerm()) {
-      animals = this.animalsService.filterAnimalsByName(animals, this.searchTerm());
+    if (this.terminoBusqueda()) {
+      animales = this.servicioAnimales.filtrarAnimalesPorNombre(animales, this.terminoBusqueda());
     }
     
     // Filtrar por ubicación si hay filtro
-    if (this.locationFilter()) {
-      animals = this.animalsService.filterAnimalsByLocation(animals, this.locationFilter());
+    if (this.filtroUbicacion()) {
+      animales = this.servicioAnimales.filtrarAnimalesPorUbicacion(animales, this.filtroUbicacion());
     }
     
-    return animals;
+    return animales;
   });
 
   /** Opciones para el selector de cantidad de animales */
-  countOptions = [10, 20, 50, 100];
+  opcionesCantidad = [10, 20, 50, 100];
 
   /**
    * Constructor vacío - ngOnInit se usa para la inicialización
@@ -83,76 +83,76 @@ export class AnimalListComponent implements OnInit {
    * Carga los datos iniciales de animales
    */
   ngOnInit(): void {
-    this.loadAnimals();
+    this.cargarAnimales();
   }
 
   /**
    * Carga animales desde la API
    */
-  loadAnimals(): void {
-    this.loading.set(true);
+  cargarAnimales(): void {
+    this.cargando.set(true);
     
-    this.animalsService.getAnimals(this.animalCount()).subscribe({
-      next: (animals) => {
-        this.allAnimals.set(animals);
-        this.loading.set(false);
+    this.servicioAnimales.obtenerAnimales(this.cantidadAnimales()).subscribe({
+      next: (animales) => {
+        this.todosLosAnimales.set(animales);
+        this.cargando.set(false);
       },
       error: (error) => {
         console.error('Error cargando animales:', error);
-        this.loading.set(false);
+        this.cargando.set(false);
       }
     });
   }
 
   /**
    * Maneja el cambio en el término de búsqueda
-   * @param event - Evento del input
+   * @param evento - Evento del input
    */
-  onSearchChange(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.searchTerm.set(value);
+  alCambiarBusqueda(evento: Event): void {
+    const valor = (evento.target as HTMLInputElement).value;
+    this.terminoBusqueda.set(valor);
   }
 
   /**
    * Maneja el cambio en el filtro de ubicación
-   * @param event - Evento del input
+   * @param evento - Evento del input
    */
-  onLocationChange(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.locationFilter.set(value);
+  alCambiarUbicacion(evento: Event): void {
+    const valor = (evento.target as HTMLInputElement).value;
+    this.filtroUbicacion.set(valor);
   }
 
   /**
    * Maneja el cambio en la cantidad de animales a cargar
    */
-  onCountChange(): void {
-    this.loadAnimals();
+  alCambiarCantidad(): void {
+    this.cargarAnimales();
   }
 
   /**
    * Limpia todos los filtros
    */
-  clearFilters(): void {
-    this.searchTerm.set('');
-    this.locationFilter.set('');
+  limpiarFiltros(): void {
+    this.terminoBusqueda.set('');
+    this.filtroUbicacion.set('');
   }
 
   /**
    * Carga un animal aleatorio
    */
-  loadRandomAnimal(): void {
-    this.loading.set(true);
+  cargarAnimalAleatorio(): void {
+    this.cargando.set(true);
     
-    this.animalsService.getRandomAnimal(true).subscribe({
+    this.servicioAnimales.obtenerAnimalAleatorio(true).subscribe({
       next: (animal) => {
         if (animal) {
-          this.allAnimals.set([animal]);
+          this.todosLosAnimales.set([animal]);
         }
-        this.loading.set(false);
+        this.cargando.set(false);
       },
       error: (error) => {
         console.error('Error cargando animal aleatorio:', error);
-        this.loading.set(false);
+        this.cargando.set(false);
       }
     });
   }
@@ -162,8 +162,8 @@ export class AnimalListComponent implements OnInit {
    * Comunicación bidireccional: envía datos al diálogo y puede recibir respuesta
    * @param animal - Animal a mostrar en el diálogo
    */
-  openAnimalDetails(animal: ExtinctAnimal): void {
-    this.dialog.open(AnimalDetailDialogComponent, {
+  abrirDetallesAnimal(animal: AnimalExtinto): void {
+    this.dialogo.open(DialogoDetalleAnimal, {
       data: animal,
       width: '700px',
       maxHeight: '90vh'

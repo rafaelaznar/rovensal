@@ -1,8 +1,8 @@
 /**
  * Interfaz que representa un animal extinto según la API de Cheba
- * @interface ExtinctAnimal
+ * Los nombres de propiedades coinciden con los que devuelve la API (en inglés)
  */
-export interface ExtinctAnimal {
+export interface AnimalExtinto {
   /** Nombre científico binomial del animal */
   binomialName: string;
   
@@ -27,12 +27,11 @@ export interface ExtinctAnimal {
 
 /**
  * Interfaz para la respuesta de la API
- * @interface ApiResponse
  */
-export interface ApiResponse {
+export interface RespuestaApi {
   /** Estado de la respuesta */
   status: string;
   
   /** Array de animales extintos */
-  data: ExtinctAnimal[];
+  data: AnimalExtinto[];
 }

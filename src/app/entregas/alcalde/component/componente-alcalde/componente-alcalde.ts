@@ -8,11 +8,11 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-alcalde',
   imports: [RouterOutlet],
-  templateUrl: './alcaldeComponent.html',
-  styleUrl: './alcaldeComponent.css',
+  templateUrl: './componente-alcalde.html',
+  styleUrl: './componente-alcalde.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlcaldeComponent {
+export class ComponenteAlcalde {
   /**
    * Constructor vacío
    */

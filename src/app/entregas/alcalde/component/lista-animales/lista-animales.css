@@ -1,4 +1,4 @@
-.container {
+.contenedor {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
@@ -14,37 +14,37 @@ header h1 {
   margin-bottom: 0.5rem;
 }
 
-.subtitle {
+.subtitulo {
   color: #666;
   font-size: 1.1rem;
 }
 
-.controls {
+.controles {
   background-color: #f5f5f5;
   padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 2rem;
 }
 
-.filters {
+.filtros {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
-.filters mat-form-field {
+.filtros mat-form-field {
   flex: 1;
   min-width: 200px;
 }
 
-.action-buttons {
+.botones-accion {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
-.loading {
+.cargando {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,35 +52,35 @@ header h1 {
   padding: 3rem;
 }
 
-.loading p {
+.cargando p {
   margin-top: 1rem;
   color: #666;
 }
 
-.results-info {
+.info-resultados {
   text-align: center;
   margin-bottom: 1rem;
   color: #666;
 }
 
-.animals-grid {
+.cuadricula-animales {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
   justify-items: center;
 }
 
-.no-results {
+.sin-resultados {
   text-align: center;
   padding: 3rem;
 }
 
-.no-results h2 {
+.sin-resultados h2 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
 }
 
-.no-results p {
+.sin-resultados p {
   color: #666;
   font-size: 1.1rem;
 }

@@ -1,35 +1,35 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{ getDisplayName() }}</mat-card-title>
+    <mat-card-title>{{ obtenerNombreParaMostrar() }}</mat-card-title>
     <mat-card-subtitle>{{ animal().binomialName }}</mat-card-subtitle>
   </mat-card-header>
   
-  @if (hasImage()) {
+  @if (tieneImagen()) {
     <img 
       mat-card-image 
       [ngSrc]="animal().imageSrc" 
-      [alt]="getDisplayName()"
+      [alt]="obtenerNombreParaMostrar()"
       width="300"
       height="200"
       priority
     />
   } @else {
-    <div class="no-image">
+    <div class="sin-imagen">
       <p>Sin imagen disponible</p>
     </div>
   }
   
   <mat-card-content>
-    <p class="description">{{ animal().shortDesc }}</p>
+    <p class="descripcion">{{ animal().shortDesc }}</p>
     
-    <div class="info-chips">
+    <div class="chips-info">
       <mat-chip>📍 {{ animal().location }}</mat-chip>
       <mat-chip>📅 {{ animal().lastRecord }}</mat-chip>
     </div>
   </mat-card-content>
   
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="onViewDetails()">
+    <button mat-raised-button color="primary" (click)="alVerDetalles()">
       Ver más
     </button>
     <a 

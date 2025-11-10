@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
-import { AlcaldeComponent } from './entregas/alcalde/component/alcaldeComponent/alcaldeComponent';
-import { AnimalListComponent } from './entregas/alcalde/component/animal-list/animal-list';
+import { ComponenteAlcalde } from './entregas/alcalde/component/componente-alcalde/componente-alcalde';
+import { ListaAnimales } from './entregas/alcalde/component/lista-animales/lista-animales';
 import { AlcanyizComponent } from './entregas/alcanyiz/component/alcanyizComponent/alcanyizComponent';
 import { AlfonsoComponent } from './entregas/alfonso/component/alfonsoComponent/alfonsoComponent';
 import { CalinescuComponent } from './entregas/calinescu/component/calinescuComponent/calinescuComponent';
@@ -25,10 +25,10 @@ export const routes: Routes = [
     { path: 'home', component: Home },
     { 
         path: 'alcalde', 
-        component: AlcaldeComponent,
+        component: ComponenteAlcalde,
         children: [
-            { path: '', redirectTo: 'animals', pathMatch: 'full' },
-            { path: 'animals', component: AnimalListComponent }
+            { path: '', redirectTo: 'animales', pathMatch: 'full' },
+            { path: 'animales', component: ListaAnimales }
         ]
     },
     { path: 'alcanyiz', component: AlcanyizComponent },

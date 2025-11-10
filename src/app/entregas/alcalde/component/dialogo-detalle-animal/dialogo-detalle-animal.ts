@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { NgOptimizedImage } from '@angular/common';
-import { ExtinctAnimal } from '../../models/animal.interface';
+import { AnimalExtinto } from '../../models/animal.interfaz';
 
 /**
  * Componente de diálogo (ventana emergente) que muestra información detallada de un animal
@@ -11,23 +11,23 @@ import { ExtinctAnimal } from '../../models/animal.interface';
  * Permite comunicación bidireccional con el padre mediante MatDialogRef
  */
 @Component({
-  selector: 'app-animal-detail-dialog',
+  selector: 'app-dialogo-detalle-animal',
   imports: [
     MatDialogModule,
     MatButtonModule,
     MatChipsModule,
     NgOptimizedImage
   ],
-  templateUrl: './animal-detail-dialog.html',
-  styleUrl: './animal-detail-dialog.css',
+  templateUrl: './dialogo-detalle-animal.html',
+  styleUrl: './dialogo-detalle-animal.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AnimalDetailDialogComponent {
+export class DialogoDetalleAnimal {
   /** Datos del animal inyectados desde el componente padre */
-  animal = inject<ExtinctAnimal>(MAT_DIALOG_DATA);
+  animal = inject<AnimalExtinto>(MAT_DIALOG_DATA);
   
   /** Referencia al diálogo para cerrarlo y enviar datos de vuelta */
-  private dialogRef = inject(MatDialogRef<AnimalDetailDialogComponent>);
+  private referenciaDialogo = inject(MatDialogRef<DialogoDetalleAnimal>);
 
   /**
    * Constructor vacío - usamos inject() para inyección de dependencias
@@ -37,14 +37,14 @@ export class AnimalDetailDialogComponent {
   /**
    * Cierra el diálogo
    */
-  onClose(): void {
-    this.dialogRef.close();
+  alCerrar(): void {
+    this.referenciaDialogo.close();
   }
 
   /**
    * Abre el enlace de Wikipedia en una nueva pestaña
    */
-  openWikipedia(): void {
+  abrirWikipedia(): void {
     window.open(this.animal.wikiLink, '_blank', 'noopener,noreferrer');
   }
 
@@ -52,7 +52,7 @@ export class AnimalDetailDialogComponent {
    * Verifica si la imagen está disponible
    * @returns true si hay una URL de imagen válida
    */
-  hasImage(): boolean {
+  tieneImagen(): boolean {
     return !!this.animal.imageSrc && this.animal.imageSrc.trim() !== '';
   }
 
@@ -60,7 +60,7 @@ export class AnimalDetailDialogComponent {
    * Obtiene el nombre a mostrar (común o binomial)
    * @returns El nombre común si existe, sino el binomial
    */
-  getDisplayName(): string {
+  obtenerNombreParaMostrar(): string {
     return this.animal.commonName || this.animal.binomialName;
   }
 }

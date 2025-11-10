@@ -3,7 +3,7 @@ mat-card {
   margin: 1rem;
 }
 
-.no-image {
+.sin-imagen {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,12 +12,12 @@ mat-card {
   color: #666;
 }
 
-.description {
+.descripcion {
   margin: 1rem 0;
   line-height: 1.5;
 }
 
-.info-chips {
+.chips-info {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;

@@ -1,7 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 import { RickMortyService } from '../../services/rick-morty-serv';
 import { CharacterSelectorComponent } from '../character-selector/character-selector';
+import { Character } from '../../model/characterInterface';
+import { CharacterDialogComponent } from '../character-dialog/character-dialog';
 
 // Componente para búsqueda avanzada de personajes
 @Component({
@@ -12,6 +15,7 @@ import { CharacterSelectorComponent } from '../character-selector/character-sele
 })
 export class SearchPageComponent implements OnInit {
   private rickMortyService = inject(RickMortyService);
+  private dialog = inject(MatDialog);
   
   characters = this.rickMortyService.characters;
   loading = this.rickMortyService.loading;
@@ -20,6 +24,15 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
     // No cargar personajes automáticamente, esperar a que el usuario busque
+  }
+
+  // Abre un diálogo con todos los atributos del personaje
+  viewDetails(character: Character): void {
+    this.dialog.open(CharacterDialogComponent, {
+      data: character,
+      width: '600px',
+      maxHeight: '90vh'
+    });
   }
 
   nextPage(): void {

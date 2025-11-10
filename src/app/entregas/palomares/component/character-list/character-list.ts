@@ -1,8 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { RickMortyService } from '../../services/rick-morty-serv';
 import { Character } from '../../model/characterInterface';
+import { CharacterDialogComponent } from '../character-dialog/character-dialog';
 
 // Componente que muestra la lista paginada de personajes
 @Component({
@@ -14,6 +16,7 @@ import { Character } from '../../model/characterInterface';
 export class CharacterListComponent implements OnInit {
   private rickMortyService = inject(RickMortyService);
   private router = inject(Router);
+  private dialog = inject(MatDialog);
   
   characters = this.rickMortyService.characters;
   loading = this.rickMortyService.loading;
@@ -29,9 +32,13 @@ export class CharacterListComponent implements OnInit {
     this.rickMortyService.searchWithFilters(undefined, undefined, undefined, undefined, page);
   }
 
-  // Navega a la página de detalles del personaje usando ruta parametrizada
+  // Abre un diálogo con todos los atributos del personaje
   viewDetails(character: Character): void {
-    this.router.navigate(['/palomares/character', character.id]);
+    this.dialog.open(CharacterDialogComponent, {
+      data: character,
+      width: '600px',
+      maxHeight: '90vh'
+    });
   }
 
   nextPage(): void {

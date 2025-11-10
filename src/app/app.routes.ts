@@ -26,7 +26,11 @@ export const routes: Routes = [
         path: 'alcalde', 
         component: AlcaldeComponent,
         children: [
-            { path: '', redirectTo: 'animales', pathMatch: 'full' },
+            { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
+            { 
+                path: 'bienvenida', 
+                loadComponent: () => import('./entregas/alcalde/component/bienvenida/bienvenida').then(m => m.Bienvenida)
+            },
             { 
                 path: 'animales', 
                 loadComponent: () => import('./entregas/alcalde/component/lista-animales/lista-animales').then(m => m.ListaAnimales)

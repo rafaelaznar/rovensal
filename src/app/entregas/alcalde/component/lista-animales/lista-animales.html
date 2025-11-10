@@ -2,7 +2,7 @@
   <header>
     <h1>Animales Extintos del Holoceno</h1>
     <p class="subtitulo">
-      Explora 804 especies animales extintas en los últimos 11.650 años
+      Explora 804 especies animales extintas
     </p>
   </header>
 
@@ -14,7 +14,6 @@
           matInput 
           [value]="terminoBusqueda()"
           (input)="alCambiarBusqueda($event)"
-          placeholder="Ej: Kioea, Dodo..."
         />
       </mat-form-field>
 
@@ -24,7 +23,6 @@
           matInput 
           [value]="filtroUbicacion()"
           (input)="alCambiarUbicacion($event)"
-          placeholder="Ej: Hawaii, Australia..."
         />
       </mat-form-field>
 
@@ -59,7 +57,7 @@
   } @else {
     @if (animalesFiltrados().length > 0) {
       <div class="info-resultados">
-        <p>Mostrando {{ animalesFiltrados().length }} animal(es)</p>
+        <p>Mostrando {{ animalesFiltrados().length }} animales</p>
       </div>
       
       <div class="cuadricula-animales">

@@ -39,7 +39,7 @@ export class ListaAnimales implements OnInit {
   
   cargando = signal<boolean>(false);
   
-  cantidadAnimales = signal<number>(20);
+  cantidadAnimales = signal<number | string>(20);
 
   animalesFiltrados = computed(() => {
     let animales = this.todosLosAnimales();
@@ -55,7 +55,7 @@ export class ListaAnimales implements OnInit {
     return animales;
   });
 
-  opcionesCantidad = [10, 20, 50, 100];
+  opcionesCantidad: (number | string)[] = [10, 20, 50, 100, 'TODOS'];
 
   constructor() {}
 
@@ -66,7 +66,9 @@ export class ListaAnimales implements OnInit {
   cargarAnimales(): void {
     this.cargando.set(true);
     
-    this.servicioAnimales.obtenerAnimales(this.cantidadAnimales()).subscribe({
+    const cantidad = this.cantidadAnimales() === 'TODOS' ? 804 : this.cantidadAnimales() as number;
+    
+    this.servicioAnimales.obtenerAnimales(cantidad).subscribe({
       next: (animales) => {
         this.todosLosAnimales.set(animales);
         this.cargando.set(false);

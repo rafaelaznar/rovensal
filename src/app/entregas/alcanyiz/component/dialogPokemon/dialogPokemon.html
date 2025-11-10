@@ -1,0 +1,21 @@
+<!-- html del dialog -->
+<div class="poke-dialog">
+  <header class="poke-dialog__header">
+    <span class="poke-dialog__title">Vista rápida</span>
+    <!-- botón para llamar la función de cerrar el dialog -->
+    <button class="btn-close" (click)="closeDialog()" aria-label="Cerrar">✕</button>
+  </header>
+
+  <div class="poke-dialog__body">
+    <img class="poke-dialog__sprite" src="{{dataDialog.sprites.front_default}}" alt="{{dataDialog.name}}">
+    <div class="poke-dialog__meta">
+      <p><strong>Nombre:</strong> <span class="text-capitalize">{{dataDialog.name}}</span></p>
+      <p><strong>Pokédex:</strong> #{{dataDialog.id}}</p>
+      <p><strong>Peso:</strong> {{(dataDialog.weight || 0) / 10}} kg</p>
+    </div>
+  </div>
+
+  <footer class="poke-dialog__footer">
+    <button class="btn-white" (click)="closeDialog()">Cerrar</button>
+  </footer>
+</div>

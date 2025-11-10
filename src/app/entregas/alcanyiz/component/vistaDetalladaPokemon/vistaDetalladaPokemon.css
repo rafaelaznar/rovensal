@@ -1,0 +1,237 @@
+/* Pokédex-themed styling for detailed Pokémon view
+     Palette inspired by alcanyizComponent: vivid red + light blue accents */
+
+:host {
+    /* Theme tokens (scoped to this component) */
+    --poke-red: #ff3b3b;
+    --poke-blue: #4fc3f7;
+    --poke-dark: #1b1b1b;
+    --poke-shadow: rgba(0, 0, 0, 0.15);
+
+    display: block;
+    padding: 16px 18px;
+    border-radius: 16px;
+    background:
+        linear-gradient(135deg, rgba(255, 59, 59, 0.10), rgba(79, 195, 247, 0.10))
+        , #ffffff;
+    box-shadow: 0 6px 18px var(--poke-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Decorative red strip (Pokédex vibe) */
+:host::before {
+    content: "";
+    display: block;
+    height: 6px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--poke-red), #ff6b6b);
+}
+
+/* Sprite gallery container (first block in the template) */
+:host > div:first-child {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    align-items: center;
+    justify-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255, 59, 59, 0.06), rgba(79, 195, 247, 0.06));
+    border: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+/* Individual sprite wrapper */
+:host > div:first-child > div {
+    display: grid;
+    place-items: center;
+}
+
+/* Sprites: nice and big, pixel-art friendly */
+:host img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+    transition: transform 120ms ease-out, filter 120ms ease-out;
+}
+
+:host img:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.22));
+}
+
+/* General text blocks */
+:host p {
+    margin: 8px 0;
+    color: var(--poke-dark);
+}
+
+/* Title-like paragraphs (those without classes) */
+:host p:not([class]) {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* Back button */
+.backBar {
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px 0 6px 0;
+}
+
+.btn-back {
+    appearance: none;
+    background: #ffffff;
+    color: var(--poke-red);
+    border: 2px solid var(--poke-red);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.10);
+    transition: background 150ms ease, color 150ms ease, transform 120ms ease;
+}
+
+.btn-back:hover {
+    background: linear-gradient(90deg, var(--poke-red), #ff6b6b);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.btn-back:active {
+    transform: translateY(0);
+}
+
+/* Stats: visual progress bars */
+.statsGrid {
+    margin: 8px 0 14px 0;
+    padding: 12px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255, 59, 59, 0.06), rgba(79, 195, 247, 0.06));
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.statRow {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
+}
+
+.statName {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    color: var(--poke-dark);
+    opacity: 0.8;
+}
+
+.statBarWrapper {
+    height: 16px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.06);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* The bar reads --value (0..255 typically) and maps to a percent scale */
+.statBar {
+    --pct: clamp(0%, calc(var(--value, 0) * 1%), 100%);
+    height: 100%;
+    width: var(--pct);
+    background: linear-gradient(90deg, var(--poke-blue), var(--poke-red));
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: width 200ms ease-out;
+    position: relative;
+}
+
+.statBar::after {
+    content: attr(data-value);
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 520px) {
+    .statRow {
+        grid-template-columns: 100px 1fr;
+    }
+}
+
+/* Types: keep original colors, add consistent badge styling */
+.water{ background-color: #6390F0; }
+.electric{ background-color: #F7D02C; }
+.fairy{ background-color: #D685AD; }
+.fighting{ background-color: #C22E28; }
+.normal{ background-color: #A8A77A; }
+.grass{ background-color: #7AC74C; }
+.poison{ background-color: #A33EA1; }
+.bug{ background-color: #A6B91A; }
+.rock{ background-color: #B6A136; }
+.ground{ background-color: #E2BF65; }
+.ghost{ background-color: #735797; }
+.psychic{ background-color: #F95587; }
+.ice{ background-color: #96D9D6; }
+.dragon{ background-color: #6F35FC; }
+.dark{ background-color: #705746; }
+.steel{ background-color: #B7B7CE; }
+.flying{ background-color: #A98FF3; }
+.fire{ background-color: #EE8130; }
+.poce{ background-color: #A33EA1; }
+.phyco{ background-color: #F95587; }
+
+/* Unified badge look for all type pills */
+.water,
+.electric,
+.fairy,
+.fighting,
+.normal,
+.grass,
+.poison,
+.bug,
+.rock,
+.ground,
+.ghost,
+.psychic,
+.ice,
+.dragon,
+.dark,
+.steel,
+.flying,
+.fire,
+.poce,
+.phyco {
+    color: #ffffff;
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 4px 8px 4px 0;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+}
+
+/* Subtle footer strip in blue */
+:host::after {
+    content: "";
+    display: block;
+    height: 5px;
+    margin-top: 12px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--poke-blue), #7fe1ff);
+}

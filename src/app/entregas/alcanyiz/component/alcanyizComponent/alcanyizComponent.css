@@ -1,2 +1,128 @@
-/* Styles for AlcanyizComponent */
-h2 { color: #2a6f97; }
+/* Pokédex themed styles (component scoped) */
+
+.poke-page {
+  background: linear-gradient(180deg, #f9f9fb 0%, #fff 100%);
+  padding: 1rem 1rem 2rem;
+  border-radius: 18px;
+  position: relative;
+}
+
+.poke-header {
+  background: linear-gradient(90deg, #ff2e2e 0%, #c40000 40%, #4fc3f7 100%);
+  padding: 1rem 1.25rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: #ffffff;
+}
+
+.poke-title {
+  margin: 0;
+  font-size: 1.75rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+.poke-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-white {
+  background: #ffffff;
+  color: #c40000;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 2px solid #c40000;
+  text-decoration: none;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  transition: transform .15s, box-shadow .3s, background .2s;
+}
+
+.btn-white:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  background: #4fc3f7;
+  color: #000;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.btn-ghost:hover {
+  background: #ffffff;
+  color: #c40000;
+}
+
+.trainer-row {
+  margin: 0.75rem 0 1.25rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, #fff, #f5fafe);
+  border: 2px solid #eaeef3;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(79,195,247,0.15);
+}
+
+.trainer-name {
+  margin: 0;
+  font-weight: 600;
+  color: #c40000;
+}
+
+.pokedexContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+app-container-pokemon {
+  display: block;
+}
+
+.cargandoSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 180px;
+  gap: 1rem;
+  width: 100%;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ff2e2e 0%, #4fc3f7 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.loader {
+  width: 54px;
+  height: 54px;
+  border: 6px solid rgba(255,255,255,0.4);
+  border-top: 6px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Make inner card sprites larger via cascade */
+.poke-page .pokemon-container .pokemon-sprite {
+  width: 140px !important;
+  height: 140px !important;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .poke-title { font-size: 1.4rem; }
+  .btn-white { padding: 0.5rem 0.9rem; font-size: 0.8rem; }
+  .pokedexContainer { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+}

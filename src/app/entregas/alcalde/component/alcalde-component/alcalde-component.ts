@@ -4,10 +4,10 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-alcalde',
   imports: [RouterOutlet],
-  templateUrl: './componente-alcalde.html',
-  styleUrl: './componente-alcalde.css',
+  templateUrl: './alcalde-component.html',
+  styleUrl: './alcalde-component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComponenteAlcalde {
+export class AlcaldeComponent {
   constructor() {}
 }

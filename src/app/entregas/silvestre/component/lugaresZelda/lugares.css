@@ -2,7 +2,7 @@
 .contenedor-juegos {
   padding: 2rem;
   text-align: center;
-  background: #f9fbff;
+  background: #cef0db;
   min-height: 100vh;
 }
 
@@ -10,7 +10,7 @@
 h2 {
   text-align: center;
   margin-bottom: 1rem;
-  color: #2c3e50;
+  color: #000000;
   font-size: 1.8rem;
 }
 
@@ -39,13 +39,13 @@ h2 {
 
 .juego-card h3 {
   margin-top: 0;
-  color: #0077b6;
+  color: #000000;
   font-size: 1.2rem;
 }
 
 /* Botón de las cartas */
 button {
-  background-color: #0077b6;
+  background-color: #e6c24d;
   color: white;
   border: none;
   border-radius: 8px;
@@ -55,7 +55,7 @@ button {
 }
 
 button:hover {
-  background-color: #005f8f;
+  background-color: #e6c24d;
   transform: scale(1.05);
 }
 
@@ -86,15 +86,42 @@ button:hover {
 }
 
 .modal-contenido h3 {
-  color: #0077b6;
+  color: #000000;
   margin-top: 0;
 }
 
+/* Descripciones: vista previa con corte y la versión expandida */
 .descripcion {
-  margin-top: 1rem;
-  line-height: 1.5;
+  margin-top: 0.6rem;
+  line-height: 1.4;
   color: #333;
   font-size: 0.95rem;
+}
+
+/* Versión expandida (muestra todo) */
+.descripcion-expanded {
+  max-height: none;
+  overflow: visible;
+}
+
+/* Botón/ enlace para alternar leer más */
+.leer-mas-btn {
+  background: transparent;
+  border: none;
+  color: #13703a;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.4rem;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Mantener el estilo existente del botón "Ver más" que abre el modal */
+.juego-card .actions {
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
 }
 
 /* Listas de habitantes/apariciones */
@@ -117,7 +144,7 @@ ul li {
 .boton {
   display: inline-block;
   padding: 0.8rem 1.5rem;
-  background: #0077cc;
+  background: #b8a25b;
   color: white;
   border-radius: 10px;
   text-decoration: none;
@@ -126,5 +153,5 @@ ul li {
 }
 
 .boton:hover {
-  background: #005fa3;
+  background: #b8a25b;
 }

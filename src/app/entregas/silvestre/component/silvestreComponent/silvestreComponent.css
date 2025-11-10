@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #f9fbff;
+  background: #cef0db;
   color: #333;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -49,11 +49,68 @@
 }
 
 .menu nav a.activo {
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid #89a04b;
   padding-bottom: 3px;
 }
 
 .contenido {
   flex: 1;
   padding: 2rem;
+}
+
+/* Botones: dorado por defecto + variante verde estilo Zelda */
+.contenido button,
+.extras-controls button,
+.card button,
+button.btn,
+.btn {
+  background: linear-gradient(180deg, #e6c24d 0%, #c79a00 100%); /* dorado */
+  color: #1b1200;
+  border: 1px solid #9a7600;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.35);
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .08s ease, filter .08s ease, box-shadow .08s ease;
+}
+
+/* Hover / activo */
+.contenido button:hover,
+.extras-controls button:hover,
+.card button:hover,
+button.btn:hover,
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.98);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.18);
+}
+
+/* Variante verde estilo Zelda */
+.btn--green {
+  background: linear-gradient(180deg, #55bb6e 0%, #2a8f3c 100%);
+  color: #ffffff;
+  border: 1px solid #1f6f2a;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+}
+
+/* Variante dorada explícita */
+.btn--gold {
+  background: linear-gradient(180deg, #e6c24d 0%, #c79a00 100%);
+  color: #1b1200;
+  border: 1px solid #9a7600;
+}
+
+/* Pequeños ajustes para acciones secundarias */
+.button--ghost {
+  background: transparent;
+  color: #1b1200;
+  border: 1px solid rgba(27,18,0,0.08);
+  box-shadow: none;
+}
+
+/* Asegura contraste accesible en foco */
+button:focus {
+  outline: 3px solid rgba(152,122,34,0.25);
+  outline-offset: 2px;
 }

@@ -18,6 +18,14 @@ import { SilvestreComponent } from './entregas/silvestre/component/silvestreComp
 import { SoaresComponent } from './entregas/soares/component/soaresComponent/soaresComponent';
 import { UskiComponent } from './entregas/uski/component/uskiComponent/uskiComponent';
 import { ZanonComponent } from './entregas/zanon/component/zanonComponent/zanonComponent';
+// Importar componentes hijos de soares
+import { HomeComponent } from './entregas/soares/soares/component/home/home.component';
+import { GamesComponent } from './entregas/soares/soares/component/games/games.component';
+import { PlayersModalComponent } from './entregas/soares/soares/component/players/players.component';
+import { RankingComponent } from './entregas/soares/soares/component/ranking/ranking.component';
+import { StatisticsComponent } from './entregas/soares/soares/component/statistics/statistics.component';
+import { TeamsComponent } from './entregas/soares/soares/component/teams/teams.component';
+import { QuizComponent } from './entregas/soares/soares/component/quiz/quiz.component';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -37,7 +45,21 @@ export const routes: Routes = [
     { path: 'salinas', component: SalinasComponent },
     { path: 'sempertegui', component: SemperteguiComponent },
     { path: 'silvestre', component: SilvestreComponent },
-    { path: 'soares', component: SoaresComponent },
+    {
+path: 'soares',
+component: SoaresComponent,
+children: [
+{ path: 'home', component: HomeComponent },
+{ path: 'games', component: GamesComponent },
+{ path: 'players', component: PlayersModalComponent },
+{ path: 'players/:id', component: PlayersModalComponent },
+{ path: 'ranking', component: RankingComponent },
+{ path: 'statistics', component: StatisticsComponent },
+{ path: 'teams', component: TeamsComponent },
+{ path: 'quiz', component: QuizComponent },
+{ path: '', redirectTo: 'home', pathMatch: 'full' }
+]
+},
     { path: 'uski', component: UskiComponent },
     { path: 'zanon', component: ZanonComponent },
 ];

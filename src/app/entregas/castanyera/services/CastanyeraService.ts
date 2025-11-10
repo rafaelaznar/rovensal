@@ -13,7 +13,7 @@ export class Jsonplacecastanyera {
   //conseguir array con todos los personajes
   getAllCharacters(): Observable<Castanyera[]> {
     return this.oHttpClient
-      .get<any>('https://api.disneyapi.dev/character/:id?=page=1&pageSize=800').pipe(
+      .get<any>('https://api.disneyapi.dev/character/:id?=page=1&pageSize=6500').pipe(
         map((res) => res.data as Castanyera[]),
       map((characters: Castanyera[]) =>
         characters.filter((char) =>

@@ -6,6 +6,7 @@ import { Jsonplacecastanyera } from '../../services/CastanyeraService';
 import { Castanyera } from '../../model/castanyeraInterface';
 import { CastanyeraCards } from '../castanyera-cards/castanyera-cards';
 import { CastanyeraSearchBarName } from '../castanyera-search-bar-name/castanyera-search-bar-name';
+import { CastanyeraMenuButton } from '../castanyera-menu-button/castanyera-menu-button';
 import { CastanyeraSearchBarPeli } from '../castanyera-search-bar-peli/castanyera-search-bar-peli';
 import { CastanyeraPaginator } from '../castanyera-paginator/castanyera-paginator';
 
@@ -17,6 +18,7 @@ import { CastanyeraPaginator } from '../castanyera-paginator/castanyera-paginato
     MatButtonModule,
     CastanyeraCards,
     CastanyeraSearchBarName,
+    CastanyeraMenuButton,
     CastanyeraSearchBarPeli,
     CastanyeraPaginator,
   ],

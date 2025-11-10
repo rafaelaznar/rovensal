@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ getDisplayName() }}</mat-card-title>
+    <mat-card-subtitle>{{ animal().binomialName }}</mat-card-subtitle>
+  </mat-card-header>
+  
+  @if (hasImage()) {
+    <img 
+      mat-card-image 
+      [ngSrc]="animal().imageSrc" 
+      [alt]="getDisplayName()"
+      width="300"
+      height="200"
+      priority
+    />
+  } @else {
+    <div class="no-image">
+      <p>Sin imagen disponible</p>
+    </div>
+  }
+  
+  <mat-card-content>
+    <p class="description">{{ animal().shortDesc }}</p>
+    
+    <div class="info-chips">
+      <mat-chip>📍 {{ animal().location }}</mat-chip>
+      <mat-chip>📅 {{ animal().lastRecord }}</mat-chip>
+    </div>
+  </mat-card-content>
+  
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onViewDetails()">
+      Ver más
+    </button>
+    <a 
+      mat-button 
+      [href]="animal().wikiLink" 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      Wikipedia
+    </a>
+  </mat-card-actions>
+</mat-card>

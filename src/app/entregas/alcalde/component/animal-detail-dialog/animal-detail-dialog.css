@@ -1,0 +1,49 @@
+mat-dialog-content {
+  max-width: 600px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.no-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background-color: #f0f0f0;
+  color: #666;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.detail-section {
+  margin-bottom: 1.5rem;
+}
+
+.detail-section h3 {
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.detail-section p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem;
+}

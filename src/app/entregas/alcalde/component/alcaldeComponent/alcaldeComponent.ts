@@ -1,13 +1,20 @@
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-import { Component } from '@angular/core';
-
+/**
+ * Componente raíz de la sección Alcalde
+ * Actúa como contenedor para las rutas hijas mediante RouterOutlet
+ */
 @Component({
   selector: 'app-alcalde',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './alcaldeComponent.html',
   styleUrl: './alcaldeComponent.css',
-  standalone: true
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlcaldeComponent {
-
+  /**
+   * Constructor vacío
+   */
+  constructor() {}
 }

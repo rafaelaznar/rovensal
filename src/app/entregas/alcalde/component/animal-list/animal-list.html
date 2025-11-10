@@ -1,0 +1,80 @@
+<div class="container">
+  <header>
+    <h1>🦴 Animales Extintos del Holoceno</h1>
+    <p class="subtitle">
+      Explora 804 especies animales extintas en los últimos 11.650 años
+    </p>
+  </header>
+
+  <div class="controls">
+    <div class="filters">
+      <mat-form-field>
+        <mat-label>Buscar por nombre</mat-label>
+        <input 
+          matInput 
+          [value]="searchTerm()"
+          (input)="onSearchChange($event)"
+          placeholder="Ej: Kioea, Dodo..."
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Filtrar por ubicación</mat-label>
+        <input 
+          matInput 
+          [value]="locationFilter()"
+          (input)="onLocationChange($event)"
+          placeholder="Ej: Hawaii, Australia..."
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Cantidad de animales</mat-label>
+        <mat-select [(ngModel)]="animalCount" (selectionChange)="onCountChange()">
+          @for (option of countOptions; track option) {
+            <mat-option [value]="option">{{ option }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="loadAnimals()" [disabled]="loading()">
+        🔄 Recargar
+      </button>
+      <button mat-raised-button color="accent" (click)="loadRandomAnimal()" [disabled]="loading()">
+        🎲 Animal aleatorio
+      </button>
+      <button mat-stroked-button (click)="clearFilters()">
+        🗑️ Limpiar filtros
+      </button>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+      <p>Cargando animales extintos...</p>
+    </div>
+  } @else {
+    @if (filteredAnimals().length > 0) {
+      <div class="results-info">
+        <p>Mostrando {{ filteredAnimals().length }} animal(es)</p>
+      </div>
+      
+      <div class="animals-grid">
+        @for (animal of filteredAnimals(); track animal.binomialName) {
+          <app-animal-card 
+            [animal]="animal"
+            (viewDetails)="openAnimalDetails($event)"
+          />
+        }
+      </div>
+    } @else {
+      <div class="no-results">
+        <h2>😔 No se encontraron animales</h2>
+        <p>Intenta con otros criterios de búsqueda o recarga los datos</p>
+      </div>
+    }
+  }
+</div>

@@ -2,7 +2,7 @@
 .contenedor-juegos {
   padding: 2rem;
   text-align: center;
-  background: #f9fbff;
+  background: #cef0db;
   min-height: 100vh;
 }
 
@@ -14,7 +14,7 @@
 .boton {
   display: inline-block;
   padding: 0.8rem 1.5rem;
-  background: #0077cc;
+  background: #e6c24d;
   color: white;
   border-radius: 10px;
   text-decoration: none;
@@ -23,14 +23,14 @@
 }
 
 .boton:hover {
-  background: #005fa3;
+  background: #e6c24d;
 }
 
 /* Título */
 h2 {
   text-align: center;
   margin-bottom: 1rem;
-  color: #2c3e50;
+  color: #000000;
 }
 
 /* Grid de juegos */
@@ -57,6 +57,7 @@ h2 {
 
 .juego-card:hover {
   transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* Clase dinámica para juego destacado/seleccionado */
@@ -68,7 +69,7 @@ h2 {
 
 .juego-card h3 {
   margin-top: 0;
-  color: #0077b6;
+  color: #000000;
 }
 
 /* Mensajes de estado */
@@ -85,7 +86,7 @@ h2 {
 
 /* Botón de las cartas */
 button {
-  background-color: #0077b6;
+  background-color: #e6c24d;
   color: white;
   border: none;
   border-radius: 8px;
@@ -95,7 +96,7 @@ button {
 }
 
 button:hover {
-  background-color: #005f8f;
+  background-color: #e6c24d;
 }
 
 /* Modal */
@@ -121,7 +122,7 @@ button:hover {
 }
 
 .modal-contenido h3 {
-  color: #0077b6;
+  color: #000000;
   margin-top: 0;
 }
 

@@ -2,7 +2,7 @@
 .contenedor-personajes {
   padding: 2rem;
   text-align: center;
-  background: #f9fbff;
+  background: #cef0db;
   min-height: 100vh;
 }
 
@@ -14,7 +14,7 @@
 .boton {
   display: inline-block;
   padding: 0.8rem 1.5rem;
-  background: #0077cc;
+  background: #b8a25b;
   color: white;
   border-radius: 10px;
   text-decoration: none;
@@ -23,14 +23,14 @@
 }
 
 .boton:hover {
-  background: #005fa3;
+  background: #b8a25b;
 }
 
 /* Título */
 h2 {
   text-align: center;
   margin-bottom: 1rem;
-  color: #2c3e50;
+  color: #000000;
 }
 
 /* Grid de personajes */
@@ -53,6 +53,7 @@ h2 {
 
 .personaje-card:hover {
   transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* Clase dinámica para personaje seleccionado */
@@ -63,12 +64,12 @@ h2 {
 
 .personaje-card h3 {
   margin-top: 0;
-  color: #0077b6;
+  color: #000000;
 }
 
 /* Botón dentro de la carta */
 button {
-  background-color: #0077b6;
+  background-color: #e6c24d;
   color: white;
   border: none;
   border-radius: 8px;
@@ -78,7 +79,7 @@ button {
 }
 
 button:hover {
-  background-color: #005f8f;
+  background-color: #e6c24d;
 }
 
 /* Modal */
@@ -104,7 +105,7 @@ button:hover {
 }
 
 .modal-contenido h3 {
-  color: #0077b6;
+  color: #000000;
   margin-top: 0;
 }
 

@@ -23,7 +23,8 @@ constructor(private pokemonService: PokemonService) { }
 
 ngOnInit() {
   this.getPokemons()
-  }
+
+}
 
 getPokemons(){
   this.pokemonService.getAllPokemons().subscribe((response: PokemonListResponse) => {

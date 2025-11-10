@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiCallService } from '../../services/api-call-service';
 import { Product } from '../../model/productsInterface';
-
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-product-page',
-  imports: [],
+  imports: [MatIcon],
   templateUrl: './productPageComponent.html',
   styleUrl: './productPageComponent.css',
 })

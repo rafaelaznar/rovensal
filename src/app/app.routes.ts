@@ -18,6 +18,8 @@ import { SilvestreComponent } from './entregas/silvestre/component/silvestreComp
 import { SoaresComponent } from './entregas/soares/component/soaresComponent/soaresComponent';
 import { UskiComponent } from './entregas/uski/component/uskiComponent/uskiComponent';
 import { ZanonComponent } from './entregas/zanon/component/zanonComponent/zanonComponent';
+import { PokemonCard } from './entregas/pallas/component/hijo/pokemon-card/pokemon-card';
+import { PokemonList } from './entregas/pallas/component/padre/pokemon-list/pokemon-list';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -30,7 +32,6 @@ export const routes: Routes = [
     { path: 'contreras', component: ContrerasComponent },
     { path: 'fernandez', component: FernandezComponent },
     { path: 'garcia', component: GarciaComponent },
-    { path: 'pallas', component: PallasComponent },
     { path: 'palomares', component: PalomaresComponent },
     { path: 'pavon', component: PavonComponent },
     { path: 'reyna', component: ReynaComponent },
@@ -40,4 +41,20 @@ export const routes: Routes = [
     { path: 'soares', component: SoaresComponent },
     { path: 'uski', component: UskiComponent },
     { path: 'zanon', component: ZanonComponent },
+    { path: 'pokemons', component: PokemonCard },
+    { path: 'pokemon.list', component: PokemonList },
+
+    {
+        path: 'pallas',
+        loadComponent: () => import('./entregas/pallas/component/pallasComponent/pallasComponent').then(m => m.PallasComponent),
+    },
+    {
+        path: 'pallas/pokemons',
+        loadComponent: () => import('./entregas/pallas/component/hijo/pokemon-card/pokemon-card').then(m => m.PokemonCard),
+    },
+    {
+        path: 'pallas/pokemon.list',
+        loadComponent: () => import('./entregas/pallas/component/padre/pokemon-list/pokemon-list').then(m => m.PokemonList),
+    },
+    
 ];

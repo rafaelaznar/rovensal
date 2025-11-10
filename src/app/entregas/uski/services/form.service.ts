@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
+import { Form } from '../interfaces/form.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FormService {
-  private baseUrl = 'https://api.ejemplo-pagina-web.com/'; 
+  private baseUrl = 'https://api.ejemplo.com/';
 
   constructor(private http: HttpClient) {}
 
-  sendForm(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/form`, data);
+  sendForm(data: Form): Observable<Form> {
+    return this.http.post<Form>(`${this.baseUrl}post-form`, data).pipe(
+      catchError((err) => {
+        console.error('Error API:', err);
+        return throwError(() => err);
+      })
+    );
   }
 }

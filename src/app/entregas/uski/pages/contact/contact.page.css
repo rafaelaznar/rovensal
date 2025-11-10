@@ -6,7 +6,6 @@
 
 .contact-wrapper {
   display: flex;
-  gap: 24px;
   max-width: 1080px;
   width: 100%;
 }
@@ -60,17 +59,16 @@
   margin: 12px 0 14px;
 }
 
-/* form */
 .contact-form form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 30px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  position: relative;
 }
 
 .field label {
@@ -94,6 +92,22 @@ input:focus,
 select:focus,
 textarea:focus {
   border-color: #111827;
+}
+
+input.error,
+select.error,
+textarea.error {
+  border-color: #ef4444;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
 }
 
 textarea {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { exhaustMap, filter, finalize, Subject } from 'rxjs';
 import { FormService } from '../../services/form.service';
 
@@ -11,29 +11,40 @@ import { FormService } from '../../services/form.service';
   standalone: true,
 })
 export class UskiContactPage {
-  form: FormGroup = new FormGroup({
-    username: new FormControl(null),
-    email: new FormControl(null),
-    interest: new FormControl(),
-    phone: new FormControl(null),
-    message: new FormControl(null),
-  });
+  constructor(private formService: FormService, private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      username: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      interest: [null, Validators.required],
+      phone: [null, Validators.required],
+      message: [null, [Validators.required, Validators.minLength(5)]],
+    });
+  }
+
+  form: FormGroup;
 
   submit$ = new Subject<void>();
   loading = false;
 
-  constructor(private formService: FormService) {
-    
-  }
-
+  // ejemplo de RxJS para formularios
   ngOnInit() {
     this.submit$
       .pipe(
+        // continua si el formulario es valido
         filter(() => this.form.valid),
+
+        // ignorar clicks repetidos
         exhaustMap(() => {
-          this.loading = true;
-          return this.formService.sendForm(this.form.value).pipe(
-            finalize(() => this.loading = false)
+          this.loading = true; // activar el estado de carga
+
+          console.log(this.form.value);
+
+          // enviar los datos al servidor
+          return (
+            this.formService
+              .sendForm(this.form.value)
+              // "finalize" se ejecuta al terminar el request
+              .pipe(finalize(() => (this.loading = false)))
           );
         })
       )
@@ -41,6 +52,12 @@ export class UskiContactPage {
   }
 
   onSubmit() {
-    this.submit$.next();
+    if (this.form.invalid) {
+      // Mark all fields as touched to show errors immediately
+      Object.keys(this.form.controls).forEach((key) => {
+        this.form.get(key)?.markAsTouched();
+      });
+    }
+    this.submit$.next(); // dispara el flujo de envío del formulario
   }
 }

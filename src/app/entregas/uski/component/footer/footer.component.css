@@ -85,7 +85,10 @@
 
 .footer-links {
   display: flex;
-  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  font-size: 12px;
 }
 
 .footer-links a {

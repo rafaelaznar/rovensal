@@ -1,6 +1,6 @@
 <div class="contenedor">
   <header>
-    <h1>🦴 Animales Extintos del Holoceno</h1>
+    <h1>Animales Extintos del Holoceno</h1>
     <p class="subtitulo">
       Explora 804 especies animales extintas en los últimos 11.650 años
     </p>
@@ -40,13 +40,13 @@
 
     <div class="botones-accion">
       <button mat-raised-button color="primary" (click)="cargarAnimales()" [disabled]="cargando()">
-        🔄 Recargar
+        Recargar
       </button>
       <button mat-raised-button color="accent" (click)="cargarAnimalAleatorio()" [disabled]="cargando()">
-        🎲 Animal aleatorio
+        Animal aleatorio
       </button>
       <button mat-stroked-button (click)="limpiarFiltros()">
-        🗑️ Limpiar filtros
+        Limpiar filtros
       </button>
     </div>
   </div>
@@ -72,7 +72,7 @@
       </div>
     } @else {
       <div class="sin-resultados">
-        <h2>😔 No se encontraron animales</h2>
+        <h2>No se encontraron animales</h2>
         <p>Intenta con otros criterios de búsqueda o recarga los datos</p>
       </div>
     }

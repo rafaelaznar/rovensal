@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
 import { AlcaldeComponent } from './entregas/alcalde/component/alcaldeComponent/alcaldeComponent';
 import { AlcanyizComponent } from './entregas/alcanyiz/component/alcanyizComponent/alcanyizComponent';
-import { AlfonsoComponent } from './entregas/alfonso/component/alfonsoComponent/alfonsoComponent';
 import { CalinescuComponent } from './entregas/calinescu/component/calinescuComponent/calinescuComponent';
 import { CastanyeraComponent } from './entregas/castanyera/component/castanyeraComponent/castanyeraComponent';
 import { ContrerasComponent } from './entregas/contreras/component/contrerasComponent/contrerasComponent';
@@ -24,7 +23,18 @@ export const routes: Routes = [
     { path: 'home', component: Home },
     { path: 'alcalde', component: AlcaldeComponent },
     { path: 'alcanyiz', component: AlcanyizComponent },
-    { path: 'alfonso', component: AlfonsoComponent },
+    {
+        path: 'alfonso',
+        loadComponent: () => import('./entregas/alfonso/component/alfonsoComponent/alfonsoComponent').then(m => m.AlfonsoComponent),
+    },
+    {
+        path: 'alfonso/menu',
+        loadComponent: () => import('./entregas/alfonso/component/menuPage/menuPage').then(m => m.MenuPageComponent),
+    },
+    {
+        path: 'alfonso/stock',
+        loadComponent: () => import('./entregas/alfonso/component/stockPage/stockPage').then(m => m.StockPageComponent),
+    },
     { path: 'calinescu', component: CalinescuComponent },
     { path: 'castanyera', component: CastanyeraComponent },
     { path: 'contreras', component: ContrerasComponent },

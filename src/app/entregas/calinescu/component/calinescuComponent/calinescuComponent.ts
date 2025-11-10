@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Menu } from '../menu/menu';
 import { DinoServ } from '../../services/dino-serv';
@@ -37,9 +37,6 @@ export class CalinescuComponent {
   
   /** Dinosaurios destacados para mostrar en la página de inicio */
   dinosauriosDestacados: Dino[] = [];
-  
-  /** Referencia al componente Menu */
-  @ViewChild(Menu) menuComponent!: Menu;
 
   /**
    * Constructor del componente.
@@ -135,5 +132,18 @@ export class CalinescuComponent {
   obtenerDinosAleatorios(dinos: Dino[], cantidad: number): Dino[] {
     const shuffled = [...dinos].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, cantidad);
+  }
+  
+  /**
+   * Cierra la sesión del usuario actual.
+   * Limpia todos los datos del usuario logueado y del dinosaurio favorito.
+   * También limpia los favoritos del servicio.
+   */
+  cerrarSesion() {
+    this.usuarioLogueado = null;
+    this.nombreDinoFav = null;
+    this.dinoFavorito = undefined;
+    this.favoritosService.limpiarFavoritos();
+    console.log('Sesión cerrada');
   }
 }

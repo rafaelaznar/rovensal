@@ -48,6 +48,11 @@ export class Menu {
   @Output() loginRealizado = new EventEmitter<{nombre: string, email: string, dinoFav: string}>();
 
   /**
+   * @Output - Emite el evento de cierre de sesión hacia CalinescuComponent (padre).
+   */
+  @Output() cerrarSesionEvent = new EventEmitter<void>();
+
+  /**
    * Constructor del componente.
    * Configura un listener para detectar cambios de navegación
    * y actualizar la ruta activa para el resaltado del menú.
@@ -72,6 +77,7 @@ export class Menu {
 
   /**
    * Abre una ventana emergente (MatDialog) con el formulario de login.
+   * Si ya hay un usuario logueado, muestra un alert pidiendo que cierre sesión primero.
    * Pasa datos al diálogo (usuarioActual) y recibe los datos del formulario al cerrar.
    * Implementa comunicación bidireccional con ventana emergente.
    * Al recibir los datos del login, los emite al componente padre.
@@ -81,6 +87,12 @@ export class Menu {
    * <button (click)="abrirLoginModal()">Iniciar Sesión</button>
    */
   abrirLoginModal() {
+    // Si ya hay un usuario logueado, avisar que debe cerrar sesión primero
+    if (this.usuarioActual) {
+      alert('Ya hay una sesión activa. Por favor, cierra sesión antes de iniciar sesión con otro usuario.');
+      return;
+    }
+
     const dialogRef = this.dialog.open(LoginHijo, {
       width: '500px',
       disableClose: false,
@@ -123,5 +135,14 @@ export class Menu {
         // Aquí podrías mostrar el mensaje de que ya está en favoritos
       }
     });
+  }
+
+  /**
+   * Cierra la sesión del usuario actual.
+   * Emite el evento al componente padre para que limpie los datos del usuario.
+   * @returns void
+   */
+  cerrarSesion() {
+    this.cerrarSesionEvent.emit();
   }
 }

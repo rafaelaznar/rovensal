@@ -6,15 +6,15 @@ import { NgOptimizedImage } from '@angular/common';
 import { AnimalExtinto } from '../../model/animal-interfaz';
 
 @Component({
-  selector: 'app-dialogo-animal',
+  selector: 'app-dialogo-detalle-animal',
   imports: [
     MatDialogModule,
     MatButtonModule,
     MatChipsModule,
     NgOptimizedImage
   ],
-  templateUrl: './dialogo-animal.html',
-  styleUrl: './dialogo-animal.css',
+  templateUrl: './dialogo-detalle-animal.html',
+  styleUrl: './dialogo-detalle-animal.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogoDetalleAnimal {

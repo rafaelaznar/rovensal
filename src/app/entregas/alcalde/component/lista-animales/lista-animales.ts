@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ServicioAnimalesExtintos } from '../../service/animales-extintos-servicio';
 import { AnimalExtinto } from '../../model/animal-interfaz';
 import { TarjetaAnimal } from '../tarjeta-animal/tarjeta-animal';
-import { DialogoDetalleAnimal } from '../dialogo-animal/dialogo-animal';
+import { DialogoDetalleAnimal } from '../dialogo-detalle-animal/dialogo-detalle-animal';
 
 @Component({
   selector: 'app-lista-animales',

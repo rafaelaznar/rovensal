@@ -4,8 +4,7 @@ import { ProductService } from '../../service/product.service';
 import { Product } from '../../model/product.model';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { ProductCardUnroutedComponent } from '../product-card-unrouted/product-card-unrouted';
-import { HeaderUnrouted } from "../header-unrouted/header-unrouted";
-
+import { HeaderUnrouted } from '../header-unrouted/header-unrouted';
 
 @Component({
   selector: 'app-category-list-routed',

@@ -53,7 +53,7 @@ export class UskiContactPage {
 
   onSubmit() {
     if (this.form.invalid) {
-      // Mark all fields as touched to show errors immediately
+      // marcar todos los inputs para mostrar erores
       Object.keys(this.form.controls).forEach((key) => {
         this.form.get(key)?.markAsTouched();
       });

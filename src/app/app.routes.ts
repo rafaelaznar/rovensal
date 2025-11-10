@@ -18,35 +18,34 @@ import { SilvestreComponent } from './entregas/silvestre/component/silvestreComp
 import { SoaresComponent } from './entregas/soares/component/soaresComponent/soaresComponent';
 import { UskiComponent } from './entregas/uski/component/uskiComponent/uskiComponent';
 import { ZanonComponent } from './entregas/zanon/component/zanonComponent/zanonComponent';
-import { UskiContactPage } from './entregas/uski/pages/contact/contact.page';
 import { UskiHomePage } from './entregas/uski/pages/home/home.page';
+import { UskiContactPage } from './entregas/uski/pages/contact/contact.page';
 
-// вернуть стандартный таб
 export const routes: Routes = [
-  { path: '', component: Home },
-  { path: 'home', component: Home },
-  { path: 'alcalde', component: AlcaldeComponent },
-  { path: 'alcanyiz', component: AlcanyizComponent },
-  { path: 'alfonso', component: AlfonsoComponent },
-  { path: 'calinescu', component: CalinescuComponent },
-  { path: 'castanyera', component: CastanyeraComponent },
-  { path: 'contreras', component: ContrerasComponent },
-  { path: 'fernandez', component: FernandezComponent },
-  { path: 'garcia', component: GarciaComponent },
-  { path: 'pallas', component: PallasComponent },
-  { path: 'palomares', component: PalomaresComponent },
-  { path: 'pavon', component: PavonComponent },
-  { path: 'reyna', component: ReynaComponent },
-  { path: 'salinas', component: SalinasComponent },
-  { path: 'sempertegui', component: SemperteguiComponent },
-  { path: 'silvestre', component: SilvestreComponent },
-  { path: 'soares', component: SoaresComponent },
-  { path: 'uski', component: UskiComponent,
-    children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: UskiHomePage },
-      { path: 'contact', component: UskiContactPage }
-    ]
- },
-  { path: 'zanon', component: ZanonComponent },
+    { path: '', component: Home },
+    { path: 'home', component: Home },
+    { path: 'alcalde', component: AlcaldeComponent },
+    { path: 'alcanyiz', component: AlcanyizComponent },
+    { path: 'alfonso', component: AlfonsoComponent },
+    { path: 'calinescu', component: CalinescuComponent },
+    { path: 'castanyera', component: CastanyeraComponent },
+    { path: 'contreras', component: ContrerasComponent },
+    { path: 'fernandez', component: FernandezComponent },
+    { path: 'garcia', component: GarciaComponent },
+    { path: 'pallas', component: PallasComponent },
+    { path: 'palomares', component: PalomaresComponent },
+    { path: 'pavon', component: PavonComponent },
+    { path: 'reyna', component: ReynaComponent },
+    { path: 'salinas', component: SalinasComponent },
+    { path: 'sempertegui', component: SemperteguiComponent },
+    { path: 'silvestre', component: SilvestreComponent },
+    { path: 'soares', component: SoaresComponent },
+    { path: 'uski', component: UskiComponent,
+      children: [
+        { path: '', redirectTo: 'home', pathMatch: 'full' },
+        { path: 'home', component: UskiHomePage },
+        { path: 'contact', component: UskiContactPage }
+      ]
+    },
+    { path: 'zanon', component: ZanonComponent },
 ];

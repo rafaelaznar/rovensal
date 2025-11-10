@@ -29,7 +29,7 @@ export class JuegosComponent implements OnInit {
   constructor(private oJuegosService: ZeldaJuegosService) {}
 
   /**
-   * Hook del ciclo de vida de Angular
+   * Ciclo de vida del componente
    * Se ejecuta después de la inicialización del componente
    * Carga los juegos desde la API
    */
@@ -62,7 +62,7 @@ export class JuegosComponent implements OnInit {
   }
 
   /**
-   * Función de trackeo para optimizar el renderizado del @for
+   * Función para optimizar el renderizado del @for
    * @param index - Índice del elemento
    * @param item - Juego actual
    * @returns ID del juego o índice si no hay ID

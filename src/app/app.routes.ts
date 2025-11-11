@@ -22,6 +22,14 @@ import { HomePageComponent } from './entregas/sempertegui/component/homePageComp
 import { CatalogPageComponent } from './entregas/sempertegui/component/catalogPageComponent/catalogPageComponent';
 import { ProductPageComponent } from './entregas/sempertegui/component/productPageComponent/productPageComponent';
 
+// Importar componentes hijos de soares
+import { HomeComponent } from './entregas/soares/soares/component/home/home.component';
+import { GamesComponent } from './entregas/soares/soares/component/games/games.component';
+import { PlayersModalComponent } from './entregas/soares/soares/component/players/players.component';
+import { RankingComponent } from './entregas/soares/soares/component/ranking/ranking.component';
+import { StatisticsComponent } from './entregas/soares/soares/component/statistics/statistics.component';
+import { TeamsComponent } from './entregas/soares/soares/component/teams/teams.component';
+import { QuizComponent } from './entregas/soares/soares/component/quiz/quiz.component';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -48,7 +56,21 @@ export const routes: Routes = [
         ],
     },
     { path: 'silvestre', component: SilvestreComponent },
-    { path: 'soares', component: SoaresComponent },
+    {
+path: 'soares',
+component: SoaresComponent,
+children: [
+{ path: 'home', component: HomeComponent },
+{ path: 'games', component: GamesComponent },
+{ path: 'players', component: PlayersModalComponent },
+{ path: 'players/:id', component: PlayersModalComponent },
+{ path: 'ranking', component: RankingComponent },
+{ path: 'statistics', component: StatisticsComponent },
+{ path: 'teams', component: TeamsComponent },
+{ path: 'quiz', component: QuizComponent },
+{ path: '', redirectTo: 'home', pathMatch: 'full' }
+]
+},
     { path: 'uski', component: UskiComponent },
     { path: 'zanon', component: ZanonComponent },
 ];

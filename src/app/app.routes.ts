@@ -12,6 +12,10 @@ import { FernandezComponent } from './entregas/fernandez/component/fernandezComp
 import { GarciaComponent } from './entregas/garcia/component/garciaComponent/garciaComponent';
 import { PallasComponent } from './entregas/pallas/component/pallasComponent/pallasComponent';
 import { PalomaresComponent } from './entregas/palomares/component/palomaresComponent/palomaresComponent';
+import { CharacterListComponent } from './entregas/palomares/component/character-list/character-list';
+import { CharacterDetailPageComponent } from './entregas/palomares/component/character-detail-page/character-detail-page';
+import { SearchPageComponent } from './entregas/palomares/component/search-page/search-page';
+import { LoginComponent } from './entregas/palomares/component/login/login';
 import { PavonComponent } from './entregas/pavon/component/pavonComponent/pavonComponent';
 import { ReynaComponent } from './entregas/reyna/components/reynaComponent/reynaComponent';
 import { SalinasComponent } from './entregas/salinas/component/salinasComponent/salinasComponent';
@@ -57,7 +61,16 @@ export const routes: Routes = [
   { path: 'fernandez', component: FernandezComponent },
   { path: 'garcia', component: GarciaComponent },
   { path: 'pallas', component: PallasComponent },
-  { path: 'palomares', component: PalomaresComponent },
+   { 
+        path: 'palomares', 
+        component: PalomaresComponent,
+        children: [
+            { path: '', component: CharacterListComponent },
+            { path: 'search', component: SearchPageComponent },
+            { path: 'character/:id', component: CharacterDetailPageComponent },
+            { path: 'login', component: LoginComponent }
+        ]
+    },
   { path: 'pavon', component: PavonComponent },
   { path: 'reyna', component: ReynaComponent },
   { path: 'salinas', component: SalinasComponent },
@@ -108,7 +121,6 @@ export const routes: Routes = [
     { path: 'fernandez', component: FernandezComponent },
     { path: 'garcia', component: GarciaComponent },
     { path: 'pallas', component: PallasComponent },
-    { path: 'palomares', component: PalomaresComponent },
     { path: 'pavon', component: PavonComponent },
     
     /* mis rutas */

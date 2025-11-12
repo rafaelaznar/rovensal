@@ -1,2 +1,76 @@
 <h2>Entrega Contreras</h2>
 
+<h2>Bienvenido al buscador de personajes de League of Legends</h2>
+
+<br>
+
+<!-- IR AL COMPARADOR -->
+<button (click)="ruta_Comparador()">Comparador</button>
+<br><br>
+
+<button (click)="campeon_Random()">Personaje aleatorio</button>
+<br><br>
+
+<button (click)="mostrar_Campeones()">Ver todos los campeones</button>
+
+<br><br>
+<div>
+  <button (click)="buscador = !buscador">Buscar personaje:</button>
+  
+  <!-- Coger texto escrito usuario -->
+  @if (buscador) {
+    <div style="margin-top: 10px;">
+      <input type="text" placeholder="Ej: Ahri" 
+        #input_Usuario
+        style="padding: 5px; margin-right: 10px;">
+      <button (click)="buscar_Campeon(input_Usuario.value)">Buscar</button>
+      
+      <!-- Error no encontrado -->
+      @if (no_Encontrado) {
+        <div style="color: red; font-size: 12px; margin-top: 5px;">
+          {{ no_Encontrado }}
+        </div>
+      }
+      <div style="color: #666; font-size: 11px; margin-top: 3px;">
+        Solo letras y espacios (2-20 caracteres)
+      </div>
+    </div>
+  }
+</div>
+
+  <!-- Total personajes -->
+<p>Total de personajes cargados: {{ posts.length }}</p>
+
+  <!-- MOSTRAR CAMPEON -->
+@if (campeon) {
+  <div class="campeon_container">
+    <div class="campeon_header"> <!-- div imagen -->
+      <img [src]="campeon.icon"  
+           [alt]="campeon.name" 
+           class="campeon_image"> 
+      <div class="campeon_info">
+        <h3>{{ campeon.name }}</h3> <!-- nombre -->
+        <p>{{ campeon.title }}</p> <!-- titulo personaje -->
+      </div>
+    </div>
+    <p><strong>ID:</strong> {{ campeon.id }}</p> 
+    <p><strong>Tipo de daño:</strong> {{ campeon.adaptiveType }}</p>
+    <p><strong>Rango ataque:</strong> {{ campeon.attackType }}</p>
+    <p><strong>Recurso:</strong> {{ campeon.resource }}</p>
+    <p><strong>Lineas:</strong> {{ campeon.positions }}</p>
+    <p><strong>Roles:</strong> {{ campeon.roles }}</p>
+    <p><strong>Faccion:</strong> {{ campeon.faction }}</p>
+    <p><strong>Vida:</strong> {{ campeon.stats?.health?.flat }}</p> <!-- utilizo flat por el tipo de dato, sino me devolveria un object porque tiene varios valores -->
+    <p><strong>Armadura:</strong> {{ campeon.stats?.armor?.flat }}</p>
+    <p><strong>Daño:</strong> {{ campeon.stats?.attackDamage?.flat }}</p>
+    <p><strong>Velocidad:</strong> {{ campeon.stats?.movespeed?.flat }}</p>
+    <p><strong>Lore:</strong> 
+      <br>
+      <span #loreText>{{ campeon.lore.substring(0, 150) }}...</span>
+      <button #btnmas (click)="loreText.textContent = campeon.lore; btnmas.style.display = 'none'" 
+              style="margin-left: 10px; color: #007acc; background: none; border: none; cursor: pointer; text-decoration: underline;">
+        Ver mas
+      </button>
+    </p>
+  </div>
+}

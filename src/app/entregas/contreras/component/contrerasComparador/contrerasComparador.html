@@ -1,0 +1,116 @@
+<h2>Comparador de Personajes</h2>
+<br><br>
+<button onclick="history.back()" style="margin-right: 10px;">Volver</button>
+<button (click)="vaciar_Texto()">Limpiar</button>
+<br><br>
+<!-- CAMPEONES -->
+<div class="main">
+  <!-- CAMPEON 1 -->
+  <div class="campeon">
+    <h3>Personaje 1</h3>
+    <input type="text" placeholder="Ej: Ahri" #input1 style="margin-right: 10px;">
+    <button (click)="buscar_c1(input1.value)" style="margin-right: 10px;">Buscar</button>
+    <button (click)="aleatorio_c1()">Aleatorio</button>
+    <br><br>
+    
+    @if (error_txtVacio_c1) {
+      <p style="color: red;">{{ error_txtVacio_c1 }}</p>
+    }
+    
+    @if (campeon1) {
+      <div>
+        <h4>{{ campeon1.name }}</h4>
+        <img [src]="campeon1.icon" class="icono_campeon">
+        <br><br>
+        <p>Vida: {{ campeon1.stats?.health?.flat || 0 }}</p>
+        <p>Armadura: {{ campeon1.stats?.armor?.flat || 0 }}</p>
+        <p>Daño: {{ campeon1.stats?.attackDamage?.flat || 0 }}</p>
+        <p>Velocidad: {{ campeon1.stats?.movespeed?.flat || 0 }}</p>
+        <p>Roles: {{ campeon1.roles.join(', ') }}</p>
+      </div>
+    } @else {
+      <p class="placeholder">Selecciona campeon</p>
+    }
+  </div>
+
+  <!-- CAMPEON 2 -->
+  <div class="campeon">
+    <h3>Campeon 2</h3>
+    <input type="text" placeholder="Ej: Gragas" #input2 style="margin-right: 10px;">
+    <button (click)="buscar_c2(input2.value)" style="margin-right: 10px;">Buscar</button>
+    <button (click)="aleatorio_c2()">Aleatorio</button>
+    <br><br>
+    
+    @if (error_txtVacio_c2) {
+      <p style="color: red;">{{ error_txtVacio_c2 }}</p>
+    }
+    
+    @if (campeon2) {
+      <div>
+        <h4>{{ campeon2.name }}</h4>
+        <img [src]="campeon2.icon" class="icono_campeon">
+        <br><br>
+        <p>Vida: {{ campeon2.stats?.health?.flat || 0 }}</p>
+        <p>Armadura: {{ campeon2.stats?.armor?.flat || 0 }}</p>
+        <p>Daño: {{ campeon2.stats?.attackDamage?.flat || 0 }}</p>
+        <p>Velocidad: {{ campeon2.stats?.movespeed?.flat || 0 }}</p>
+        <p>Roles: {{ campeon2.roles.join(', ') }}</p>
+      </div>
+    } @else {
+      <p class="placeholder">Selecciona campeon</p>
+    }
+  </div>
+</div>
+<br>
+
+<!-- COMPARACION DE STATS -->
+@if (campeon1 && campeon2) {
+  <div class="seccion_comparacion"> 
+    <h3>VS</h3>
+    <div class="stat_comparacion">  <!-- VIDA -->
+      <span [class]="comparacion_Stats(campeon1.stats?.health?.flat, campeon2.stats?.health?.flat)">
+        {{ campeon1.stats?.health?.flat || 0 }}
+      </span>
+      <span>Vida</span>
+      <span [class]="comparacion_Stats(campeon2.stats?.health?.flat, campeon1.stats?.health?.flat)">
+        {{ campeon2.stats?.health?.flat || 0 }}
+      </span>
+    </div>
+
+    <div class="stat_comparacion"> <!-- ARMADURA -->
+      <span [class]="comparacion_Stats(campeon1.stats?.armor?.flat, campeon2.stats?.armor?.flat)">
+        {{ campeon1.stats?.armor?.flat || 0 }}
+      </span>
+      <span>Armadura</span>
+      <span [class]="comparacion_Stats(campeon2.stats?.armor?.flat, campeon1.stats?.armor?.flat)">
+        {{ campeon2.stats?.armor?.flat || 0 }}
+      </span>
+    </div>
+
+    <div class="stat_comparacion"> <!-- DAÑO -->
+      <span [class]="comparacion_Stats(campeon1.stats?.attackDamage?.flat, campeon2.stats?.attackDamage?.flat)">
+        {{ campeon1.stats?.attackDamage?.flat || 0 }}
+      </span>
+      <span>Daño</span>
+      <span [class]="comparacion_Stats(campeon2.stats?.attackDamage?.flat, campeon1.stats?.attackDamage?.flat)">
+        {{ campeon2.stats?.attackDamage?.flat || 0 }}
+      </span>
+    </div>
+
+    <div class="stat_comparacion"> <!-- VELOCIDAD -->
+      <span [class]="comparacion_Stats(campeon1.stats?.movespeed?.flat, campeon2.stats?.movespeed?.flat)">
+        {{ campeon1.stats?.movespeed?.flat || 0 }}
+      </span>
+      <span>Velocidad</span>
+      <span [class]="comparacion_Stats(campeon2.stats?.movespeed?.flat, campeon1.stats?.movespeed?.flat)">
+        {{ campeon2.stats?.movespeed?.flat || 0 }}
+      </span>
+    </div>
+
+    @if (roles_Comunes().length > 0) { <!-- ROLES -->
+      <p class="roles_comunes">Roles comunes: {{ roles_Comunes().join(', ') }}</p>
+    } @else {
+      <p class="sin_roles_comunes">Tienen Roles diferentes</p>
+    }
+  </div>
+}

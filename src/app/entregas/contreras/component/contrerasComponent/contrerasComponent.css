@@ -1,2 +1,32 @@
-/* Styles for ContrerasComponent */
+:host {
+  display: block;
+  background-color: #e3f2fd;
+  min-height: 100vh;
+  padding: 20px;
+}
+
 h2 { color: #2a6f97; }
+
+.campeon_container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+}
+
+.campeon_header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.campeon_image {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+}
+
+.campeon_info h3 { margin: 0; }
+.campeon_info p { margin: 5px 0; color: #666; font-style: italic; }

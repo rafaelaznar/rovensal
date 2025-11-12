@@ -1,0 +1,54 @@
+<div class="theme-selector">
+  <div class="theme-selector-content">
+    
+  
+    <div class="quick-selector">
+      <button 
+        class="theme-btn theme-btn-light"
+        [class.active]="currentTheme() === 'light'"
+        (click)="setTheme('light')"
+        title="Tema Claro">
+        <span class="theme-icon">☀️</span>
+        <span class="theme-label">Claro</span>
+      </button>
+      
+      <button 
+        class="theme-btn theme-btn-dark"
+        [class.active]="currentTheme() === 'dark'"
+        (click)="setTheme('dark')"
+        title="Tema Oscuro">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-label">Oscuro</span>
+      </button>
+      
+      <button 
+        class="theme-btn theme-btn-auto"
+        [class.active]="currentTheme() === 'auto'"
+        (click)="setTheme('auto')"
+        title="Tema Automático (sigue el sistema)">
+        <span class="theme-icon">🌓</span>
+        <span class="theme-label">Auto</span>
+      </button>
+    </div>
+    
+
+    <div class="current-theme-info">
+      <div class="info-item">
+        <span class="info-label">Tema actual:</span>
+        <span class="info-value">
+          {{ getCurrentThemeInfo().icon }} {{ getCurrentThemeInfo().displayName }}
+        </span>
+      </div>
+      
+      <div class="info-item" *ngIf="isAutoMode()">
+        <span class="info-label">Detectado:</span>
+        <span class="info-value">
+          {{ effectiveTheme() === 'dark' ? '🌙 Oscuro' : '☀️ Claro' }}
+        </span>
+      </div>
+    </div>
+    
+
+    
+  </div>
+</div>

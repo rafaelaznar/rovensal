@@ -1,2 +1,111 @@
-<h2>Entrega Fernandez</h2>
+
+<div class="got-app">
+  
+
+  <header class="app-header">
+    <div class="container">
+      <div class="header-top">
+        <h1 class="app-title">{{ appTitle() }}</h1>
+        
+
+        <div class="theme-section">
+          <app-theme-selector></app-theme-selector>
+        </div>
+      </div>
+      
+      @if (isLoading()) {
+        <div class="loading-indicator">
+          <span class="spinner"></span>
+          <span>Loading...</span>
+        </div>
+      }
+      
+
+      @if (hasSelectedCharacter()) {
+        <div class="selected-character-info">
+          <span>Current: {{ selectedCharacter()?.fullName }}</span>
+          <button 
+            class="clear-btn" 
+            (click)="clearSelection()"
+            title="Clear selection">
+            ✕
+          </button>
+        </div>
+      }
+    </div>
+  </header>
+  
+
+  <nav class="main-navigation">
+    <div class="container">
+      <ul class="nav-list">
+        @for (item of navItems(); track item.path) {
+          <li class="nav-item">
+            <a 
+              [routerLink]="item.path" 
+              routerLinkActive="active"
+              class="nav-link">
+              <span class="nav-icon">{{ getIcon(item.icon) }}</span>
+              <span class="nav-label">{{ item.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </nav>
+  
+
+  @if (errorMessage()) {
+    <div class="error-banner">
+      <div class="container">
+        <div class="error-content">
+          <span class="error-icon">⚠️</span>
+          <span class="error-text">{{ errorMessage() }}</span>
+          <button 
+            class="error-close" 
+            (click)="clearError()"
+            title="Cerrar error">
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+  
+
+  <main class="main-content">
+    <div class="container">
+      
+
+      @if (!hasSelectedCharacter()) {
+        <div class="welcome-section">
+          <h2>Bienvenido a Game of Thrones App</h2>
+          <p>Explora el mundo de Westeros y sus personajes</p>
+          
+          <div class="quick-actions">
+            @for (card of actionCards(); track card.path) {
+              <a [routerLink]="card.path" class="action-card">
+                <div class="action-icon">{{ card.icon }}</div>
+                <h3>{{ card.title }}</h3>
+                <p>{{ card.description }}</p>
+              </a>
+            }
+          </div>
+        </div>
+      }
+      
+
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  
+
+  <footer class="app-footer">
+    <div class="container">
+      <p>&copy; 2024 Game of Thrones App - Proyecto Angular</p>
+      <p>Datos obtenidos de <a href="https://thronesapi.com" target="_blank">ThronesAPI</a></p>
+    </div>
+  </footer>
+  
+</div>
 

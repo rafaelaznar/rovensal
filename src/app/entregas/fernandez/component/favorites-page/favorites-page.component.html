@@ -1,0 +1,193 @@
+<div class="favorites-page">
+  <div class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">
+        <span class="icon">⭐</span>
+        Mis Favoritos
+        <span class="count-badge" *ngIf="favoritesCount() > 0">{{favoritesCount()}}</span>
+      </h1>
+      
+      <div class="header-actions" *ngIf="favoritesCount() > 0">
+        <button class="btn btn-outline" (click)="toggleViewMode()">
+          <span class="icon">{{viewMode() === 'grid' ? '📋' : '🔲'}}</span>
+          {{viewMode() === 'grid' ? 'Lista' : 'Grid'}}
+        </button>
+        
+        <button class="btn btn-outline" (click)="exportFavorites()">
+          <span class="icon">💾</span>
+          Exportar
+        </button>
+        
+        <label class="btn btn-outline import-btn">
+          <span class="icon">📁</span>
+          Importar
+          <input type="file" accept=".json" (change)="importFavorites($event)" hidden>
+        </label>
+        
+        <button class="btn btn-danger" (click)="clearAllFavorites()">
+          <span class="icon">🗑️</span>
+          Limpiar
+        </button>
+      </div>
+    </div>
+    
+
+    <div class="stats-bar" *ngIf="favoritesCount() > 0">
+      <div class="stat-item">
+        <span class="stat-label">Total:</span>
+        <span class="stat-value">{{favoriteStats().total}}</span>
+      </div>
+      <div class="stat-item" *ngIf="favoriteStats().topFamilies.length > 0">
+        <span class="stat-label">Casa favorita:</span>
+        <span class="stat-value">{{favoriteStats().topFamilies[0].family}} ({{favoriteStats().topFamilies[0].count}})</span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="controls-bar" *ngIf="favoritesCount() > 0">
+    <div class="filters">
+      <div class="filter-buttons">
+        <button 
+          class="filter-btn"
+          [class.active]="selectedFamily() === ''"
+          (click)="onFamilyFilterChange('')">
+          <span class="icon">🏠</span>
+          Todas las casas
+        </button>
+        
+        <button 
+          *ngFor="let family of uniqueFamilies().slice(0, 5)" 
+          class="filter-btn"
+          [class.active]="selectedFamily() === family"
+          (click)="onFamilyFilterChange(family)">
+          <span class="icon">🏰</span>
+          {{family}}
+        </button>
+        
+        <button class="btn btn-sm btn-outline" *ngIf="selectedFamily()" (click)="clearFamilyFilter()">
+          <span class="icon">✖️</span>
+          Limpiar filtro
+        </button>
+      </div>
+    </div>
+    
+    <div class="sorting">
+      <div class="sort-buttons">
+        <span class="sort-label">Ordenar por:</span>
+        <button 
+          class="sort-btn"
+          [class.active]="sortBy() === 'name'"
+          (click)="setSortBy('name')">
+          <span class="icon">🔤</span>
+          Nombre
+        </button>
+        <button 
+          class="sort-btn"
+          [class.active]="sortBy() === 'family'"
+          (click)="setSortBy('family')">
+          <span class="icon">🏰</span>
+          Casa
+        </button>
+        <button 
+          class="sort-btn"
+          [class.active]="sortBy() === 'dateAdded'"
+          (click)="setSortBy('dateAdded')">
+          <span class="icon">⏰</span>
+          Recientes
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="main-content">
+    
+
+    <div class="empty-state" *ngIf="displayMessage()">
+      <div class="empty-icon">⭐</div>
+      <h2 class="empty-title">{{displayMessage()!.title}}</h2>
+      <p class="empty-subtitle">{{displayMessage()!.subtitle}}</p>
+      <a *ngIf="displayMessage()!.showAddButton" routerLink="/fernandez/characters" class="btn btn-primary">
+        <span class="icon">👥</span>
+        Ver Personajes
+      </a>
+    </div>
+
+
+    <div class="favorites-container" *ngIf="filteredAndSortedFavorites().length > 0">
+      
+
+      <div class="favorites-grid" *ngIf="viewMode() === 'grid'">
+        <div class="character-card" *ngFor="let character of filteredAndSortedFavorites()" 
+             (click)="onCharacterSelected(character)"
+             [class.selected]="selectedCharacterForDetail()?.id === character.id">
+          
+          <button class="remove-favorite-btn" (click)="removeFavorite(character, $event)" title="Quitar de favoritos">
+            <span class="icon">❌</span>
+          </button>
+          
+          <div class="character-image">
+            <img [src]="getCharacterImage(character)" 
+                 [alt]="character.fullName"
+                 (error)="onImageError($event)"
+                 loading="lazy">
+          </div>
+          
+          <div class="character-info">
+            <h3 class="character-name">{{character.fullName}}</h3>
+            <p class="character-family" *ngIf="character.family">{{character.family}}</p>
+            <p class="character-title" *ngIf="character.title">{{character.title}}</p>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="favorites-list" *ngIf="viewMode() === 'list'">
+        <div class="list-item" *ngFor="let character of filteredAndSortedFavorites()"
+             (click)="onCharacterSelected(character)"
+             [class.selected]="selectedCharacterForDetail()?.id === character.id">
+          
+          <img class="list-avatar" [src]="getCharacterImage(character)" 
+               [alt]="character.fullName"
+               (error)="onImageError($event)"
+               loading="lazy">
+          
+          <div class="list-content">
+            <div class="list-main">
+              <h3 class="list-name">{{character.fullName}}</h3>
+              <p class="list-family" *ngIf="character.family">{{character.family}}</p>
+            </div>
+            <p class="list-title" *ngIf="character.title">{{character.title}}</p>
+          </div>
+          
+          <button class="list-remove-btn" (click)="removeFavorite(character, $event)" title="Quitar de favoritos">
+            <span class="icon">❌</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="character-detail-overlay" *ngIf="selectedCharacterForDetail()" (click)="onCloseDetail()">
+    <div class="character-detail-container" (click)="$event.stopPropagation()">
+      <app-character-detail 
+        [character]="selectedCharacterForDetail()"
+        (closeRequested)="onCloseDetail()">
+      </app-character-detail>
+    </div>
+  </div>
+
+
+  <div class="family-summary" *ngIf="favoritesCount() > 0 && getFamilyKeys().length > 1">
+    <h2 class="summary-title">Resumen por Casas</h2>
+    <div class="family-cards">
+      <div class="family-card" *ngFor="let family of getFamilyKeys()">
+        <h3 class="family-name">{{family}}</h3>
+        <p class="family-count">{{favoritesByFamily()[family].length}} personaje(s)</p>
+        <button class="btn btn-sm" (click)="onFamilyFilterChange(family)">Ver solo esta casa</button>
+      </div>
+    </div>
+  </div>
+</div>

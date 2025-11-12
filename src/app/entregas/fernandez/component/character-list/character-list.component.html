@@ -1,0 +1,129 @@
+
+<div class="character-list-container">
+  
+
+  <div class="list-header">
+    <h3 class="list-title">{{ title() }}</h3>
+    
+
+    @if (showFamilyFilter()) {
+      <div class="family-filter">
+        <label for="family-select">Filtrar por Casa:</label>
+        <select 
+          id="family-select"
+          [value]="selectedFamily()"
+          (change)="onFamilySelectChange($event)"
+          class="family-select">
+          <option value="">Todas las Casas</option>
+          @for (family of getUniqueFamilies(); track family) {
+            <option [value]="family">{{ family }}</option>
+          }
+        </select>
+      </div>
+    }
+  </div>
+  
+
+  @if (loading()) {
+    <div class="loading-container">
+      <div class="spinner-large"></div>
+      <p>Cargando personajes...</p>
+    </div>
+  }
+  
+
+  @if (!loading() && getFilteredCharacters().length > 0) {
+    <div class="characters-grid">
+      @for (character of getFilteredCharacters(); track character.id) {
+        <div 
+          class="character-card"
+          (click)="onCharacterSelect(character)"
+          [class.selected]="character.id === getSelectedCharacter()?.id"
+          role="button"
+          tabindex="0"
+          [attr.aria-label]="'Seleccionar ' + character.fullName">
+          
+ 
+          <div class="character-image-container">
+            <img 
+              [src]="getCharacterImage(character)"
+              [alt]="character.fullName"
+              (error)="onImageError($event)"
+              class="character-image"
+              loading="lazy">
+            
+        
+            <button 
+              class="favorite-btn"
+              [class.is-favorite]="isFavorite(character.id)"
+              (click)="toggleFavorite(character, $event)"
+              [title]="isFavorite(character.id) ? 'Quitar de favoritos' : 'Añadir a favoritos'">
+              <span class="favorite-icon">{{isFavorite(character.id) ? '⭐' : '☆'}}</span>
+            </button>
+            
+           
+            <div class="character-overlay">
+              <span class="character-id">#{{ character.id }}</span>
+            </div>
+          </div>
+          
+       
+          <div class="character-info">
+            <h4 class="character-name">{{ character.fullName }}</h4>
+            
+            @if (character.title) {
+              <p class="character-title">{{ character.title }}</p>
+            }
+            
+            @if (character.family) {
+              <p class="character-family">
+                <span class="family-label">Casa:</span>
+                {{ character.family }}
+              </p>
+            }
+          </div>
+          
+        
+          <div class="selection-indicator">
+            <span class="checkmark">✓</span>
+          </div>
+        </div>
+      }
+    </div>
+    
+  
+    <div class="character-count">
+      <p>
+        Mostrando {{ getFilteredCharacters().length }} 
+        @if (getFilteredCharacters().length !== characters().length) {
+          de {{ characters().length }}
+        }
+        personajes
+      </p>
+    </div>
+  }
+  
+ 
+  @if (!loading() && characters().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">👤</div>
+      <h4>No hay personajes disponibles</h4>
+      <p>No se encontraron personajes para mostrar.</p>
+    </div>
+  }
+  
+
+  @if (!loading() && characters().length > 0 && getFilteredCharacters().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">🔍</div>
+      <h4>No hay resultados</h4>
+      <p>No se encontraron personajes que coincidan con el filtro seleccionado.</p>
+      <button 
+        class="clear-filter-btn"
+        (click)="onFamilyFilterChange('')">
+        Limpiar filtro
+      </button>
+    </div>
+  }
+  
+</div>

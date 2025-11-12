@@ -1,0 +1,101 @@
+
+<div class="search-page">
+  
+
+  <div class="page-header">
+    <h2 class="page-title">Buscar Personajes</h2>
+    <p class="page-description">
+      Encuentra personajes específicos usando filtros avanzados
+    </p>
+  </div>
+  
+
+  <div class="search-form-container">
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
+      
+      <div class="form-field">
+        <label for="name">Nombre del personaje:</label>
+        <input 
+          id="name"
+          type="text" 
+          formControlName="name"
+          placeholder="Ej: Jon Snow, Tyrion..."
+          class="form-input">
+        
+        @if (searchForm.get('name')?.invalid && searchForm.get('name')?.touched) {
+          <div class="field-error">
+            El nombre debe tener al menos 2 caracteres
+          </div>
+        }
+      </div>
+      
+
+      <div class="form-field">
+        <label for="family">Casa/Familia:</label>
+        <input 
+          id="family"
+          type="text" 
+          formControlName="family"
+          placeholder="Ej: Stark, Lannister..."
+          class="form-input">
+      </div>
+      
+
+      <div class="form-field">
+        <label for="title">Título:</label>
+        <input 
+          id="title"
+          type="text" 
+          formControlName="title"
+          placeholder="Ej: King, Lord, Hand..."
+          class="form-input">
+      </div>
+      
+
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          [disabled]="searchForm.invalid || loading()"
+          class="search-btn">
+          @if (loading()) {
+            <span class="btn-spinner"></span>
+            Buscando...
+          } @else {
+            <span class="btn-icon">🔍</span>
+            Buscar
+          }
+        </button>
+        
+        <button 
+          type="button" 
+          (click)="onClear()"
+          class="clear-btn">
+          <span class="btn-icon">🗑️</span>
+          Limpiar
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  // Resultados
+  @if (hasSearched()) {
+    <div class="results-section">
+      @if (searchResults().length > 0) {
+        <app-character-list
+          [characters]="searchResults()"
+          [loading]="loading()"
+          [title]="'Resultados de búsqueda'"
+          [showFamilyFilter]="false"
+          (characterSelected)="onCharacterSelected($event)">
+        </app-character-list>
+      } @else if (!loading()) {
+        <div class="no-results">
+          <div class="no-results-icon">🔍</div>
+          <h3>No se encontraron resultados</h3>
+          <p>Intenta modificar los filtros de búsqueda</p>
+        </div>
+      }
+    </div>
+  }
+  
+</div>

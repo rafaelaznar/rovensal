@@ -1,0 +1,103 @@
+<div class="character-detail-container">
+  
+  @if (character()) {
+    <div class="detail-header">
+      <h2 class="detail-title">Detalles del Personaje</h2>
+      <button 
+        class="close-btn"
+        (click)="onClose()"
+        title="Cerrar detalles"
+        aria-label="Cerrar detalles del personaje">
+        ✕
+      </button>
+    </div>
+    
+    <div class="detail-content">
+      
+      <div class="character-info-section">
+        
+        <div class="character-header">
+          <div class="character-image-container">
+            <div class="image-container">
+              
+              @if (!imageLoaded() && !imageError()) {
+                <div class="image-placeholder">
+                  <div class="loading-spinner"></div>
+                  <span>Cargando...</span>
+                </div>
+              }
+              
+              <img 
+                [src]="getCharacterImage()"
+                [alt]="character()!.fullName"
+                (load)="onImageLoad()"
+                (error)="onImageError()"
+                class="character-image"
+                [class.loaded]="imageLoaded()"
+                [class.error]="imageError()">
+              
+              <div class="character-id-overlay">
+                <span>#{{ character()!.id }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="character-basic-info">
+            <h3 class="character-name">{{ getFormattedName() }}</h3>
+            
+            @if (character()!.family) {
+              <p class="character-house">
+                <span class="house-icon">🏰</span>
+                Casa {{ character()!.family }}
+              </p>
+            }
+            
+            @if (character()!.title) {
+              <p class="character-title">
+                <span class="title-icon">👑</span>
+                {{ character()!.title }}
+              </p>
+            }
+          </div>
+        </div>
+        
+        <div class="character-details">
+          <h4 class="details-title">Información</h4>
+          
+          <div class="details-grid">
+            @for (info of getCharacterInfo(); track info.label) {
+              <div class="detail-item">
+                <span class="detail-label">{{ info.label }}:</span>
+                <span class="detail-value">{{ info.value }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        
+        <div class="additional-info">
+          <h4 class="additional-title">Sobre este personaje</h4>
+          <p class="additional-text">
+            {{ character()!.fullName }} 
+            @if (character()!.family) {
+              es miembro de la Casa {{ character()!.family }}
+            }
+            @if (character()!.title) {
+              y ostenta el título de {{ character()!.title }}
+            }.
+            @if (!character()!.family && !character()!.title) {
+              es un personaje importante en el mundo de Juego de Tronos
+            }.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+  } @else {
+    <div class="no-character-state">
+      <div class="no-character-icon">👤</div>
+      <h3>No hay personaje seleccionado</h3>
+      <p>Selecciona un personaje de la lista para ver sus detalles.</p>
+    </div>
+  }
+  
+</div>

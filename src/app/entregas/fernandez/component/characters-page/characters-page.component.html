@@ -1,0 +1,89 @@
+
+<div class="characters-page">
+  
+
+  <div class="page-header">
+    <h2 class="page-title">Personajes de Westeros</h2>
+    <p class="page-description">
+      Explora todos los personajes de Game of Thrones y descubre sus historias
+    </p>
+    
+
+    <div class="page-controls">
+      @if (selectedCharacter()) {
+        <button 
+          class="control-btn"
+          (click)="toggleDetailPanel()"
+          [class.active]="showDetailPanel()">
+          <span class="btn-icon">👁️</span>
+          {{ showDetailPanel() ? 'Ocultar' : 'Mostrar' }} Detalles
+        </button>
+      }
+      
+      <span class="character-counter">
+        {{ characters().length }} personajes cargados
+      </span>
+    </div>
+  </div>
+  
+
+  <div class="page-content" [class.with-detail]="showDetailPanel()">
+    
+
+    <div class="characters-section">
+      <app-character-list
+        [characters]="characters()"
+        [loading]="loading()"
+        [title]="'Lista de Personajes'"
+        [showFamilyFilter]="true"
+        (characterSelected)="onCharacterSelected($event)"
+        (familyFilterChanged)="onFamilyFilterChanged($event)">
+      </app-character-list>
+    </div>
+    
+
+    @if (showDetailPanel() && selectedCharacter()) {
+      <div class="detail-section">
+        <app-character-detail
+          [character]="selectedCharacter()"
+          (closeRequested)="onDetailCloseRequested()">
+        </app-character-detail>
+      </div>
+    }
+  </div>
+  
+
+  @if (loading() && characters().length === 0) {
+    <div class="global-loading">
+      <div class="loading-content">
+        <div class="loading-spinner-large"></div>
+        <h3>Cargando personajes...</h3>
+        <p>Conectando con la API de Game of Thrones</p>
+      </div>
+    </div>
+  }
+  
+
+  <div class="page-footer">
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="card-icon">🏰</div>
+        <h4>Casas Nobles</h4>
+        <p>Descubre las grandes casas de Westeros y sus miembros</p>
+      </div>
+      
+      <div class="info-card">
+        <div class="card-icon">👑</div>
+        <h4>Personajes Principales</h4>
+        <p>Conoce a los protagonistas de la saga</p>
+      </div>
+      
+      <div class="info-card">
+        <div class="card-icon">⚔️</div>
+        <h4>Historia y Política</h4>
+        <p>Explora las complejas relaciones entre personajes</p>
+      </div>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,33 @@
+<mat-dialog-content>
+    <h2>Información de {{ oPokemon.name }}</h2>
+
+    <div class="text-center mb-3">
+        <img [src]="oPokemon.imageUrl" alt="{{ oPokemon.name }}"
+             class="img-fluid rounded-circle shadow" style="width: 150px; height: 150px; object-fit: contain;">
+    </div>
+
+    <table class="table table-striped table-hover table-bordered text-center">
+        <tr>
+            <th>Altura</th>
+            <td>{{ oPokemon.height }}</td>
+        </tr>
+        <tr>
+            <th>Peso</th>
+            <td>{{ oPokemon.weight }}</td>
+        </tr>
+        <tr>
+            <th>Tipos</th>
+            @for (tipo of oPokemon.types; track $index) {
+                <td style="font-weight: bold;">{{ $index + 1 }}</td>
+                <td>{{ tipo }}</td>
+            }
+        </tr>
+        <tr>
+            <th>Habilidades</th>
+            @for (habilidad of oPokemon.abilities; track $index) {
+                <td style="font-weight: bold;">{{ $index + 1 }}</td>
+                <td>{{ habilidad }}</td>
+            }
+        </tr>
+    </table>
+</mat-dialog-content>

@@ -1,2 +1,30 @@
-<h2>Entrega Castanyera</h2>
+<div class="castanyera-root">
+  <app-castanyera-menu-button class="menu-button"></app-castanyera-menu-button>
+  <h2 class="titulo">PERSONAJES DE DISNEY</h2>
 
+  <div class="search-container">
+    <app-castanyera-search-bar-name
+      (search)="onSearchName($event)"
+      [hasResults]="nameFiltered.length > 0"
+    ></app-castanyera-search-bar-name>
+    <app-castanyera-search-bar-peli
+      (search)="onSearchMedia($event)"
+      [hasResults]="mediaFiltered.length > 0"
+    ></app-castanyera-search-bar-peli>
+  </div>
+
+  <div class="card-container" *ngIf="!showNoResults">
+    <app-castanyera-cards
+      *ngFor="let personaje of pagedCharacters"
+      [personaje]="personaje"
+    ></app-castanyera-cards>
+  </div>
+
+  <div class="paginator-container" *ngIf="!showNoResults">
+    <app-castanyera-paginator
+      [length]="(filteredCharacters.length ? filteredCharacters : personajes).length"
+      [pageSize]="pageSize"
+      (page)="onPageChange($event)"
+    ></app-castanyera-paginator>
+  </div>
+</div>

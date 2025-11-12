@@ -1,0 +1,13 @@
+<mat-form-field appearance="outline" class="w-100">
+  <mat-label>Buscar por película o serie</mat-label>
+  <input
+    matInput
+    [(ngModel)]="searchText"
+    (input)="onSearch()"
+    placeholder="Ej: Toy Story, Mickey Mouse Clubhouse"
+  />
+</mat-form-field>
+<!-- mensaje cuando no hay resultados para la búsqueda por película/serie -->
+<div *ngIf="searchText && !hasResults" class="no-results">
+  No se han encontrado series o películas que coincidan.
+</div>

@@ -1,2 +1,38 @@
 /* Styles for CastanyeraComponent */
-h2 { color: #2a6f97; }
+h2 {
+  color: #ad306b;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+}
+
+.castanyera-root {
+  background-color: #f8c7de;
+  height: 100%;
+  width: 100%;
+  padding: 50px;
+  border-radius: 15px;
+}
+
+/* Container grid for cards */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  /* stretch items so they all match the row height */
+  align-items: stretch;
+  padding: 8px 0;
+}
+
+.castanyera-root {
+  position: relative;
+  padding: 16px;
+}
+
+.menu-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+}

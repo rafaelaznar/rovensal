@@ -111,6 +111,20 @@ export const routes: Routes = [
     { path: 'palomares', component: PalomaresComponent },
     { path: 'pavon', component: PavonComponent },
     
+     {
+        path: 'pallas',
+        loadComponent: () => import('./entregas/pallas/component/pallasComponent/pallasComponent').then(m => m.PallasComponent),
+    },
+    {
+        path: 'pallas/pokemons',
+        loadComponent: () => import('./entregas/pallas/component/hijo/pokemon-card/pokemond-card').then(m => m.PokemonCard),
+    },
+    {
+        path: 'pallas/pokemon.list',
+        loadComponent: () => import('./entregas/pallas/component/padre/pokemon-list/pokemon-list').then(m => m.PokemonList),
+    },
+
+
     /* mis rutas */
     { path: 'reyna', component: ReynaComponent },
     { path: 'reyna/list', component: ProductListRoutedComponent }, 

@@ -1,0 +1,30 @@
+
+<div class="container mt-4">
+  <div class="text-end">
+    @if(pokemonsFiltrados.length > 0) {
+        <p>Se han cargado {{pokemonsFiltrados.length}} pokemons.</p>
+      } @else {
+        <p>Cargando pokemons...</p>
+      }
+  </div>
+  <!-- Barra de búsqueda -->
+  <div class="input-group mb-4 shadow-sm">
+  <span class="input-group-text bg-light"></span>
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Buscar Pokémon..."
+    [(ngModel)]="searchTerm"
+    (keyup)="filtrarPokemons()"
+  />
+  <button class="btn btn-outline-primary" (click)="filtrarPokemons()">Buscar</button>
+  </div>
+  <!-- Lista de pokemons -->
+  <div class="row">
+    @for(pokemon of pokemonsFiltrados; track pokemon.name) {
+      <div class="col-6 col-sm-4 col-md-3 mb-4">
+        <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+      </div>
+    }
+  </div>
+</div>

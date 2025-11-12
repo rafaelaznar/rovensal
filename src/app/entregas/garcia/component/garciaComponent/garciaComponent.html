@@ -1,2 +1,310 @@
-<h2>Entrega Garcia</h2>
+<!-- PANTALLA PRINCIPAL DEL JUEGO -->
+<div class="contenedor-principal">
 
+    <app-menu-garcia (reiniciar)="reiniciarJuego()"></app-menu-garcia>
+
+    <!-- ELEGIR GÉNERO -->
+    @if (!generoElegido) {
+    <div class="pantalla-paso">
+        <h1>Combate Demon Slayer</h1>
+        <h2>Elige tu género</h2>
+
+        <div class="botones-genero">
+            <button (click)="elegirHombre()" class="boton-grande boton-hombre">
+                HOMBRE
+            </button>
+
+            <button (click)="elegirMujer()" class="boton-grande boton-mujer">
+                MUJER
+            </button>
+        </div>
+    </div>
+    }
+
+    <!-- INGRESAR NOMBRE -->
+    @if (generoElegido && !nombreIngresado) {
+    <div class="pantalla-paso">
+        <h1>Combate Demon Slayer</h1>
+        <h2>Ingresa tu nombre</h2>
+
+        <div class="preview-personaje">
+            <img [src]="imagenJugador" alt="Tu personaje">
+            <p>Personaje: {{ generoElegido === 'hombre' ? 'Hombre' : 'Mujer' }}</p>
+        </div>
+
+        <div class="grupo-nombre">
+            <input type="text" [(ngModel)]="nombreJugador" placeholder="Escribe tu nombre aquí..." maxlength="20"
+                class="input-nombre" />
+                <p style="text-align: center; opacity: 0.5;">Mínimo 3 carácteres y solo letras</p>
+
+            @if (mensajeError) {
+            <p class="error">❌ {{ mensajeError }}</p>
+            }
+        </div>
+       
+
+        <div class="botones-navegacion">
+            <button (click)="volverAtras()" class="boton-secundario">
+                Volver
+            </button>
+
+            <button (click)="confirmarNombre()" class="boton-principal">
+                Continuar
+            </button>
+        </div>
+    </div>
+    }
+
+    <!-- CONFIRMACIÓN -->
+    @if (generoElegido && nombreIngresado && !combateIniciado && rondaActual === 1) {
+    <div class="pantalla-paso">
+        <h1>Combate Demon Slayer</h1>
+        <h2>¡Prepárate para 5 combates!</h2>
+
+        <div class="resumen-jugador">
+            <img [src]="imagenJugador" alt="Tu personaje">
+            <h3>{{ nombreJugador }}</h3>
+            <p>Género: {{ generoElegido === 'hombre' ? 'Hombre' : 'Mujer' }}</p>
+            <p style="font-weight: bold; margin-top: 10px;">
+                🎯 Debes derrotar a 5 enemigos consecutivos
+            </p>
+        </div>
+
+        @if (cargandoDemonio) {
+        <p class="mensaje-carga">⏳ Buscando tu primer oponente...</p>
+        }
+
+        @if (mensajeError) {
+        <p class="error">❌ {{ mensajeError }}</p>
+        }
+
+        <div class="botones-navegacion">
+            <button (click)="volverAtras()" class="boton-secundario">
+                Cambiar Nombre
+            </button>
+
+            <button (click)="iniciarCombate()" [disabled]="cargandoDemonio" class="boton-grande boton-iniciar">
+                COMENZAR AVENTURA
+            </button>
+        </div>
+    </div>
+    }
+
+    <!-- TRANSICIÓN ENTRE RONDAS -->
+    @if (!combateIniciado && rondaActual > 1 && rondaActual <= totalRondas && !combateTerminado) { <div
+        class="pantalla-paso">
+        <h1>🎉 ¡Victoria en Ronda {{ rondaActual - 1 }}! 🎉</h1>
+        <h2>Preparando siguiente combate...</h2>
+
+        <div class="resumen-jugador">
+            <img [src]="imagenJugador" alt="Tu personaje">
+            <h3>{{ nombreJugador }}</h3>
+            <p>❤️ Vida actual: {{ vidaJugador }} / {{ vidaMaxJugador }}</p>
+            <p style="color: #2ecc71; font-weight: bold;">💚 ¡Recuperaste 30% de vida!</p>
+        </div>
+
+        <div class="progreso-rondas">
+            <h3>Progreso: {{ rondaActual - 1 }} / {{ totalRondas }} enemigos derrotados</h3>
+            <div class="enemigos-derrotados">
+                @for (enemigo of historialEnemigos; track enemigo.nombre) {
+                <div class="enemigo-miniatura">
+                    <img [src]="enemigo.imagen" [alt]="enemigo.nombre">
+                    <p>{{ enemigo.nombre }}</p>
+                </div>
+                }
+            </div>
+        </div>
+
+        <p class="mensaje-carga">⏳ Cargando enemigo {{ rondaActual }}/{{ totalRondas }}...</p>
+</div>
+}
+
+<!-- PANTALLA DE COMBATE -->
+@if (combateIniciado && !combateTerminado) {
+<div class="pantalla-combate">
+    <div class="header-combate">
+        <h1>¡COMBATE!</h1>
+        <p class="info-ronda">🎯 Ronda: {{ rondaActual }} / {{ totalRondas }}</p>
+        <p class="info-turno">⏱️ Turno: {{ numeroTurno }}</p>
+    </div>
+
+    <div class="arena-combate">
+
+        <!-- TARJETA DEL JUGADOR -->
+        <div class="tarjeta-combatiente tarjeta-jugador">
+            <div class="cabecera-tarjeta">
+                <img [src]="imagenJugador" alt="Tu personaje" class="imagen-combatiente">
+            </div>
+            <h3>TÚ</h3>
+            <h4>{{ nombreJugador }}</h4>
+
+            <div class="stats">
+                <p>⚔️ Ataque: {{ ataqueJugador }}</p>
+                <p>🛡️ Defensa: {{ defensaJugador }}</p>
+            </div>
+
+            <app-barra-vida [vidaActual]="vidaJugador" [vidaMaxima]="vidaMaxJugador">
+            </app-barra-vida>
+
+            @if (jugadorDefendiendo) {
+            <p class="estado-defensa">DEFENDIENDO</p>
+            }
+        </div>
+
+        <!-- VS CENTRAL -->
+        <div class="vs">
+            <h2>VS</h2>
+        </div>
+
+        <!-- TARJETA DEL ENEMIGO -->
+        <div class="tarjeta-combatiente tarjeta-demonio">
+            <div class="cabecera-tarjeta">
+                <img [src]="imagenDemonio" alt="Enemigo" class="imagen-combatiente">
+            </div>
+            <h3>ENEMIGO {{ rondaActual }}/{{ totalRondas }}</h3>
+            <h4>{{ nombreDemonio }}</h4>
+
+            <div class="stats">
+                <p>⚔️ Ataque: {{ ataqueDemonio }}</p>
+                <p>🛡️ Defensa: {{ defensaDemonio }}</p>
+                <p>🏷️ Tipo: {{ tipoDemonio }}</p>
+            </div>
+
+            <app-barra-vida [vidaActual]="vidaDemonio" [vidaMaxima]="vidaMaxDemonio">
+            </app-barra-vida>
+
+            @if (demonioDefendiendo) {
+            <p class="estado-defensa">DEFENDIENDO</p>
+            }
+        </div>
+    </div>
+
+    <!-- BOTONES DE ACCIÓN -->
+    @if (esTurnoJugador) {
+    <app-botones-accion [titulo]="'¡Tu turno!'" [habilitado]="esTurnoJugador"
+        [pocionesDisponibles]="pocionesDisponibles" (atacar)="manejarAtacar()" (curar)="manejarCurar()"
+        (defender)="manejarDefender()">
+    </app-botones-accion>
+    } @else {
+    <div class="botones-accion">
+        <h3>⏳ Turno del enemigo...</h3>
+        <p class="mensaje-espera">Esperando acción...</p>
+    </div>
+    }
+
+    <!-- HISTORIAL DE COMBATE -->
+    <div class="log-combate">
+        <h3>📜 Historial de Combate</h3>
+        <div class="lista-logs">
+            @if (logs.length === 0) {
+            <p class="log-vacio">El combate acaba de empezar...</p>
+            } @else {
+            @for (log of logs; track log.id) {
+            @switch (log.tipo) {
+            @case ('jugador') {
+            <p class="log-mensaje jugador">
+                <strong>⚔️ Turno {{ log.turno }}:</strong> {{ log.mensaje }}
+            </p>
+            }
+            @case ('demonio') {
+            <p class="log-mensaje demonio">
+                <strong>👹 Turno {{ log.turno }}:</strong> {{ log.mensaje }}
+            </p>
+            }
+            @case ('sistema') {
+            <p class="log-mensaje sistema">
+                <strong>ℹ️</strong> {{ log.mensaje }}
+            </p>
+            }
+            @default {
+            <p class="log-mensaje">
+                <strong>Turno {{ log.turno }}:</strong> {{ log.mensaje }}
+            </p>
+            }
+            }
+            }
+            }
+        </div>
+    </div>
+</div>
+}
+
+<!-- PANTALLA DE RESULTADO -->
+@if (combateTerminado) {
+<div class="pantalla-resultado">
+
+    @if (juegoCompletado) {
+    <!-- VICTORIA TOTAL -->
+    <h1 class="titulo-victoria">🏆 ¡VICTORIA TOTAL! 🏆</h1>
+    <img [src]="imagenJugador" alt="Victoria" class="imagen-resultado">
+    <p class="mensaje-resultado">
+        ¡{{ nombreJugador }} ha derrotado a los {{ totalRondas }} enemigos!
+    </p>
+
+    <div class="stats-finales">
+        <h3>🎖️ Logro Desbloqueado</h3>
+        <p style="color: #f39c12; font-size: 1.3rem;">⭐ MAESTRO CAZADOR DE DEMONIOS ⭐</p>
+        <p>🏆 Enemigos derrotados: {{ enemigosDerrotados }} / {{ totalRondas }}</p>
+        <p>❤️ Vida restante: {{ vidaJugador }} / {{ vidaMaxJugador }}</p>
+    </div>
+
+    <div class="historial-completo">
+        <h3>📜 Enemigos Derrotados:</h3>
+        <div class="lista-enemigos-derrotados">
+            @for (enemigo of historialEnemigos; track enemigo.nombre) {
+            <div class="enemigo-card">
+                <img [src]="enemigo.imagen" [alt]="enemigo.nombre">
+                <p><strong>{{ enemigo.nombre }}</strong></p>
+                <p class="tipo-enemigo">{{ enemigo.tipo }}</p>
+                <p class="ronda-enemigo">Ronda {{ enemigo.ronda }}</p>
+            </div>
+            }
+        </div>
+    </div>
+
+    } @else if (jugadorGano) {
+    <!-- VICTORIA EN UNA RONDA -->
+    <h1 class="titulo-victoria">🎉 ¡VICTORIA! 🎉</h1>
+    <img [src]="imagenJugador" alt="Victoria" class="imagen-resultado">
+    <p class="mensaje-resultado">
+        ¡{{ nombreJugador }} ha derrotado a {{ nombreDemonio }}!
+    </p>
+    } @else {
+    <!-- DERROTA -->
+    <h1 class="titulo-derrota">💀 DERROTA 💀</h1>
+    <img [src]="imagenDemonio" alt="Derrota" class="imagen-resultado">
+    <p class="mensaje-resultado">
+        {{ nombreDemonio }} ha derrotado a {{ nombreJugador }}...
+    </p>
+
+    <div class="stats-finales">
+        <h3>📊 Estadísticas Finales</h3>
+        <p>🏆 Enemigos derrotados: {{ enemigosDerrotados }} / {{ totalRondas }}</p>
+        <p>💀 Derrotado en ronda: {{ rondaActual }}</p>
+        <p>❤️ Vida restante: {{ vidaJugador }}</p>
+    </div>
+
+    @if (historialEnemigos.length > 0) {
+    <div class="historial-completo">
+        <h3>📜 Enemigos que derrotaste:</h3>
+        <div class="lista-enemigos-derrotados">
+            @for (enemigo of historialEnemigos; track enemigo.nombre) {
+            <div class="enemigo-card">
+                <img [src]="enemigo.imagen" [alt]="enemigo.nombre">
+                <p><strong>{{ enemigo.nombre }}</strong></p>
+                <p class="tipo-enemigo">{{ enemigo.tipo }}</p>
+                <p class="ronda-enemigo">Ronda {{ enemigo.ronda }}</p>
+            </div>
+            }
+        </div>
+    </div>
+    }
+    }
+
+    <button (click)="reiniciarJuego()" class="boton-grande boton-reiniciar">
+        JUGAR DE NUEVO
+    </button>
+</div>
+}
+
+</div>

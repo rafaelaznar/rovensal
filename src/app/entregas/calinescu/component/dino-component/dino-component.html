@@ -1,0 +1,168 @@
+<div class="container my-4">
+  <h2 class="text-center mb-4">
+    <i class="bi bi-list-stars"></i> Lista de Dinosaurios
+  </h2>
+
+  <!-- BARRA DE BÚSQUEDA CON ANGULAR MATERIAL -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-8">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>
+          <mat-icon style="vertical-align: middle;">search</mat-icon>
+          Buscar dinosaurios
+        </mat-label>
+        <input 
+          matInput
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="filtrarDinos()"
+          placeholder="Escribe el nombre o descripción..."
+        >
+        @if(searchTerm) {
+          <button 
+            matSuffix 
+            mat-icon-button 
+            (click)="limpiarBusqueda()"
+            aria-label="Limpiar búsqueda"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- SWITCH PARA ESTADOS DE CARGA -->
+  @switch (estadoCarga) {
+    @case ('cargando') {
+      <div class="alert alert-info text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-3 mb-0">
+          <i class="bi bi-hourglass-split"></i>
+          Cargando dinosaurios...
+        </p>
+      </div>
+    }
+    @case ('error') {
+      <div class="alert alert-danger text-center">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <h4>Error al cargar los datos</h4>
+        <p>No se pudo conectar con la API de dinosaurios.</p>
+        <button class="btn btn-danger" (click)="getDinos()">
+          <i class="bi bi-arrow-clockwise"></i> Reintentar
+        </button>
+      </div>
+    }
+    @case ('vacio') {
+      <div class="alert alert-warning text-center">
+        <i class="bi bi-inbox"></i>
+        <h4>No hay dinosaurios disponibles</h4>
+        <p>La API no devolvió ningún resultado.</p>
+      </div>
+    }
+    @case ('cargado') {
+      <!-- Contador de resultados -->
+      <div class="alert alert-info text-center">
+        <i class="bi bi-info-circle"></i>
+        Mostrando <strong>{{ dinosPaginados.length }}</strong> de <strong>{{ dinosFiltrados.length }}</strong> dinosaurios
+        (Total: <strong>{{ dinos.length }}</strong>)
+        @if(searchTerm) {
+          <span> - Filtrados por: "<strong>{{ searchTerm }}</strong>"</span>
+        }
+        <br>
+        <small class="text-muted">
+          Página {{ paginaActual }} de {{ getTotalPaginas() }} | {{ itemsPorPagina }} por página
+        </small>
+      </div>
+      
+      <!-- Lista de dinosaurios PAGINADOS -->
+      @if(dinosPaginados.length > 0) {
+        <div class="row">
+          @for(dino of dinosPaginados; track $index) {
+              <div class="col-md-4">
+                  <div class="card dino-item shadow border-0 mb-3">
+                      <div [routerLink]="['/calinescu/dino-details', dino.Name]" style="cursor: pointer;">
+                          <div class="card-body">
+                              <h5 class="card-title text-success fw-bold mb-2">
+                                  {{dino.Name}}
+                              </h5>
+                              <p class="card-text text-muted">{{dino.Description}}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          }
+        </div>
+        
+        <!-- CONTROLES DE PAGINACIÓN -->
+        @if(getTotalPaginas() > 1) {
+          <nav aria-label="Paginación de dinosaurios">
+            <ul class="pagination justify-content-center mt-4">
+              <!-- Botón Primera página -->
+              <li class="page-item" [class.disabled]="paginaActual === 1">
+                <button class="page-link" (click)="irAPagina(1)" [disabled]="paginaActual === 1">
+                  <i class="bi bi-chevron-double-left"></i>
+                </button>
+              </li>
+              
+              <!-- Botón Anterior -->
+              <li class="page-item" [class.disabled]="paginaActual === 1">
+                <button class="page-link" (click)="paginaAnterior()" [disabled]="paginaActual === 1">
+                  <i class="bi bi-chevron-left"></i> Anterior
+                </button>
+              </li>
+              
+              <!-- Números de página -->
+              @for(pagina of getPaginas(); track pagina) {
+                <li class="page-item" [class.active]="paginaActual === pagina">
+                  <button class="page-link" (click)="irAPagina(pagina)">
+                    {{ pagina }}
+                  </button>
+                </li>
+              }
+              
+              <!-- Botón Siguiente -->
+              <li class="page-item" [class.disabled]="paginaActual === getTotalPaginas()">
+                <button class="page-link" (click)="paginaSiguiente()" [disabled]="paginaActual === getTotalPaginas()">
+                  Siguiente <i class="bi bi-chevron-right"></i>
+                </button>
+              </li>
+              
+              <!-- Botón Última página -->
+              <li class="page-item" [class.disabled]="paginaActual === getTotalPaginas()">
+                <button class="page-link" (click)="irAPagina(getTotalPaginas())" [disabled]="paginaActual === getTotalPaginas()">
+                  <i class="bi bi-chevron-double-right"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        }
+      } @else {
+        <div class="container">
+          <div class="alert alert-warning text-center">
+            <i class="bi bi-exclamation-triangle"></i>
+            No se encontraron dinosaurios con el término "<strong>{{ searchTerm }}</strong>"
+          </div>
+        </div>
+      }
+    }
+  }
+</div>
+
+@if(selectedDino) {
+    <div style="border: 2px solid #4CAF50; padding: 15px; margin-top: 10px; background-color: #f0f8ff; border-radius: 8px;">
+        <h3 style="margin-top: 0;">{{selectedDino.Name}}</h3>
+        @if(selectedDino.thumbnail) {
+            <img [src]="selectedDino.thumbnail.source" 
+                 [alt]="selectedDino.Name" 
+                 style="max-width: 300px; border-radius: 4px; margin: 10px 0;">
+        }
+        <p>{{selectedDino.extract}}</p>
+        <button (click)="selectedDino = undefined;" 
+                class="btn btn-danger mt-3">
+            <i class="bi bi-x-circle"></i> Cerrar detalles
+        </button>
+    </div>
+}

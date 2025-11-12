@@ -1,0 +1,13 @@
+button[mat-icon-button] {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+button[mat-icon-button]:hover {
+  background-color: #f2f2f2;
+}

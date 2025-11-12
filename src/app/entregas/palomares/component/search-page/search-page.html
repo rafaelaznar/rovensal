@@ -1,0 +1,64 @@
+<div class="search-page-container">
+  <h2>Búsqueda Avanzada</h2>
+  
+  <app-character-selector></app-character-selector>
+
+  @if (loading()) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Buscando personajes...</p>
+    </div>
+  } @else if (characters().length > 0) {
+    <div class="results-container">
+      <p class="results-info">
+        Mostrando página {{ currentPage() }} de {{ totalPages() }}
+      </p>
+      
+      <div class="characters-grid">
+        @for (character of characters(); track character.id) {
+          <div class="character-card" (click)="viewDetails(character)">
+            <img [src]="character.image" [alt]="character.name" />
+            <div class="character-info">
+              <h3>{{ character.name }}</h3>
+              <p class="status" [class.alive]="character.status === 'Alive'" 
+                 [class.dead]="character.status === 'Dead'">
+                <span class="status-dot"></span>
+                {{ character.status }} - {{ character.species }}
+              </p>
+              <p class="location">
+                <strong>Location:</strong><br/>
+                {{ character.location.name }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="pagination">
+        <button 
+          (click)="previousPage()" 
+          [disabled]="currentPage() === 1"
+          class="pagination-btn"
+        >
+          ← Anterior
+        </button>
+        
+        <span class="page-info">
+          Página {{ currentPage() }} de {{ totalPages() }}
+        </span>
+        
+        <button 
+          (click)="nextPage()" 
+          [disabled]="currentPage() === totalPages()"
+          class="pagination-btn"
+        >
+          Siguiente →
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="no-results">
+      <p>Usa los filtros arriba para buscar personajes</p>
+    </div>
+  }
+</div>

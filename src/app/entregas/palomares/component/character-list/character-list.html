@@ -1,0 +1,56 @@
+<div class="list-container">
+  <h2>Rick and Morty Characters</h2>
+
+  @if (loading()) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Loading characters...</p>
+    </div>
+  } @else {
+    <div class="characters-grid">
+      @for (character of characters(); track character.id) {
+        <div class="character-card" (click)="viewDetails(character)">
+          <img [src]="character.image" [alt]="character.name" />
+          <div class="character-info">
+            <h3>{{ character.name }}</h3>
+            <p class="status" [class.alive]="character.status === 'Alive'" 
+               [class.dead]="character.status === 'Dead'">
+              <span class="status-dot"></span>
+              {{ character.status }} - {{ character.species }}
+            </p>
+            <p class="location">
+              <strong>Location:</strong><br/>
+              {{ character.location.name }}
+            </p>
+            <p class="origin">
+              <strong>Origin:</strong><br/>
+              {{ character.origin.name }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="pagination">
+      <button 
+        (click)="previousPage()" 
+        [disabled]="currentPage() === 1"
+        class="page-btn"
+      >
+        Previous
+      </button>
+      
+      <span class="page-info">
+        Page {{ currentPage() }} of {{ totalPages() }}
+      </span>
+      
+      <button 
+        (click)="nextPage()" 
+        [disabled]="currentPage() === totalPages()"
+        class="page-btn"
+      >
+        Next
+      </button>
+    </div>
+  }
+</div>

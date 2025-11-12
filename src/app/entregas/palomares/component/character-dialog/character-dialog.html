@@ -1,0 +1,85 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h2 mat-dialog-title>{{ character.name }}</h2>
+    <button mat-icon-button (click)="close()" class="close-button">✕</button>
+  </div>
+
+  <mat-dialog-content>
+    <div class="character-image-container">
+      <img [src]="character.image" [alt]="character.name" class="character-image">
+    </div>
+
+    <div class="attributes-grid">
+      <div class="attribute-item">
+        <span class="attribute-label">ID:</span>
+        <span class="attribute-value">{{ character.id }}</span>
+      </div>
+
+      <div class="attribute-item">
+        <span class="attribute-label">Nombre:</span>
+        <span class="attribute-value">{{ character.name }}</span>
+      </div>
+
+      <div class="attribute-item">
+        <span class="attribute-label">Estado:</span>
+        <span class="attribute-value" [class]="'status-' + character.status.toLowerCase()">
+          {{ character.status }}
+        </span>
+      </div>
+
+      <div class="attribute-item">
+        <span class="attribute-label">Especie:</span>
+        <span class="attribute-value">{{ character.species }}</span>
+      </div>
+
+      <div class="attribute-item">
+        <span class="attribute-label">Tipo:</span>
+        <span class="attribute-value">{{ character.type || 'N/A' }}</span>
+      </div>
+
+      <div class="attribute-item">
+        <span class="attribute-label">Género:</span>
+        <span class="attribute-value">{{ character.gender }}</span>
+      </div>
+
+      <div class="attribute-item full-width">
+        <span class="attribute-label">Origen:</span>
+        <span class="attribute-value">{{ character.origin.name }}</span>
+      </div>
+
+      <div class="attribute-item full-width">
+        <span class="attribute-label">URL Origen:</span>
+        <span class="attribute-value url-text">{{ character.origin.url || 'N/A' }}</span>
+      </div>
+
+      <div class="attribute-item full-width">
+        <span class="attribute-label">Ubicación Actual:</span>
+        <span class="attribute-value">{{ character.location.name }}</span>
+      </div>
+
+      <div class="attribute-item full-width">
+        <span class="attribute-label">URL Ubicación:</span>
+        <span class="attribute-value url-text">{{ character.location.url || 'N/A' }}</span>
+      </div>
+
+      <div class="attribute-item full-width">
+        <span class="attribute-label">URL Personaje:</span>
+        <span class="attribute-value url-text">{{ character.url }}</span>
+      </div>
+
+      <div class="attribute-item full-width">
+        <span class="attribute-label">Fecha de Creación:</span>
+        <span class="attribute-value">{{ character.created | date:'medium' }}</span>
+      </div>
+
+      <div class="attribute-item full-width">
+        <span class="attribute-label">Episodios:</span>
+        <span class="attribute-value">{{ character.episode.length }} episodios</span>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="close()">Cerrar</button>
+  </mat-dialog-actions>
+</div>

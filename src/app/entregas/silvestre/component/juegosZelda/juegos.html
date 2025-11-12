@@ -1,0 +1,36 @@
+<div class="contenedor-juegos">
+  <h2>Juegos de The Legend of Zelda</h2>
+
+  @if (cargando) {
+  <p>Cargando juegos...</p>
+  } @else {
+  <div class="juegos-grid">
+    @for (juego of juegos; track juego.id) {
+    <div class="juego-card">
+      <h3>{{ juego.name }}</h3>
+      <p class="fecha"><strong>Lanzamiento:</strong> {{ juego.released_date }}</p>
+      <p><strong>Desarrollador:</strong> {{ juego.developer }}</p>
+      <p><strong>Distribuidor:</strong> {{ juego.publisher }}</p>
+      <button (click)="verDetalles(juego)">Ver más</button>
+    </div>
+    }
+  </div>
+
+  @if (juegoSeleccionado) {
+  <div class="modal-fondo" (click)="cerrarDetalles()">
+    <div class="modal-contenido" (click)="$event.stopPropagation()">
+      <h3>{{ juegoSeleccionado.name }}</h3>
+      <p><strong>Lanzamiento:</strong> {{ juegoSeleccionado.released_date }}</p>
+      <p><strong>Desarrollador:</strong> {{ juegoSeleccionado.developer }}</p>
+      <p><strong>Distribuidor:</strong> {{ juegoSeleccionado.publisher }}</p>
+      <p class="descripcion"><strong>Información:</strong> {{ juegoSeleccionado.description }}</p>
+      <button (click)="cerrarDetalles()">Cerrar</button>
+    </div>
+  </div>
+  } }
+
+  <div class="volver">
+    <a routerLink="../" class="boton">Volver al inicio</a>
+  </div>
+
+</div>

@@ -1,0 +1,13 @@
+<div class="pt-20px text-center">
+    <h2 mat-dialog-title>{{ product.title }}</h2>
+</div>
+<mat-dialog-content>
+  <img [src]="product.image" alt="{{ product.title }}" class="img-fluid mb-3" />
+  <p><strong>Categoría:</strong> {{ product.category }}</p>
+  <p><strong>Precio:</strong> {{ product.price | currency:'EUR' }}</p>
+  <p><strong>Descripción:</strong> {{ product.description }}</p>
+  <p><strong>Rating:</strong> ★ {{ product.rating.rate }} ({{ product.rating.count }} votos)</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>

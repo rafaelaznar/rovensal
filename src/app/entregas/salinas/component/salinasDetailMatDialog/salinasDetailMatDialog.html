@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{ personaje?.name }}</h2>
+<mat-dialog-content>
+  <img [src]="personaje?.image" alt="{{ personaje?.name }}" class="img-fluid mb-3" />
+  <p><strong>Status:</strong> {{ personaje?.status }}</p>
+  <p><strong>Species:</strong> {{ personaje?.species }}</p>
+  <p><strong>Type:</strong> {{ personaje?.type || 'N/A' }}</p>
+  <p><strong>Gender:</strong> {{ personaje?.gender }}</p>
+  <p><strong>Origin:</strong> {{ personaje?.origin?.name }}</p>
+  <p><strong>Location:</strong> {{ personaje?.location?.name }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>

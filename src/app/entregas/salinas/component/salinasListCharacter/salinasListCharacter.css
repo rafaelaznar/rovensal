@@ -1,0 +1,38 @@
+/* Contenedor principal */
+.container {
+  background: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
+  color: #ffffff;
+}
+
+/* Título principal */
+h2.text-center {
+  font-family: 'Comic Sans MS', 'Arial', sans-serif;
+  font-size: 2rem;
+  color: #00ffcc;
+  text-shadow: 2px 2px 8px #000000;
+  margin-bottom: 30px;
+}
+
+/* Mensaje de carga */
+p.text-muted {
+  font-size: 1.2rem;
+  color: #cccccc;
+  font-style: italic;
+}
+
+/* Grid de personajes */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Cada columna */
+.col-md-3 {
+  display: flex;
+  justify-content: center;
+}

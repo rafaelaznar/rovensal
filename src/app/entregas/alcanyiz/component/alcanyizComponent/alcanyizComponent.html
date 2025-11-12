@@ -1,2 +1,34 @@
-<h2>Entrega Alcanyiz</h2>
-
+<div class="poke-page">
+  <header class="poke-header">
+    <h2 class="poke-title">Pokédex</h2>
+    <div class="poke-actions">
+      <a href="alcanyiz/buscarPokemon" class="btn-white">Buscar Pokémon</a>
+      <a href="alcanyiz/buscarPokemon" class="btn-white btn-ghost">Mi equipo</a>
+    </div>
+  </header>
+  <!-- si hay un nombre de entrenador lo muestra -->
+  @if (trainerName) {
+    <div class="trainer-row">
+      <p class="trainer-name">Entrenador: {{ trainerName }}</p>
+    </div>
+  }
+  <!-- cargamos toda la pokedex -->
+  <div class="pokedexContainer">
+  <!-- esto se encargará de cargar los pokemons en el viewport y no tener tantas imagenes cargadas -->
+@defer (on viewport) {
+  <!-- con el @for imprimiremos en pantalla cada uno de los pokemons de la api -->
+@for (pokemon of pokemons; track $index){
+  @if (pokemon.sprites.front_default != null ){
+    <!-- llamaremos a un componente que le pasaremos la información del pokemon para que la utilice -->
+    <app-container-pokemon [pokemon]="pokemon"></app-container-pokemon>
+  }
+}
+} <!-- mintras no estén cargados se mostrará cargando pokedex -->
+@placeholder {
+  <section class="cargandoSection">
+    <div class="loader"></div>
+    <h3>Cargando Pokédex</h3>
+  </section>
+}
+  </div>
+</div>

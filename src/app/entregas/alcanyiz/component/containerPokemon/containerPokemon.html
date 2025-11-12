@@ -1,0 +1,45 @@
+<article class="pokemonArticle">
+  <!-- usamos el defer para cargar los pokemons en el viewport y no tener tantas imagenes cargadas -->
+      @defer (on viewport) {
+          <img src={{pokemon.sprites.front_default}} alt="">
+          <p>{{ pokemon.name }} </p>
+          <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <button class="btn btn-outline-light btn-sm" (click)="selectPokemon(pokemon)">Vista Previa</button>
+            <a class="btn btn-outline-light btn-sm" [routerLink]="['/alcanyiz/pokemon', pokemon.name]">Ver detalles</a>
+            <!-- Si pulsamos con el botón derecho se abrirá un menú contextual -->
+            <button class="btn btn-outline-light btn-sm" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (contextmenu)="abrirMenu($event, menuTrigger)">Tipos</button>
+          </div>
+      } <!-- antes de cargarse se muestra el placeholder mientras no estemos viendo la imagen y el loading mientras se carga -->
+      @placeholder {
+          <span>Cargando pokemon...</span>
+      } @loading {
+        <span>Cargando</span>
+      }
+</article>
+<!-- Aquí se mostrará el menú contextual con los tipos del Pokémon
+ segun el tipo se le aplicará una clase al <p> con un fondo diferente -->
+<mat-menu #menu="matMenu">
+  @for (type of pokemon.types || []; track type.type.name) {
+    <p
+    [class.fire]="type.type.name === 'fire'"
+    [class.water]="type.type.name === 'water'"
+    [class.grass]="type.type.name === 'grass'"
+    [class.electric]="type.type.name === 'electric'"
+    [class.ice]="type.type.name === 'ice'"
+    [class.fighting]="type.type.name === 'fighting'"
+    [class.poison]="type.type.name === 'poison'"
+    [class.ground]="type.type.name === 'ground'"
+    [class.flying]="type.type.name === 'flying'"
+    [class.psychic]="type.type.name === 'psychic'"
+    [class.bug]="type.type.name === 'bug'"
+    [class.rock]="type.type.name === 'rock'"
+    [class.ghost]="type.type.name === 'ghost'"
+    [class.dragon]="type.type.name === 'dragon'"
+    [class.dark]="type.type.name === 'dark'"
+    [class.steel]="type.type.name === 'steel'"
+    [class.fairy]="type.type.name === 'fairy'"
+    [class.normal]="type.type.name === 'normal'"
+    [class.shadow]="type.type.name === 'shadow'"
+    >{{type.type.name}}</p>
+  }
+</mat-menu>

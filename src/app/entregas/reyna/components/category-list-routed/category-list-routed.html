@@ -1,0 +1,13 @@
+<app-header-unrouted></app-header-unrouted>
+
+<header>
+  <h2>Productos de la categoría: {{ categoryName | titlecase }}</h2>
+</header>
+
+<div class="row g-3">
+  @for (product of products; track product.id) {
+    <div class="col-md-4">
+      <app-product-card-unrouted [product]="product"></app-product-card-unrouted>
+    </div>
+  }
+</div>

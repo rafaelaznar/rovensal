@@ -1,0 +1,30 @@
+@if (visible) {
+  <div class="overlay">
+    <div class="login-modal__dialog">
+    <h3>Inicia sesión</h3>
+
+    @if (error) {
+      <p class="error">{{ error }}</p>
+    }
+
+    <label>Nombre</label>
+    <input type="text" [(ngModel)]="nombre" />
+
+    <label>Email</label>
+    <input type="email" [(ngModel)]="email" />
+
+    <label>Tu compañero favorito (opcional)</label>
+    <select [(ngModel)]="companionFav">
+      <option value="">-- Ninguno --</option>
+      @for (c of companions; track c.id) {
+        <option [value]="c.id">{{ c.name }} ({{ c.region }})</option>
+      }
+    </select>
+
+    <div class="acciones">
+      <button (click)="submit()">Entrar</button>
+      <button class="sec" (click)="cancel()">Cancelar</button>
+    </div>
+    </div>
+  </div>
+}

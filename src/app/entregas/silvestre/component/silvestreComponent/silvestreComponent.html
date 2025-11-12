@@ -1,2 +1,71 @@
-<h2>Entrega Silvestre</h2>
+<!-- Componente principal de la sección "Silvestre" -->
+<div class="layout">
+
+  <!-- Cabecera / menú principal -->
+  <!-- Contiene el título de la sección y la navegación entre las subrutas -->
+  <header class="menu">
+    <h1>Bienvenido al MARAVILLOSO mundo de The Legend of Zelda - by Ana Silvestre</h1>
+    <nav>
+      <!-- Enlaces de navegación; routerLink/Active gestionan la ruta activa -->
+      <a routerLink="../" routerLinkActive="activo"> Home </a>
+      <a routerLink="../silvestre" routerLinkActive="activo">Inicio</a>
+      <a routerLink="juegos" routerLinkActive="activo">Juegos</a>
+      <a routerLink="personajes" routerLinkActive="activo">Personajes</a>
+      <a routerLink="lugares" routerLinkActive="activo">Lugares</a>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="contenido">
+
+    <!-- Controles extra: abrir modal de login / selector de compañero -->
+    <!-- Los botones muestran/ocultan mmodals a través de variables booleanas del componente -->
+    <section class="extras-controls" style="margin-bottom:1rem">
+      <button (click)="showLogin = true">Entrar y seleccionar compañero</button>
+      <button (click)="showPicker = true">Seleccionar compañero</button>
+
+      <!--
+        Botón "Cerrar sesión" slamente está si hay un usuario logueado.
+        La sintaxis @if es el control de flujo nativo q usamos en este proyecto;
+        comprueba la variable `selectedUser` del componente padre.
+      -->
+      @if (selectedUser) {
+        <button (click)="logout()">Cerrar sesión</button>
+      }
+    </section>
+
+    <!--
+      Inclusión de los componentes hijos:
+      - app-login-modal: emite los datos del usuario cuando se cierra
+      - app-companion-picker: selector que emite el compañero seleccionado
+    -->
+    <app-login-modal [visible]="showLogin" [companions]="companions" (close)="onLoginClose($event)"></app-login-modal>
+    <app-companion-picker [visible]="showPicker" [companions]="companions" (close)="onPickerClose($event)"></app-companion-picker>
+
+    <!-- Estado / información del usuario y compañero seleccionado -->
+    <section class="status" style="margin-bottom:1rem">
+      <!-- Si hay usuario logueado mostramos sus datos -->
+      @if (selectedUser) {
+        <p><strong>Nombre:</strong> {{ selectedUser.nombre }}</p>
+        <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+        <!-- companionFav es el id (string) del compañero/compañía favorito/a -->
+        <p><strong>Compañía:</strong> {{ selectedUser.companionFav }}</p>
+      } @else {
+        <!-- Si no accede nadie, no hay nadie conectado -->
+        <p>Nadie conectado</p>
+      }
+
+      <!-- Si hay una compañía seleccionada mostramos su información resumida -->
+      @if (selectedCompanion) {
+        <p><strong>{{ selectedCompanion.name }}</strong> — {{ selectedCompanion.region }}</p>
+        <p>{{ selectedCompanion.description }}</p>
+      } @else {
+        <p>No hay compañía seleccionada</p>
+      }
+    </section>
+
+    <!-- Punto de inserción -->
+    <router-outlet></router-outlet>
+  </main>
+</div>
 

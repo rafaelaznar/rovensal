@@ -1,0 +1,134 @@
+/* Contenedor general */
+.contenedor-juegos {
+  padding: 2rem;
+  text-align: center;
+  background: #cef0db;
+  min-height: 100vh;
+}
+
+.volver {
+  /* aumentar separación sobre el botón para separar de las cartas */
+  margin: 2.5rem 0 1.5rem; /* top right/left bottom */
+}
+
+.boton {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: #e6c24d;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+.boton:hover {
+  background: #e6c24d;
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #000000;
+}
+
+/* Grid de juegos */
+.juegos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* asegurar separación inferior del grid por si el botón usa posicionamiento distinto */
+.juegos-grid {
+  margin-bottom: 0.5rem;
+}
+
+/* Tarjeta de juego */
+.juego-card {
+  background-color: #f9fafb;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.juego-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Clase dinámica para juego destacado/seleccionado */
+.juego-card.destacado {
+  border: 2px solid #0077b6;
+  box-shadow: 0 4px 12px rgba(0, 119, 182, 0.3);
+  background-color: #f0f8ff;
+}
+
+.juego-card h3 {
+  margin-top: 0;
+  color: #000000;
+}
+
+/* Mensajes de estado */
+.mensaje-carga {
+  color: #0077b6;
+  font-size: 1.2rem;
+}
+
+.mensaje-error {
+  color: #d32f2f;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Botón de las cartas */
+button {
+  background-color: #e6c24d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #e6c24d;
+}
+
+/* Modal */
+.modal-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-contenido {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-contenido h3 {
+  color: #000000;
+  margin-top: 0;
+}
+
+.descripcion {
+  margin-top: 1rem;
+  line-height: 1.5;
+  color: #333;
+}
+

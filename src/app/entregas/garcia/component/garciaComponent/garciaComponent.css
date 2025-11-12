@@ -1,2 +1,631 @@
-/* Styles for GarciaComponent */
-h2 { color: #2a6f97; }
+body {
+    background-image: url('../../../../../../public/garcia/imagenes/fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+app-menu-garcia {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.contenedor-principal {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pantalla-paso {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.pantalla-paso h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.pantalla-paso h2 {
+    color: #34495e;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.botones-genero {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.boton-grande {
+    padding: 20px 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.boton-grande:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.boton-hombre {
+    background-color: #3498db;
+    color: white;
+}
+
+.boton-hombre:hover {
+    background-color: #2980b9;
+}
+
+.boton-mujer {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.boton-mujer:hover {
+    background-color: #c0392b;
+}
+
+.preview-personaje {
+    margin: 30px 0;
+}
+
+.preview-personaje img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid #3498db;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.preview-personaje p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+}
+
+.grupo-nombre {
+    margin: 30px 0;
+}
+
+.input-nombre {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    font-size: 1.2rem;
+    border: 3px solid #bdc3c7;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.input-nombre:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.error {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.botones-navegacion {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.boton-principal {
+    background-color: #2ecc71;
+    color: white;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.boton-principal:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+.boton-secundario {
+    background-color: #95a5a6;
+    color: white;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.boton-secundario:hover {
+    background-color: #7f8c8d;
+}
+
+.resumen-jugador {
+    margin: 30px 0;
+}
+
+.resumen-jugador img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid #2ecc71;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.resumen-jugador h3 {
+    margin-top: 15px;
+    font-size: 1.8rem;
+    color: #2c3e50;
+}
+
+.resumen-jugador p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+.mensaje-carga {
+    color: #f39c12;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.boton-iniciar {
+    background-color: #e74c3c;
+    color: white;
+    margin-top: 20px;
+}
+
+.boton-iniciar:hover {
+    background-color: #c0392b;
+}
+
+.boton-iniciar:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.pantalla-combate {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 1100px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.header-combate {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pantalla-combate h1 {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.info-ronda {
+    font-size: 1.3rem;
+    color: #f39c12;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.info-turno {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+.arena-combate {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tarjeta-combatiente {
+    background-color: #ecf0f1;
+    border-radius: 15px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tarjeta-jugador {
+    background-color: #3498db;
+    color: white;
+}
+
+.tarjeta-demonio {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.tarjeta-combatiente h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.tarjeta-combatiente h4 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.cabecera-tarjeta {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 3px solid white;
+    background-color: #ecf0f1;
+}
+
+.imagen-combatiente {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.stats {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.stats p {
+    margin: 8px 0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.estado-defensa {
+    color: #2ecc71;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.vs {
+    text-align: center;
+}
+
+.vs h2 {
+    font-size: 3rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.mensaje-espera {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.log-combate {
+    background-color: #2c3e50;
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+}
+
+.log-combate h3 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    border-bottom: 2px solid #34495e;
+    padding-bottom: 10px;
+}
+
+.lista-logs {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.log-mensaje {
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.log-mensaje.jugador {
+    background-color: rgba(52, 152, 219, 0.3);
+    border-left-color: #3498db;
+}
+
+.log-mensaje.demonio {
+    background-color: rgba(231, 76, 60, 0.3);
+    border-left-color: #e74c3c;
+}
+
+.log-mensaje.sistema {
+    background-color: rgba(149, 165, 166, 0.3);
+    border-left-color: #95a5a6;
+}
+
+.log-vacio {
+    text-align: center;
+    color: #95a5a6;
+    font-style: italic;
+    padding: 20px;
+}
+
+.pantalla-resultado {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 20px;
+    padding: 50px;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.titulo-victoria {
+    color: #2ecc71;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.titulo-derrota {
+    color: #e74c3c;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.imagen-resultado {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 6px solid #2ecc71;
+    object-fit: cover;
+    object-position: top center;
+    margin: 20px 0;
+}
+
+.mensaje-resultado {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.stats-finales {
+    background-color: rgba(236, 240, 241, 0.8);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.stats-finales h3 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.stats-finales p {
+    color: #34495e;
+    font-size: 1.1rem;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.boton-reiniciar {
+    background-color: #3498db;
+    color: white;
+}
+
+.boton-reiniciar:hover {
+    background-color: #2980b9;
+}
+
+/* NUEVOS ESTILOS PARA 5 RONDAS */
+
+.progreso-rondas {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.progreso-rondas h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.enemigos-derrotados {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.enemigo-miniatura {
+    text-align: center;
+    width: 80px;
+}
+
+.enemigo-miniatura img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid #2ecc71;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.enemigo-miniatura p {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.historial-completo {
+    background-color: rgba(236, 240, 241, 0.8);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 20px 0;
+}
+
+.historial-completo h3 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.lista-enemigos-derrotados {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.enemigo-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    width: 120px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.enemigo-card:hover {
+    transform: translateY(-5px);
+}
+
+.enemigo-card img {
+width: 80px;
+height: 80px;
+border-radius: 50%;
+border: 3px solid #3498db;
+object-fit: cover;
+object-position: top center;
+margin-bottom: 10px;
+}
+.enemigo-card p {
+margin: 5px 0;
+font-size: 0.9rem;
+color: #2c3e50;
+}
+.tipo-enemigo {
+color: #e74c3c;
+font-weight: bold;
+font-size: 0.85rem !important;
+}
+.ronda-enemigo {
+color: #7f8c8d;
+font-size: 0.8rem !important;
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+.arena-combate {
+flex-direction: column;
+}
+.tarjeta-combatiente {
+    width: 100%;
+    max-width: 350px;
+}
+
+.vs h2 {
+    font-size: 2rem;
+}
+
+.botones-genero,
+.botones-combate,
+.botones-navegacion {
+    flex-direction: column;
+}
+
+.boton-grande {
+    width: 100%;
+    max-width: 300px;
+}
+
+.pantalla-paso,
+.pantalla-combate,
+.pantalla-resultado {
+    padding: 20px;
+}
+
+.enemigos-derrotados {
+    gap: 10px;
+}
+
+.enemigo-miniatura {
+    width: 60px;
+}
+
+.enemigo-miniatura img {
+    width: 55px;
+    height: 55px;
+}
+
+.lista-enemigos-derrotados {
+    gap: 10px;
+}
+
+.enemigo-card {
+    width: 100px;
+    padding: 10px;
+}
+
+.enemigo-card img {
+    width: 70px;
+    height: 70px;
+}
+
+.cabecera-tarjeta {
+    height: 150px;
+}
+
+.pantalla-resultado {
+    max-width: 90%;
+}
+}

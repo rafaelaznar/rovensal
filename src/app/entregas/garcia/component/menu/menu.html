@@ -1,0 +1,17 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Abrir menú">
+  <mat-icon>menu</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <!-- Volver al inicio -->
+  <button mat-menu-item (click)="volverHome()">
+    <mat-icon>home</mat-icon>
+    <span>Volver al inicio</span>
+  </button>
+
+  <!-- Reiniciar juego -->
+  <button mat-menu-item (click)="confirmarReinicio()">
+    <mat-icon>refresh</mat-icon>
+    <span>Reiniciar juego</span>
+  </button>
+</mat-menu>

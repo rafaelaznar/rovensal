@@ -1,0 +1,74 @@
+<!-- si existen sprites mostrará el textos sprites y sino un texto de no hay sprites -->
+<div>
+  @switch
+  (pokemon?.sprites?.front_shiny) {
+    @case (null) {
+      <p>No hay sprites disponibles</p>
+    }
+    @default {
+      <p>Sprites:</p>
+    }
+  }
+  <!-- imprime los sprites del pokemon si existen -->
+  @if (pokemon?.sprites?.front_default) {
+    <div><img src="{{pokemon?.sprites?.front_default}}" alt="{{pokemon?.name}}"></div>
+  }
+  @if (pokemon?.sprites?.back_default) {
+    <div><img src="{{pokemon?.sprites?.back_default}}" alt="{{pokemon?.name}}"></div>
+  }
+  @if (pokemon?.sprites?.front_shiny) {
+    <div><img src="{{pokemon?.sprites?.front_shiny}}" alt="{{pokemon?.name}}"></div>
+  }
+  @if (pokemon?.sprites?.back_shiny) {
+    <div><img src="{{pokemon?.sprites?.back_shiny}}" alt="{{pokemon?.name}}"></div>
+  }
+</div>
+<!-- Botón para volver a la pokedex y -->
+<div class="backBar">
+  <a href="/alcanyiz" class="btn-back" aria-label="Volver a la Pokédex">← Volver a Pokédex</a>
+ </div>
+<p>Nombre: {{pokemon?.name}}</p>
+<p>Pokedex: {{pokemon?.id}}</p>
+<p>Peso: {{pokemon?.weight}}</p>
+<p>Stats</p>
+<!-- imprime las stats del pokemon -->
+@if (pokemon?.stats) {
+  <div class="statsGrid">
+    @for (stat of pokemon?.stats || []; track stat.stat.name) {
+      <div class="statRow">
+        <span class="statName">{{stat.stat.name}}</span>
+        <div class="statBarWrapper">
+          <div class="statBar" [style.--value]="stat.base_stat" [attr.data-value]="stat.base_stat"></div>
+        </div>
+      </div>
+    }
+  </div>
+}
+
+<!-- imprime los tipos del pokemon si existen -->
+@if (pokemon?.types) {
+  <p>Tipos:</p>
+  @for (type of pokemon?.types || []; track type.type.name) {
+    <p
+    [class.fire]="type.type.name === 'fire'"
+    [class.water]="type.type.name === 'water'"
+    [class.grass]="type.type.name === 'grass'"
+    [class.electric]="type.type.name === 'electric'"
+    [class.ice]="type.type.name === 'ice'"
+    [class.fighting]="type.type.name === 'fighting'"
+    [class.poison]="type.type.name === 'poison'"
+    [class.ground]="type.type.name === 'ground'"
+    [class.flying]="type.type.name === 'flying'"
+    [class.psychic]="type.type.name === 'psychic'"
+    [class.bug]="type.type.name === 'bug'"
+    [class.rock]="type.type.name === 'rock'"
+    [class.ghost]="type.type.name === 'ghost'"
+    [class.dragon]="type.type.name === 'dragon'"
+    [class.dark]="type.type.name === 'dark'"
+    [class.steel]="type.type.name === 'steel'"
+    [class.fairy]="type.type.name === 'fairy'"
+    [class.normal]="type.type.name === 'normal'"
+    [class.shadow]="type.type.name === 'shadow'"
+    >{{type.type.name}}</p>
+  }
+}

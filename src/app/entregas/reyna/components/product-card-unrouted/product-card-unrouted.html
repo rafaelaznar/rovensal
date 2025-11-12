@@ -1,0 +1,15 @@
+<div class="card h-100 shadow-sm">
+  <img [src]="product.image" class="card-img-top" alt="{{ product.title }}" />
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title }}</h5>
+    <p class="card-text">{{ product.price | currency : 'EUR' }}</p>
+    <button class="btn btn-primary me-2" (click)="abrirDetalle()">Ver detalle</button>
+    <button
+      (click)="toggleFavorite()"
+      [ngClass]="{ 'btn-warning': isFav, 'btn-outline-warning': !isFav }"
+      class="btn"
+    >
+      <i class="bi" [ngClass]="isFav ? 'bi-star-fill' : 'bi-star'"></i>
+    </button>
+  </div>
+</div>

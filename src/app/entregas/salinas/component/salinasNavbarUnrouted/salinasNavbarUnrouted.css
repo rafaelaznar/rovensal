@@ -1,0 +1,73 @@
+/* Navbar general */
+.navbar {
+  background: linear-gradient(90deg, #0f0c29, #302b63, #24243e); /* gradiente espacial */
+  border-bottom: 3px solid #00ffcc; /* borde neón estilo portal */
+  box-shadow: 0 4px 10px rgba(0, 255, 204, 0.4);
+  font-family: 'Comic Sans MS', Arial, sans-serif;
+}
+
+/* Marca de la navbar */
+.navbar-brand {
+  color: #00ffcc !important;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 5px #000;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.navbar-brand:hover {
+  color: #ff00ff !important;
+  text-shadow: 2px 2px 10px #00ffcc;
+}
+
+/* Links de navegación */
+.nav-link {
+  color: #ffffff !important;
+  font-weight: bold;
+  margin-right: 10px;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: #00ffcc;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.nav-link:hover {
+  color: #00ffcc !important;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Link activo */
+.nav-link.active {
+  color: #ff00ff !important;
+  text-shadow: 0 0 5px #00ffcc;
+}
+
+/* Botón de toggle (mobile) */
+.navbar-toggler {
+  border-color: #00ffcc;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,255,204, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/ %3E%3C/svg%3E");
+}
+
+/* Efecto hover para el collapse */
+.collapse.show {
+  background: rgba(15, 12, 41, 0.95);
+  border-top: 2px solid #00ffcc;
+  border-radius: 0 0 10px 10px;
+  padding: 10px 0;
+}

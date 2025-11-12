@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-dark mb-4 rounded-3 shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" routerLink="/calinescu">
+      DinoExplorer
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a routerLink="/calinescu" [class.active]="activeRoute === '/calinescu'" class="nav-link">
+            <i class="bi bi-house-fill"></i> Inicio
+          </a>
+        </li>
+        @if(usuarioActual) {
+        <li class="nav-item">
+           <button class="btn btn-link nav-link text-white ms-2" (click)="abrirSelectorDinos()">
+            <i class="bi bi-heart-fill"></i> 
+            Añadir a Favoritos
+          </button> 
+        </li>
+        }
+        <li class="nav-item">
+          <a routerLink="/calinescu/lista" [class.active]="activeRoute === '/calinescu/lista'" class="nav-link">
+            <i class="bi bi-list-ul"></i> Dinosaurios
+          </a>
+        </li>
+        
+        @if(usuarioActual) {
+        <li class="nav-item">
+          <a routerLink="/calinescu/favoritos" [class.active]="activeRoute === '/calinescu/favoritos'" class="nav-link">
+            <i class="bi bi-heart-fill"></i> Favoritos
+            @if(favoritosService.getCantidadFavoritos() > 0) {
+              <span class="badge bg-danger ms-1">{{ favoritosService.getCantidadFavoritos() }}</span>
+            }
+          </a>
+        </li>
+        }
+        
+        <li class="nav-item">
+          @if(usuarioActual) {
+            <button class="btn btn-danger ms-2" (click)="cerrarSesion()">
+              <i class="bi bi-box-arrow-right"></i> 
+              Cerrar Sesión
+            </button>
+          } @else {
+            <button class="btn btn-primary ms-2" (click)="abrirLoginModal()">
+              <i class="bi bi-person-circle"></i> 
+              Login
+            </button>
+          }
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

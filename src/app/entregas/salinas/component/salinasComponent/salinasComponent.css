@@ -1,2 +1,22 @@
 /* Styles for SalinasComponent */
 h2 { color: #2a6f97; }
+/* Buscador */
+.busqueda input {
+  border: 2px solid #00ffcc;
+  border-radius: 12px;
+  background-color: #1b1b2f;
+  color: #ffffff;
+  padding: 8px 15px;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.busqueda input::placeholder {
+  color: #cccccc;
+}
+
+.busqueda input:focus {
+  border-color: #ff00ff;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+  outline: none;
+}

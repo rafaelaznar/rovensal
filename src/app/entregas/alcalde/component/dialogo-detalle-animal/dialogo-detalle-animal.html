@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>{{ obtenerNombreParaMostrar() }}</h2>
+
+<mat-dialog-content>
+  @if (tieneImagen()) {
+    <div class="contenedor-imagen">
+      <img 
+        [ngSrc]="animal.imageSrc" 
+        [alt]="obtenerNombreParaMostrar()"
+        width="400"
+        height="300"
+        priority
+      />
+    </div>
+  } @else {
+    <div class="sin-imagen">
+      <p>Sin imagen</p>
+    </div>
+  }
+  
+  <div class="seccion-detalle">
+    <h3>Nombre científico</h3>
+    <p>{{ animal.binomialName }}</p>
+  </div>
+  
+  @if (animal.commonName) {
+    <div class="seccion-detalle">
+      <h3>Nombre común</h3>
+      <p>{{ animal.commonName }}</p>
+    </div>
+  }
+  
+  <div class="seccion-detalle">
+    <h3>Descripción</h3>
+    <p>{{ animal.shortDesc }}</p>
+  </div>
+  
+  <div class="seccion-detalle">
+    <h3>Ubicación</h3>
+    <mat-chip> {{ animal.location }}</mat-chip>
+  </div>
+  
+  <div class="seccion-detalle">
+    <h3>Último registro</h3>
+    <mat-chip> {{ animal.lastRecord }}</mat-chip>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="alCerrar()">Cerrar</button>
+  <button mat-raised-button color="primary" (click)="abrirWikipedia()">
+    Ver en Wikipedia
+  </button>
+</mat-dialog-actions>

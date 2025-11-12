@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
-import { AlcaldeComponent } from './entregas/alcalde/component/alcaldeComponent/alcaldeComponent';
+import { AlcaldeComponent } from './entregas/alcalde/component/alcalde-component/alcalde-component';
 import { AlcanyizComponent } from './entregas/alcanyiz/component/alcanyizComponent/alcanyizComponent';
 import { BuscarPokemon } from './entregas/alcanyiz/component/buscarPokemon/buscarPokemon';
 import { VistaDetalladaPokemon } from './entregas/alcanyiz/component/vistaDetalladaPokemon/vistaDetalladaPokemon';
@@ -76,7 +76,21 @@ export const routes: Routes = [
   { path: 'zanon', component: ZanonComponent },
     { path: '', component: Home },
     { path: 'home', component: Home },
-    { path: 'alcalde', component: AlcaldeComponent },
+    { 
+        path: 'alcalde', 
+        component: AlcaldeComponent,
+        children: [
+            { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
+            { 
+                path: 'bienvenida', 
+                loadComponent: () => import('./entregas/alcalde/component/bienvenida/bienvenida').then(m => m.Bienvenida)
+            },
+            { 
+                path: 'animales', 
+                loadComponent: () => import('./entregas/alcalde/component/lista-animales/lista-animales').then(m => m.ListaAnimales)
+            }
+        ]
+    },
     { path: 'alcanyiz', component: AlcanyizComponent },
     { path: 'alcanyiz/buscarPokemon', component: BuscarPokemon },
     { path: 'alcanyiz/pokemon/:nombre', component: VistaDetalladaPokemon },

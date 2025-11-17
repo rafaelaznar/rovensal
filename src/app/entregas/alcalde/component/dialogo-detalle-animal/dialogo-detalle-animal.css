@@ -1,0 +1,49 @@
+mat-dialog-content {
+  max-width: 600px;
+}
+
+.contenedor-imagen {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.contenedor-imagen img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.sin-imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background-color: #f0f0f0;
+  color: #666;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.seccion-detalle {
+  margin-bottom: 1.5rem;
+}
+
+.seccion-detalle h3 {
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.seccion-detalle p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem;
+}

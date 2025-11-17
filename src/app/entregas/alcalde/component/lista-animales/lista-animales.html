@@ -1,0 +1,78 @@
+<div class="contenedor">
+  <header>
+    <h1>Animales Extintos del Holoceno</h1>
+    <p class="subtitulo">
+      Explora 804 especies animales extintas
+    </p>
+  </header>
+
+  <div class="controles">
+    <div class="filtros">
+      <mat-form-field>
+        <mat-label>Buscar por nombre</mat-label>
+        <input 
+          matInput 
+          [value]="terminoBusqueda()"
+          (input)="alCambiarBusqueda($event)"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Filtrar por ubicación</mat-label>
+        <input 
+          matInput 
+          [value]="filtroUbicacion()"
+          (input)="alCambiarUbicacion($event)"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Cantidad de animales</mat-label>
+        <mat-select [(ngModel)]="cantidadAnimales" (selectionChange)="alCambiarCantidad()">
+          @for (opcion of opcionesCantidad; track opcion) {
+            <mat-option [value]="opcion">{{ opcion }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="botones-accion">
+      <button mat-raised-button color="primary" (click)="cargarAnimales()" [disabled]="cargando()">
+        Recargar
+      </button>
+      <button mat-raised-button color="accent" (click)="cargarAnimalAleatorio()" [disabled]="cargando()">
+        Animal aleatorio
+      </button>
+      <button mat-stroked-button (click)="limpiarFiltros()">
+        Limpiar filtros
+      </button>
+    </div>
+  </div>
+
+  @if (cargando()) {
+    <div class="cargando">
+      <mat-spinner></mat-spinner>
+      <p>Cargando animales extintos...</p>
+    </div>
+  } @else {
+    @if (animalesFiltrados().length > 0) {
+      <div class="info-resultados">
+        <p>Mostrando {{ animalesFiltrados().length }} animales</p>
+      </div>
+      
+      <div class="cuadricula-animales">
+        @for (animal of animalesFiltrados(); track animal.binomialName) {
+          <app-tarjeta-animal 
+            [animal]="animal"
+            (verDetalles)="abrirDetallesAnimal($event)"
+          />
+        }
+      </div>
+    } @else {
+      <div class="sin-resultados">
+        <h2>No se encontraron animales</h2>
+        <p>Intenta con otros criterios de búsqueda o recarga los datos</p>
+      </div>
+    }
+  }
+</div>

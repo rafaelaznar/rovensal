@@ -1,0 +1,45 @@
+<div class="contenedor-bienvenida">
+  <mat-card class="tarjeta-bienvenida">
+    <mat-card-header>
+      <mat-card-title>Bienvenido a Animales Extintos</mat-card-title>
+      <mat-card-subtitle>Introduce tus datos para empezar</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="formulario-bienvenida">
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input 
+            matInput 
+            [value]="nombre()"
+            (input)="alCambiarNombre($event)"
+            placeholder="Tu nombre"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Apellidos</mat-label>
+          <input 
+            matInput 
+            [value]="apellidos()"
+            (input)="alCambiarApellidos($event)"
+            placeholder="Tus apellidos"
+            required
+          />
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="empezar()"
+        [disabled]="!formularioValido()"
+      >
+        Comenzar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

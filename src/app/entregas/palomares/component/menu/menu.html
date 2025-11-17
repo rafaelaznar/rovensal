@@ -1,0 +1,26 @@
+<nav class="menu-container">
+  <div class="menu-header">
+    <h1>Rick & Morty Explorer</h1>
+    @if (currentUser()) {
+      <div class="user-info">
+        <span class="user-name">👤 {{ currentUser() }}</span>
+        <button class="logout-btn" (click)="logout()">Salir</button>
+      </div>
+    }
+    <button class="menu-toggle" (click)="toggleMenu()">
+      {{ isMenuOpen() ? '✕' : '☰' }}
+    </button>
+  </div>
+
+  <ul class="menu-list" [class.open]="isMenuOpen()">
+    @for (item of getVisibleMenuItems(); track item.id) {
+      <li 
+        class="menu-item"
+        (click)="navigateTo(item.id)"
+      >
+        <span class="menu-icon">{{ item.icon }}</span>
+        <span class="menu-label">{{ item.label }}</span>
+      </li>
+    }
+  </ul>
+</nav>

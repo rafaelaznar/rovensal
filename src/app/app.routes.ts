@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
-import { AlcaldeComponent } from './entregas/alcalde/component/alcaldeComponent/alcaldeComponent';
+import { AlcaldeComponent } from './entregas/alcalde/component/alcalde-component/alcalde-component';
 import { AlcanyizComponent } from './entregas/alcanyiz/component/alcanyizComponent/alcanyizComponent';
 import { BuscarPokemon } from './entregas/alcanyiz/component/buscarPokemon/buscarPokemon';
 import { VistaDetalladaPokemon } from './entregas/alcanyiz/component/vistaDetalladaPokemon/vistaDetalladaPokemon';
@@ -8,10 +8,15 @@ import { AlfonsoComponent } from './entregas/alfonso/component/alfonsoComponent/
 import { CalinescuComponent } from './entregas/calinescu/component/calinescuComponent/calinescuComponent';
 import { CastanyeraComponent } from './entregas/castanyera/component/castanyeraComponent/castanyeraComponent';
 import { ContrerasComponent } from './entregas/contreras/component/contrerasComponent/contrerasComponent';
+import { ContrerasComparadorComponent } from './entregas/contreras/component/contrerasComparador/contrerasComparador';
 import { FernandezComponent } from './entregas/fernandez/component/fernandezComponent/fernandezComponent';
 import { GarciaComponent } from './entregas/garcia/component/garciaComponent/garciaComponent';
 import { PallasComponent } from './entregas/pallas/component/pallasComponent/pallasComponent';
 import { PalomaresComponent } from './entregas/palomares/component/palomaresComponent/palomaresComponent';
+import { CharacterListComponent } from './entregas/palomares/component/character-list/character-list';
+import { CharacterDetailPageComponent } from './entregas/palomares/component/character-detail-page/character-detail-page';
+import { SearchPageComponent } from './entregas/palomares/component/search-page/search-page';
+import { LoginComponent } from './entregas/palomares/component/login/login';
 import { PavonComponent } from './entregas/pavon/component/pavonComponent/pavonComponent';
 import { ReynaComponent } from './entregas/reyna/components/reynaComponent/reynaComponent';
 import { SalinasComponent } from './entregas/salinas/component/salinasComponent/salinasComponent';
@@ -55,10 +60,21 @@ export const routes: Routes = [
   { path: 'calinescu', component: CalinescuComponent },
   { path: 'castanyera', component: CastanyeraComponent },
   { path: 'contreras', component: ContrerasComponent },
+  { path: 'contreras/:id', component: ContrerasComponent },
+  { path: 'contreras_comparador', component: ContrerasComparadorComponent },
   { path: 'fernandez', component: FernandezComponent },
   { path: 'garcia', component: GarciaComponent },
   { path: 'pallas', component: PallasComponent },
-  { path: 'palomares', component: PalomaresComponent },
+   { 
+        path: 'palomares', 
+        component: PalomaresComponent,
+        children: [
+            { path: '', component: CharacterListComponent },
+            { path: 'search', component: SearchPageComponent },
+            { path: 'character/:id', component: CharacterDetailPageComponent },
+            { path: 'login', component: LoginComponent }
+        ]
+    },
   { path: 'pavon', component: PavonComponent },
   { path: 'reyna', component: ReynaComponent },
   { path: 'salinas', component: SalinasComponent },
@@ -77,7 +93,21 @@ export const routes: Routes = [
   { path: 'zanon', component: ZanonComponent },
     { path: '', component: Home },
     { path: 'home', component: Home },
-    { path: 'alcalde', component: AlcaldeComponent },
+    { 
+        path: 'alcalde', 
+        component: AlcaldeComponent,
+        children: [
+            { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
+            { 
+                path: 'bienvenida', 
+                loadComponent: () => import('./entregas/alcalde/component/bienvenida/bienvenida').then(m => m.Bienvenida)
+            },
+            { 
+                path: 'animales', 
+                loadComponent: () => import('./entregas/alcalde/component/lista-animales/lista-animales').then(m => m.ListaAnimales)
+            }
+        ]
+    },
     { path: 'alcanyiz', component: AlcanyizComponent },
     { path: 'alcanyiz/buscarPokemon', component: BuscarPokemon },
     { path: 'alcanyiz/pokemon/:nombre', component: VistaDetalladaPokemon },
@@ -120,9 +150,11 @@ export const routes: Routes = [
       }
     ],
   },
+    { path: 'contreras/:id', component: ContrerasComponent },
+    { path: 'contreras_comparador', component: ContrerasComparadorComponent },
+    { path: 'fernandez', component: FernandezComponent },
     { path: 'garcia', component: GarciaComponent },
     { path: 'pallas', component: PallasComponent },
-    { path: 'palomares', component: PalomaresComponent },
     { path: 'pavon', component: PavonComponent },
     
     /* mis rutas */

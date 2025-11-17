@@ -8,6 +8,7 @@ import { AlfonsoComponent } from './entregas/alfonso/component/alfonsoComponent/
 import { CalinescuComponent } from './entregas/calinescu/component/calinescuComponent/calinescuComponent';
 import { CastanyeraComponent } from './entregas/castanyera/component/castanyeraComponent/castanyeraComponent';
 import { ContrerasComponent } from './entregas/contreras/component/contrerasComponent/contrerasComponent';
+import { ContrerasComparadorComponent } from './entregas/contreras/component/contrerasComparador/contrerasComparador';
 import { FernandezComponent } from './entregas/fernandez/component/fernandezComponent/fernandezComponent';
 import { GarciaComponent } from './entregas/garcia/component/garciaComponent/garciaComponent';
 import { PallasComponent } from './entregas/pallas/component/pallasComponent/pallasComponent';
@@ -54,6 +55,8 @@ export const routes: Routes = [
   { path: 'calinescu', component: CalinescuComponent },
   { path: 'castanyera', component: CastanyeraComponent },
   { path: 'contreras', component: ContrerasComponent },
+  { path: 'contreras/:id', component: ContrerasComponent },
+  { path: 'contreras_comparador', component: ContrerasComparadorComponent },
   { path: 'fernandez', component: FernandezComponent },
   { path: 'garcia', component: GarciaComponent },
   { path: 'pallas', component: PallasComponent },
@@ -119,6 +122,8 @@ export const routes: Routes = [
     { path: 'calinescu', component: CalinescuComponent },
     { path: 'castanyera', component: CastanyeraComponent },
     { path: 'contreras', component: ContrerasComponent },
+    { path: 'contreras/:id', component: ContrerasComponent },
+    { path: 'contreras_comparador', component: ContrerasComparadorComponent },
     { path: 'fernandez', component: FernandezComponent },
     { path: 'garcia', component: GarciaComponent },
     { path: 'pallas', component: PallasComponent },

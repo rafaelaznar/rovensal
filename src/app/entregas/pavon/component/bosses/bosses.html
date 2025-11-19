@@ -1,0 +1,10 @@
+<app-menu-pavon></app-menu-pavon>
+<link rel="stylesheet" href="bosses.css" />
+<h2>Lista de Jefes</h2>
+@for (item of bosses; track $index) {
+<div>
+  <button (click)="verDetalles(item)">
+    <img [src]="imageUrlFor(item)" alt="{{ item.name }}" height="200px" width="200px" />
+  </button>
+</div>
+}

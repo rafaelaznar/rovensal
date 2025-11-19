@@ -1,0 +1,9 @@
+<mat-form-field appearance="outline" class="w-100">
+  <mat-label>Buscar personaje</mat-label>
+  <input matInput [(ngModel)]="searchText" (input)="onSearch()" />
+</mat-form-field>
+
+<!-- mensaje cuando no hay resultados para la búsqueda por nombre -->
+<div *ngIf="searchText && !hasResults" class="no-results">
+  No se han encontrado personajes con ese nombre.
+</div>

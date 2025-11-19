@@ -1,0 +1,10 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>{{ personaje?.name }}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]="personaje?.imageUrl" alt="{{ personaje?.name }}" />
+  <mat-card-content>
+    <p><strong>Films:</strong> {{ personaje?.films?.join(', ') }}</p>
+    <p><strong>TV Shows:</strong> {{ personaje?.tvShows?.join(', ') }}</p>
+  </mat-card-content>
+</mat-card>

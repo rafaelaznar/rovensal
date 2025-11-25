@@ -13,7 +13,7 @@ import { CharacterDialogComponent } from '../character-dialog/character-dialog';
   templateUrl: './search-page.html',
   styleUrl: './search-page.css'
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponentPalomares implements OnInit {
   private rickMortyService = inject(RickMortyService);
   private dialog = inject(MatDialog);
   

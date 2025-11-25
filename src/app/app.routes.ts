@@ -15,7 +15,7 @@ import { PallasComponent } from './entregas/pallas/component/pallasComponent/pal
 import { PalomaresComponent } from './entregas/palomares/component/palomaresComponent/palomaresComponent';
 import { CharacterListComponent } from './entregas/palomares/component/character-list/character-list';
 import { CharacterDetailPageComponent } from './entregas/palomares/component/character-detail-page/character-detail-page';
-import { SearchPageComponent } from './entregas/palomares/component/search-page/search-page';
+import { SearchPageComponentPalomares } from './entregas/palomares/component/search-page/search-page';
 import { LoginComponent } from './entregas/palomares/component/login/login';
 import { PavonComponent } from './entregas/pavon/component/pavonComponent/pavonComponent';
 import { ReynaComponent } from './entregas/reyna/components/reynaComponent/reynaComponent';
@@ -70,7 +70,7 @@ export const routes: Routes = [
         component: PalomaresComponent,
         children: [
             { path: '', component: CharacterListComponent },
-            { path: 'search', component: SearchPageComponent },
+            { path: 'search', component: SearchPageComponentPalomares },
             { path: 'character/:id', component: CharacterDetailPageComponent },
             { path: 'login', component: LoginComponent }
         ]

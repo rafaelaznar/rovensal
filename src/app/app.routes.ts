@@ -78,7 +78,6 @@ export const routes: Routes = [
   { path: 'pavon', component: PavonComponent },
   { path: 'reyna', component: ReynaComponent },
   { path: 'salinas', component: SalinasComponent },
-  { path: 'sempertegui', component: SemperteguiComponent },
       { 
         path: 'silvestre',
     component: SilvestreComponent,
@@ -178,7 +177,6 @@ export const routes: Routes = [
 
     { path: 'salinas', component: SalinasComponent },
     { path: 'salinas/listaPersonajes', component:salinasListCharacter},
-    { path: 'sempertegui', component: SemperteguiComponent },
     { path: 'sempertegui', component: SemperteguiComponent,
         children: [
             { path: '', component: HomePageComponent },

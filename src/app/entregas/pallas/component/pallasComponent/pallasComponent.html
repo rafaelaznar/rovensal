@@ -1,2 +1,39 @@
 <h2>Entrega Pallas</h2>
 <p>Componente generado rovensal: PallasComponent</p>
+<div class="container text-center mt-5">
+  <div class="card shadow-lg border-0 p-5 rounded-4 bg-light">
+    <div class="card-body">
+      <h1 class="display-4 fw-bold text-primary mb-3">Pokédex Angular</h1>
+      <p class="lead text-muted mb-4">
+        Explora los primeros 151 Pokémon, descubre sus imágenes y usa la barra de búsqueda para encontrarlos fácilmente.
+      </p>
+
+      <img
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+        alt="Pikachu"
+        class="mb-4"
+        style="width: 120px; height: 120px;"
+      />
+
+      <!-- Mostar la pokedex  -->
+      <div class="d-flex justify-content-center gap-3">
+        <a
+          
+         [routerLink]="['/pallas/pokemon.list']"
+          routerLinkActive="active"
+          class="btn btn-primary btn-lg px-4 shadow-sm"
+        >
+          Ir a la Pokédex
+        </a>
+
+        <!-- Cuadro de dialogo de mas informacion -->
+        <button class="btn btn-outline-secondary btn-lg px-4" (click)="mostrarInfo()">
+          Más información
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+

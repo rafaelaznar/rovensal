@@ -1,0 +1,31 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="mb-4 row g-2">
+  <div class="col-md-4">
+    <input type="text" formControlName="name" class="form-control" placeholder="Nombre">
+  </div>
+  <div class="col-md-3">
+    <input type="number" formControlName="minPrice" class="form-control" placeholder="Precio mínimo">
+  </div>
+  <div class="col-md-3">
+    <input type="number" formControlName="maxPrice" class="form-control" placeholder="Precio máximo">
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+  </div>
+  @if (priceRangeInvalid) {
+    <div class="col-12">
+      <div class="alert alert-danger" role="alert">
+        El rango de precios no es válido. Asegúrate de que el precio mínimo sea menor o igual al precio máximo.
+      </div>
+    </div>
+  }
+</form>
+
+<div class="row g-3">
+  @for (product of filteredProducts; track product.id) {
+    <div class="col-md-4">
+      <app-product-card-unrouted [product]="product"></app-product-card-unrouted>
+    </div>
+  } @empty {
+    <p>No se encontraron productos 😕</p>
+  }
+</div>

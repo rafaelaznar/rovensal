@@ -1,0 +1,25 @@
+<app-salinasNavbarUnrouted></app-salinasNavbarUnrouted>
+<div class="container mt-4">
+ <h2 class="text-center mb-4">Personajes de Rick Y Morty</h2>
+
+@if (personajes.length === 0) {
+  <p class="text-center text-muted">Cargando productos...</p>
+  } @else {
+  <div class="row">
+    @for (personajes of personajes; track personajes.id) {
+    <div class="col-md-3 mb-4">
+      <app-salinasCharacterCard [personaje]="personajes" ></app-salinasCharacterCard>
+    </div>
+    }
+  </div>
+  }
+
+
+
+
+
+
+
+
+
+</div>

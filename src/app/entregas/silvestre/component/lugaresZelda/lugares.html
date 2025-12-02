@@ -1,0 +1,49 @@
+<div class="contenedor-juegos">
+  <h2>Lugares de The Legend of Zelda</h2>
+
+  @if (cargando) {
+    <p>Cargando lugares...</p>
+  } @else {
+    <div class="juegos-grid">
+      @for (lugar of lugares; track lugar.id) {
+        <div class="juego-card">
+          <h3>{{ lugar.name }}</h3>
+          <button (click)="verDetalles(lugar)">Ver más</button>
+        </div>
+      }
+    </div>
+
+    @if (lugarSeleccionado) {
+      <div class="modal-fondo" (click)="cerrarDetalles()">
+        <div class="modal-contenido" (click)="$event.stopPropagation()">
+          <h3>{{ lugarSeleccionado.name }}</h3>
+          <p class="descripcion"><strong>Descripción:</strong> {{ lugarSeleccionado.description }}</p>
+
+          @if (lugarSeleccionado.inhabitantsNames?.length) {
+            <p><strong>Habitantes:</strong></p>
+            <ul>
+              @for (hab of lugarSeleccionado.inhabitantsNames; track $index) {
+                <li>{{ hab }}</li>
+              }
+            </ul>
+          }
+
+          @if (lugarSeleccionado.appearancesNames?.length) {
+            <p><strong>Aparece en:</strong></p>
+            <ul>
+              @for (app of lugarSeleccionado.appearancesNames; track $index) {
+                <li>{{ app }}</li>
+              }
+            </ul>
+          }
+
+          <button (click)="cerrarDetalles()">Cerrar</button>
+        </div>
+      </div>
+    }
+  }
+
+  <div class="volver">
+    <a routerLink="../" class="boton">Volver al inicio</a>
+  </div>
+</div>

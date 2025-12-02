@@ -1,0 +1,69 @@
+<section class="container py-3">
+  <div class="row g-3">
+    <div class="col-12 col-lg-8">
+      <!-- botón para volver a la página principal -->
+      <div class="mb-2">
+        <a href="/alcanyiz" class="btn btn-outline-danger btn-sm" aria-label="Volver a la Pokédex">← Volver a Pokédex</a>
+      </div>
+      <!-- formulario para escribir el nombre del entrenador-->
+      <div class="mb-3">
+        <label for="nombrePokemon" class="form-label">Nombre del Entrenador:</label>
+        <input
+          type="text"
+          id="nombrePokemon"
+          name="nombrePokemon"
+          class="form-control"
+          [value]="trainerName"
+          (input)="trainerName = $event.target.value" />
+      </div>
+      <!-- formulario para buscar pokemon -->
+      <div class="card shadow-sm mb-3 border-0">
+        <div class="card-body">
+          <!-- formulario reactivo -->
+          <form [formGroup]="form" (ngSubmit)="buscarPokemon()">
+            <label class="form-label">Busca un Pokémon</label>
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <input type="text" class="form-control" formControlName="search" placeholder="Nombre o #Pokedex" />
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-outline-danger" [disabled]="form.invalid">Buscar</button>
+              </div>
+            </div>
+            <div class="form-text mt-2">Puedes escribir el nombre de un Pokémon o su número de la Pokédex.</div>
+            <div class="form-text">Ejemplos: pikachu, charizard, blastoise</div>
+          </form>
+        </div>
+      </div>
+      <!-- muestra el pokemon buscado reutilizando el componente <app-container-pokemon> -->
+      @if (pokemon) {
+        <div class="card shadow-sm text-center p-3 mb-3">
+          <app-container-pokemon [pokemon]="pokemon"></app-container-pokemon>
+          <button class="btn btn-outline-danger mt-2" (click)="anadirAEquipo(pokemon)">Añadir a equipo</button>
+        </div>
+      }
+      <p id="mensajeError" class="text-danger fw-bold small"></p>
+    </div>
+    <!-- mostraremos el equipo del entrenador -->
+    <aside class="col-12 col-lg-4">
+      <div class="card sticky-top">
+        <div class="card-header">
+          <!-- mostramos el nombre del entrenador -->
+          <h3 class="h5 mb-0">Equipo de {{ trainerName }}</h3>
+        </div>
+        <div class="card-body" style="max-height: calc(100vh - 120px); overflow: auto;">
+          <div class="d-grid gap-3">
+            <!-- @for para mostrar todos los pokemon de equipoPokemon -->
+            @for (pokemon of equipoPokemon; track $index) {
+              <div class="d-flex flex-column align-items-center gap-2 text-center">
+                <app-container-pokemon [pokemon]="pokemon"></app-container-pokemon>
+                <button class="btn btn-outline-secondary btn-sm" (click)="eliminarDelEquipo(pokemon)">Eliminar</button>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+

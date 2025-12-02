@@ -1,0 +1,158 @@
+<div class="character-form-container">
+  
+  <div class="form-header">
+    <h3 class="form-title">
+      {{ isEditing() ? 'Editar Personaje' : 'Nuevo Personaje' }}
+    </h3>
+  </div>
+  
+  <form [formGroup]="characterForm" (ngSubmit)="onSubmit()" class="character-form">
+    <div class="form-field" [class]="getFieldValidationClass('firstName')">
+      <label for="firstName" class="field-label">
+        Nombre <span class="required">*</span>
+      </label>
+      <input 
+        id="firstName"
+        type="text" 
+        formControlName="firstName"
+        placeholder="Ej: Jon, Tyrion, Daenerys..."
+        class="field-input"
+        [class.error]="hasFieldErrors('firstName')">
+      
+      <!-- Errores del campo -->
+      @if (hasFieldErrors('firstName')) {
+        <div class="field-errors">
+          @for (error of getFieldErrors('firstName'); track error) {
+            <span class="error-message">{{ error }}</span>
+          }
+        </div>
+      }
+    </div>
+    
+    <!-- Campo: Apellido -->
+    <div class="form-field" [class]="getFieldValidationClass('lastName')">
+      <label for="lastName" class="field-label">Apellido</label>
+      <input 
+        id="lastName"
+        type="text" 
+        formControlName="lastName"
+        placeholder="Ej: Snow, Lannister, Targaryen..."
+        class="field-input"
+        [class.error]="hasFieldErrors('lastName')">
+      
+      @if (hasFieldErrors('lastName')) {
+        <div class="field-errors">
+          @for (error of getFieldErrors('lastName'); track error) {
+            <span class="error-message">{{ error }}</span>
+          }
+        </div>
+      }
+    </div>
+    
+    <!-- Campo: Título -->
+    <div class="form-field" [class]="getFieldValidationClass('title')">
+      <label for="title" class="field-label">Título</label>
+      <input 
+        id="title"
+        type="text" 
+        formControlName="title"
+        placeholder="Ej: King of the Seven Kingdoms, Hand of the King..."
+        class="field-input"
+        [class.error]="hasFieldErrors('title')">
+      
+      @if (hasFieldErrors('title')) {
+        <div class="field-errors">
+          @for (error of getFieldErrors('title'); track error) {
+            <span class="error-message">{{ error }}</span>
+          }
+        </div>
+      }
+    </div>
+    
+    <!-- Campo: Casa/Familia -->
+    <div class="form-field" [class]="getFieldValidationClass('family')">
+      <label for="family" class="field-label">Casa/Familia</label>
+      <input 
+        id="family"
+        type="text" 
+        formControlName="family"
+        placeholder="Ej: House Stark, House Lannister..."
+        class="field-input"
+        [class.error]="hasFieldErrors('family')">
+      
+      @if (hasFieldErrors('family')) {
+        <div class="field-errors">
+          @for (error of getFieldErrors('family'); track error) {
+            <span class="error-message">{{ error }}</span>
+          }
+        </div>
+      }
+    </div>
+    
+    <!-- Campo: URL de imagen -->
+    <div class="form-field" [class]="getFieldValidationClass('imageUrl')">
+      <label for="imageUrl" class="field-label">URL de Imagen</label>
+      <input 
+        id="imageUrl"
+        type="url" 
+        formControlName="imageUrl"
+        placeholder="https://ejemplo.com/imagen.jpg"
+        class="field-input"
+        [class.error]="hasFieldErrors('imageUrl')">
+      
+      @if (hasFieldErrors('imageUrl')) {
+        <div class="field-errors">
+          @for (error of getFieldErrors('imageUrl'); track error) {
+            <span class="error-message">{{ error }}</span>
+          }
+        </div>
+      }
+    </div>
+    
+    <!-- Vista previa de imagen -->
+    @if (characterForm.get('imageUrl')?.value && characterForm.get('imageUrl')?.valid) {
+      <div class="image-preview">
+        <label class="field-label">Vista previa:</label>
+        <img 
+          [src]="characterForm.get('imageUrl')?.value" 
+          alt="Vista previa"
+          class="preview-image"
+          (error)="$event.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzNiNGE2MCIvPjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RXJyb3I8L3RleHQ+PC9zdmc+'">
+      </div>
+    }
+    
+    <!-- Botones del formulario -->
+    <div class="form-actions">
+      <button 
+        type="button" 
+        (click)="onCancel()"
+        class="btn btn-secondary">
+        <span class="btn-icon">❌</span>
+        Cancelar
+      </button>
+      
+      <button 
+        type="button" 
+        (click)="onReset()"
+        class="btn btn-outline">
+        <span class="btn-icon">🔄</span>
+        Resetear
+      </button>
+      
+      <button 
+        type="submit" 
+        [disabled]="characterForm.invalid || isSubmitting()"
+        class="btn btn-primary">
+        @if (isSubmitting()) {
+          <span class="btn-spinner"></span>
+          Guardando...
+        } @else {
+          <span class="btn-icon">💾</span>
+          {{ isEditing() ? 'Actualizar' : 'Crear' }}
+        }
+      </button>
+    </div>
+    
+  </form>
+  
+</div>

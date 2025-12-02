@@ -1,0 +1,26 @@
+@if (visible) {
+  <div class="overlay">
+    <div class="picker">
+    <h3>Elige un compañero</h3>
+    <p style="margin-top:0.2rem;color:#555">Selecciona un aliado de la lista.</p>
+
+    <div class="grid" style="margin-top:0.8rem">
+      @for (c of companions; track c.id) {
+        <div class="card" (click)="seleccionar(c)">
+          <div style="display:flex;align-items:center;gap:0.6rem">
+            <div>
+              <div style="font-weight:600">{{c.name}}</div>
+              <div class="era">{{c.region}}</div>
+            </div>
+          </div>
+          <div class="desc" style="margin-top:0.5rem">{{c.description}}</div>
+        </div>
+      }
+    </div>
+
+    <div class="acciones">
+      <button class="sec" (click)="cancelar()">Cancelar</button>
+    </div>
+    </div>
+  </div>
+}

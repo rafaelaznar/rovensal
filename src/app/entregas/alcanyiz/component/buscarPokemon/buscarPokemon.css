@@ -1,0 +1,34 @@
+/* Pokédex-themed palette (scoped) */
+/* Responsive two-column layout: search | team */
+/* Se han migrado la mayoría de estilos a utilidades de Bootstrap.
+   Mantenemos pequeñas personalizaciones de temática Pokédex. */
+
+/* Halo suave para las cards principales (usa clases .card ya de Bootstrap) */
+.card.shadow-sm.p-3.text-center {
+  position: relative;
+}
+.card.shadow-sm.p-3.text-center::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(255,59,59,0.15), rgba(79,195,247,0.15));
+  z-index: -1;
+  filter: blur(6px);
+}
+
+/* Botón de eliminar del equipo ajustado */
+.btn-outline-secondary.btn-sm {
+  font-weight: 600;
+}
+
+/* Ajuste del contenedor de equipo para separar elementos */
+.d-grid.gap-3 > div {
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: .85rem;
+  padding: .5rem .75rem;
+}
+
+/* Mensaje de error ya usa utilidades de Bootstrap, solo aseguramos altura */
+#mensajeError { min-height: 18px; }

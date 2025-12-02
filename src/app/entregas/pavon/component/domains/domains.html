@@ -1,0 +1,13 @@
+<app-menu-pavon></app-menu-pavon>
+<h2>Dominios</h2>
+<p>
+  Una parte importante de Genshin son los dominios, lugares misteriosos que ofrecen recompensas a
+  cambio de resina. Las recompensas van desde materiales de mejora de armas, talentos, hasta
+  artefactos que equipar a los personajes.
+</p>
+
+@for (item of domains; track $index) {
+<div>
+  <button (click)="verDetalles(item)">{{ item.name }}</button>
+</div>
+}

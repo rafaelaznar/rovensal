@@ -1,2 +1,31 @@
-/* Styles for UskiComponent */
-h2 { color: #2a6f97; }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.uski-wrapper {
+  min-height: 100vh;
+  background: url('/uski/background.avif') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 0;
+}
+
+.uski-page {
+  background: white;
+  width: 100%;
+  max-width: 90%;
+  min-height: calc(100vh - 80px);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}

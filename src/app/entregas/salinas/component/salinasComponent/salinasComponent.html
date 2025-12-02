@@ -1,2 +1,19 @@
-<h2>Entrega Salinas</h2>
+    <h2>Entrega Salinas</h2>
+    <app-salinasNavbarUnrouted></app-salinasNavbarUnrouted>
+      <div class="busqueda mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Escribe el personaje que buscas..."
+      [(ngModel)]="busqueda"
+    />
+    </div>
+    <div class="row g-4" >
+    @for (personajes of personajesFiltrados; track personajes.id)  {
+        <div class="col-md-3">
+      <app-salinasCharacterCard [personaje]="personajes" ></app-salinasCharacterCard>
+    </div>
+    }  
+    </div>
+
 

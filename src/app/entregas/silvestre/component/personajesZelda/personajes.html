@@ -1,0 +1,38 @@
+<div class="contenedor-personajes">
+  <h2>Personajes de The Legend of Zelda</h2>
+
+  @if (cargando) {
+    <p>Cargando personajes...</p>
+  } @else if (error) {
+    <p [style.color]="'red'" [style.font-weight]="'bold'">{{ error }}</p>
+  } @else {
+    <div class="personajes-grid">
+      @for (personaje of personajes; track personaje.id) {
+        <div class="personaje-card" 
+             [class.seleccionado]="personaje.id === personajeSeleccionado?.id"
+             [style.border-color]="personaje.gender === 'Male' ? '#4a90e2' : personaje.gender === 'Female' ? '#e24a8d' : '#888'">
+          <h3>{{ personaje.name }}</h3>
+          <p><strong>Género:</strong> {{ personaje.gender || 'Desconocido' }}</p>
+          <p><strong>Raza:</strong> {{ personaje.race || 'Desconocida' }}</p>
+          <button (click)="verDetalles(personaje)">Ver más</button>
+        </div>
+      }
+    </div>
+
+    @if (personajeSeleccionado) {
+      <div class="modal-fondo" (click)="cerrarDetalles()">
+        <div class="modal-contenido" (click)="$event.stopPropagation()">
+          <h3>{{ personajeSeleccionado.name }}</h3>
+          <p><strong>Género:</strong> {{ personajeSeleccionado.gender || 'Desconocido' }}</p>
+          <p><strong>Raza:</strong> {{ personajeSeleccionado.race || 'Desconocida' }}</p>
+          <p class="descripcion"><strong>Descripción:</strong> {{ personajeSeleccionado.description }}</p>
+          <button (click)="cerrarDetalles()">Cerrar</button>
+        </div>
+      </div>
+    }
+  }
+
+  <div class="volver">
+    <a routerLink="../" class="boton">Volver al inicio</a>
+  </div>
+</div>

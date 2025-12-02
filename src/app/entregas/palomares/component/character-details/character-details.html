@@ -1,0 +1,61 @@
+@if (hasCharacter()) {
+  <div class="details-overlay" (click)="closeDetails()">
+    <div class="details-container" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeDetails()">✕</button>
+      
+      @if (selectedCharacter(); as character) {
+        <div class="details-content">
+          <div class="details-header">
+            <img [src]="character.image" [alt]="character.name" class="character-image" />
+            <div class="header-info">
+              <h2>{{ character.name }}</h2>
+              <div class="status-badge" [class]="getStatusClass()">
+                <span class="status-dot"></span>
+                {{ character.status }}
+              </div>
+            </div>
+          </div>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Species</span>
+              <span class="detail-value">{{ character.species }}</span>
+            </div>
+
+            @if (character.type) {
+              <div class="detail-item">
+                <span class="detail-label">Type</span>
+                <span class="detail-value">{{ character.type }}</span>
+              </div>
+            }
+
+            <div class="detail-item">
+              <span class="detail-label">Gender</span>
+              <span class="detail-value">{{ character.gender }}</span>
+            </div>
+
+            <div class="detail-item full-width">
+              <span class="detail-label">Origin</span>
+              <span class="detail-value">{{ character.origin.name }}</span>
+            </div>
+
+            <div class="detail-item full-width">
+              <span class="detail-label">Last Known Location</span>
+              <span class="detail-value">{{ character.location.name }}</span>
+            </div>
+
+            <div class="detail-item full-width">
+              <span class="detail-label">Episodes</span>
+              <span class="detail-value">{{ episodeCount() }} episodes</span>
+            </div>
+
+            <div class="detail-item full-width">
+              <span class="detail-label">Created</span>
+              <span class="detail-value">{{ character.created | date:'medium' }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}

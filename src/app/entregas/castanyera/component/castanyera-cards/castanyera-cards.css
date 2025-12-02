@@ -1,0 +1,39 @@
+.card {
+  max-width: 320px;
+  margin: 0 auto;
+  height: 100%; /* let grid row height define the card height */
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(234, 223, 227);
+}
+
+.card img[mat-card-image] {
+  width: 100%;
+  max-height: 200px;
+  height:300px;
+  object-fit: fill; /* cover gives better crop */
+  display: block;
+  flex: 0 0 auto; /* image does not grow */
+}
+
+/* make content area grow so cards match tallest one */
+.card mat-card-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card mat-card-content p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+mat-card-header {
+  height: 80px;
+  align-items: center;
+  text-align: center;
+  color:rgb(162, 95, 129); 
+}
+

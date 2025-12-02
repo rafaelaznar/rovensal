@@ -1,0 +1,156 @@
+<div class="page">
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <h2>Get in Touch with Us</h2>
+      <p class="subtitle">To get more details, please fill-up and submit</p>
+
+      <div class="info-block">
+        <p class="label">Call</p>
+        <p class="value">+901 846 3964 3962</p>
+      </div>
+      <div class="divider"></div>
+
+      <div class="info-block">
+        <p class="label">Email</p>
+        <p class="value">example@gmail.com</p>
+      </div>
+      <div class="divider"></div>
+
+      <div class="info-block">
+        <p class="label">Open Hour</p>
+        <p class="value">9:00 am – 7:00 pm</p>
+      </div>
+      <div class="divider"></div>
+
+      <div class="info-block">
+        <p class="label">Location</p>
+        <p class="value">123 Street Road, Central Colony 34</p>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label for="name">Name</label>
+          <input
+            formControlName="username"
+            id="name"
+            type="text"
+            placeholder="Enter your mail"
+            [class.error]="form.get('username')?.invalid && form.get('username')?.touched"
+          />
+          @if (form.get('username')?.invalid && form.get('username')?.touched) {
+            <div class="error-message">
+              @if (form.get('username')?.errors?.['required']) {
+                <span>Name is required</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            formControlName="email"
+            id="email"
+            type="email"
+            placeholder="Enter your mail"
+            [class.error]="form.get('email')?.invalid && form.get('email')?.touched"
+          />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            <div class="error-message">
+              @if (form.get('email')?.errors?.['required']) {
+                <span>Email is required</span>
+              } @else if (form.get('email')?.errors?.['email']) {
+                <span>Please enter a valid email</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="field">
+          <label for="interest">Interest In</label>
+          <div class="select-wrapper">
+            <select
+              formControlName="interest"
+              id="interest"
+              [class.error]="form.get('interest')?.invalid && form.get('interest')?.touched"
+            >
+              <option value="">Select an option</option>
+              <option>Consulting</option>
+              <option>Support</option>
+              <option>Other</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+          @if (form.get('interest')?.invalid && form.get('interest')?.touched) {
+            <div class="error-message">
+              @if (form.get('interest')?.errors?.['required']) {
+                <span>Interest selection is required</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone number</label>
+          <input
+            formControlName="phone"
+            id="phone"
+            type="tel"
+            placeholder="+00 000 0000 0000"
+            [class.error]="form.get('phone')?.invalid && form.get('phone')?.touched"
+          />
+          @if (form.get('phone')?.invalid && form.get('phone')?.touched) {
+            <div class="error-message">
+              @if (form.get('phone')?.errors?.['required']) {
+                <span>Phone number is required</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea
+            formControlName="message"
+            id="message"
+            rows="4"
+            placeholder="Write here..."
+            [class.error]="form.get('message')?.invalid && form.get('message')?.touched"
+          ></textarea>
+          @if (form.get('message')?.invalid && form.get('message')?.touched) {
+            <div class="error-message">
+              @if (form.get('message')?.errors?.['required']) {
+                <span>Message is required</span>
+              } @else if (form.get('message')?.errors?.['minlength']) {
+                <span>Message should be at least 5 characters long</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="btn-container">
+          <button type="submit" [disabled]="loading" class="submit-btn">
+            @if (loading) {
+              Sending...
+            } @else {
+              Submit
+            }
+          </button>
+        </div>
+      </form>
+    </div>
+  
+  @if (successMessage) {
+    <p class="success-message">
+      {{ successMessage }}
+    </p>
+  }
+
+  @if (errorMessage) {
+    <p class="error-message global-error">
+      {{ errorMessage }}
+    </p>
+  }
+</div>
